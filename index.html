@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bubble Chart v4 - vallandingham.me</title>
+    <meta name="description" content="Using D3v4 to create a Bubble chart. Based on NYT visualization">
+    <meta name="author" content="Jim Vallandingham">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bubble_chart.css">
+    <link rel="stylesheet" href="css/brush.css">
+
+</head>
+<body>
+<div class="container">
+    <div id="vis2"></div>
+    <div id="vis1"></div>
+    <div id="rect1"></div>
+    <div id="vis"></div>
+    <div id="rect2"></div>
+    <div class="g-legend" style="position:relative;width:1100px;">
+        <div class="g-overview" style="float: left">
+            <a onclick="chartByLabel(0)" class="button3" style="background-color: #5470c6">Covid</a>
+            <a onclick="chartByLabel(1)" class="button3" style="background-color: #91cc75">Women</a>
+            <a onclick="chartByLabel(2)" class="button3" style="background-color: #fac858">Climate</a>
+            <a onclick="chartByLabel(3)" class="button3" style="background-color: #ee6666">Tax</a>
+            <a onclick="chartByLabel(4)" class="button3" style="background-color: #73c0de">Court</a>
+            <a onclick="chartByLabel(5)" class="button3" style="background-color: #3ba272">Racist</a>
+
+        </div>
+        <div id='status' style="text-align:right;width: 30%; float: left;font-size: large"></div>
+    </div>
+<!--    <div class="footer" style="margin-top: 50px">-->
+<!--        &lt;!&ndash;      <strong>This version of the code uses D3v4!</strong>&ndash;&gt;-->
+<!--        <p style="margin-left: 5%">-->
+<!--            <a href="http://localhost:63342/%E6%80%BB%E7%BB%9F%E8%BE%A9%E8%AE%BA%E6%95%B0%E6%8D%AE/simple-search-js/demo/classic.html">search twitter</a></p>-->
+<!--    </div>-->
+</div>
+
+<!--<script src="//d3js.org/d3.v4.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" integrity="sha512-RJJ1NNC88QhN7dwpCY8rm/6OxI+YdQP48DrLGe/eSAd+n+s1PXwQkkpzzAgoJe4cZFW2GALQoxox61gSY2yQfg==" crossorigin="anonymous"></script>
+<script src="https://wzrd.in/standalone/d3-force-attract@latest"></script>
+<script src="https://unpkg.com/d3-force-cluster@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/word2vec@1.1.4/lib/index.min.js"></script>
+<!--<script src="src/brush.js"></script>-->
+<script src="src/tooltip.js"></script>
+<script src="../util.js"></script>
+<script src="src/bubble_chart.js"></script>
+
+
+<!-- PLEASE REMOVE AFTER CLONING -->
+<!--  <script>-->
+<!--  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){-->
+<!--    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),-->
+<!--    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)-->
+<!--  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');-->
+
+<!--  ga('create', 'UA-17355070-1', 'auto');-->
+<!--  ga('send', 'pageview');-->
+
+<!--  </script>-->
+<!-- END REMOVE -->
+</body>
+</html>
