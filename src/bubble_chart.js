@@ -603,6 +603,7 @@ function bubbleChart() {
             // console.log(d.name)
             // if (brushScale == brushScaleLarge) {
             brushScale = brushScaleClick
+            rawDataNew = []
             // }
             for (let i = 0; i < context_data.length; i++) {
                 const currDic = context_data[i][m.name]
