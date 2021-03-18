@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>d3 three</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js"></script>
     <style>
         .link {
@@ -57,10 +56,13 @@
             border-right: 8px solid transparent;
             border-left: 8px solid transparent;
         }
+        .chart1{
+            transform: perspective(400px);
+        }
     </style>
 </head>
 <body>
-<div class="chart1"></div>
+<div class="chart1" ></div>
 <div class="chart2"></div>
 <div class="chart3"></div>
 <div class="chart4"></div>
@@ -232,15 +234,12 @@
             })
             .attr('fill', "white")
             .attr('opacity',1)
-            // return colors(d.id.split('-')[0]);
-
             .attr('stroke', "#333333")
             .attr('stroke-width', '0px');
 
         node.append("svg:text")
             .attr("dx", function (d) {
                 return d.id.length*(d.name === keyword ? 45 : scaler(d.value))*0.18
-                // return d.children ? 15 : 5;
             })
             .attr("dy", 4)
             .style('fill',"black")

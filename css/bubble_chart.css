@@ -1,33 +1,85 @@
-a, a:visited, a:active {
-  color: #444;
+a {
+  /*color: #444;*/
+    text-decoration: none;
+    color: #111
 }
-
+/*a {*/
+/*    !*text-decoration: none;*!*/
+/*    !*color: inherit;*!*/
+/*}*/
 .container {
   max-width: 1200px;
   margin: auto;
 }
 
-.button {
-  min-width: 130px;
-  padding: 4px 5px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 13px;
-  border: 1px solid #e0e0e0;
-  text-decoration: none;
-}
+/*a {*/
+/*    text-decoration: none;*/
+/*    color: inherit;*/
+/*}*/
 
-.button.active {
-  background: #000;
-  color: #fff;
+.cta {
+    position: relative;
+    margin: auto;
+    padding: 19px 22px;
+    transition: all 0.2s ease;
+}
+.cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 28px;
+    background: rgba(255, 171, 157, 0.5);
+    width: 56px;
+    height: 56px;
+    transition: all 0.3s ease;
+}
+.cta span {
+    position: relative;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+.cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #111;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+.cta:hover:before {
+    width: 100%;
+    background: #ffab9d;
+}
+.cta:hover svg {
+    transform: translateX(0);
+}
+.cta:active {
+    transform: scale(0.96);
 }
 
 
 #vis {
   width: 1200px;
-  height: 450px;
+  height: 500px;
   clear: both;
   margin-bottom: 0px;
+    margin-top: 0px;
+}
+#vis_tree {
+    /*width: 1200px;*/
+    /*height: 700px;*/
+    clear: both;
+    margin-bottom: 0px;
     margin-top: 0px;
 }
 /*#vis{*/
@@ -75,7 +127,7 @@ a, a:visited, a:active {
   text-align: center;
 }
 .g-legend {
-    color: #999;
+    /*color: #999;*/
     font: 15px/1.3em sans-serif;
     /*height: 30px;*/
     /*width: 100px;*/
@@ -100,14 +152,14 @@ a.button3{
     text-decoration:none;
     font-family:"Gill Sans","Gill Sans MT";
     font-weight:200;
-    font-color:#FFFFFF;
-    background-color:#FFFFFF;
+    /*font-color:#FFFFFF;*/
+    /*background-color:#FFFFFF;*/
     text-align:center;
     transition: all 0.2s;
 }
-a.button3:hover{
-    background-color:#FFFFFF;
-}
+/*a.button3:hover{*/
+/*    background-color:#FFFFFF;*/
+/*}*/
 @media all and (max-width:20em){
     a.button3{
         display:block;
