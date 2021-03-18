@@ -8,8 +8,6 @@
  * 2 - select word
  * @type {number}
  */
-let bubbleMode = 1
-let contextWordSelect = []
 
 
 var bubbles = null;
