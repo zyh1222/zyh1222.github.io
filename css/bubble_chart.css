@@ -9,7 +9,7 @@ a {
 }
 .container {
   max-width: 1400px;
-  margin: auto;
+  margin-left: 100px;
 }
 
 a:focus {outline-style:none; -moz-outline-style: none;}

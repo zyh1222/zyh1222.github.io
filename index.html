@@ -38,7 +38,13 @@
 <!--            <input type="text" id="" name="keyname"><br><br>-->
             <div id="selecttext"><p></p></div>
         </div>
-        <Button id="submit" onclick="clickNew()" style="position: absolute; bottom: -50px ">Submit</Button>
+        <div id="submit1" style="position: absolute; left:100px;bottom: 100px;">
+            <a href="#"  onclick="clickNew()" class="cta"  hidefocus="true">
+                <span id="modetext1">Go Patterns!</span>
+            </a>
+        </div>
+
+<!--        <Button id="submit" onclick="clickNew()" style="position: absolute; bottom: -50px ">Submit</Button>-->
 
     </div>
     <div id="vis2"></div>
@@ -98,11 +104,13 @@
     if(bubbleMode==1){
         d3.selectAll("#input_control").attr('class','hidden');
         d3.selectAll("#submit").attr('class','hidden');
+        d3.selectAll("#submit1").attr('class','hidden');
         d3.selectAll("#tip1").attr('class','hidden');
     }
     else{
         d3.selectAll("#input_control").attr('class','visible')
         d3.selectAll("#submit").attr('class','visible')
+        d3.selectAll("#submit1").attr('class','visible')
         d3.selectAll("#tip1").attr('class','visible')
     }
 
@@ -118,12 +126,14 @@
             contextWordSelect = []
             d3.selectAll("#input_control").attr('class','visible')
             d3.selectAll("#submit").attr('class','visible')
+            d3.selectAll("#submit1").attr('class','visible')
             d3.selectAll("#tip1").attr('class','visible')
 
         } else {
             bubbleMode = 1
             d3.selectAll("#input_control").attr('class','hidden');
             d3.selectAll("#submit").attr('class','hidden');
+            d3.selectAll("#submit1").attr('class','hidden');
             d3.selectAll("#tip1").attr('class','hidden');
 
 

@@ -25,7 +25,7 @@ let brushScale = brushScaleAll
 var rawDataNew = []
 const colors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
 var modesvg = null
-const MyFilter = {'name': -1, 'label':-1}
+const MyFilter = {'name': -1, 'label': -1}
 
 function chartByLabel(label) {
     if (MyFilter['label'] === label) {
@@ -37,17 +37,17 @@ function chartByLabel(label) {
 }
 
 
-
-function to_context_tree(keyword,select) {
+function to_context_tree(keyword, select) {
     // var keyword = keyword
     // var select = select
-    d3.selectAll("#vis").attr('class','hidden');
-    d3.selectAll("#vis_tree").attr('class','visible')
+    d3.selectAll("#vis").attr('class', 'hidden');
+    d3.selectAll("#vis_tree").attr('class', 'visible')
     d3.select("#vis_tree").selectAll('svg').remove()
-    d3.selectAll("#vis1").attr('class','hidden');
-    d3.selectAll("#vis2").attr('class','hidden');
-    context_tree(keyword,select)
-    function context_tree(keyword,select) {
+    d3.selectAll("#vis1").attr('class', 'hidden');
+    d3.selectAll("#vis2").attr('class', 'hidden');
+    context_tree(keyword, select)
+
+    function context_tree(keyword, select) {
         // var keyword = 'covid'
         // var select = ['virus', 'disease', 'infection', 'illness', 'flu']
 
@@ -315,13 +315,13 @@ function to_context_tree(keyword,select) {
 
         // const linkColors = ['#f1beb1','#f88477','#d6c9ec','#f5c6e0','#d78ea8','#ca6c90','#b093dc']
         const linkColors = d3.scaleLinear().domain([0, 1]).range(["#b1ddf9", "#eed0d5"])
-        const horiz = d3.scaleLinear().range([-100, 100]).domain([d3.min(Object.values(horizon)), d3.max(Object.values(horizon))])
+        const horiz = d3.scaleLinear().range([-50, 50]).domain([d3.min(Object.values(horizon)), d3.max(Object.values(horizon))])
         // .range(['#f1beb1','#f88477','#d6c9ec','#f5c6e0','#d78ea8','#ca6c90'])
 
 
         var graph = {
             width: 1200,
-            height: 800
+            height: 700
         };
 
         var timeticks = ['Tue 8am', 'Tue 6 20pm', 'Wes 7 8am', 'Wes 7 20pm', 'Thu 8 8am', 'Thu 20pm']
@@ -330,7 +330,7 @@ function to_context_tree(keyword,select) {
             .attr("width", graph.width)
             .attr("height", graph.height)
             .append('svg:g')
-            .attr('transform', 'translate(-' + graph.width * 0.01 + ', 0)')
+            .attr('transform', 'translate( 25'+', 0)')
 
         var id = "md-shadow";
         var deviation = 2;
@@ -338,7 +338,7 @@ function to_context_tree(keyword,select) {
         var slope = 0.3;
         var pad = 10
         var left = 20
-        var mid = 200
+        var mid = 180
         var wid = 300
         var scaler = d3.scalePow()
             .exponent(0.8)
@@ -476,11 +476,6 @@ function to_context_tree(keyword,select) {
             })
 
 
-
-
-
-
-
         keys = data_change.filter(d => d.time.length > 1)
         keys_f = []
         for (i = 0; i < keys.length; i++) {
@@ -499,6 +494,7 @@ function to_context_tree(keyword,select) {
                 })
             }
         }
+
         // console.log(keys_f)
 
         function diagonal(d, i) {
@@ -520,15 +516,14 @@ function to_context_tree(keyword,select) {
                 } else if (keys_f.filter(x => x.platform == d.platform && x.index == d.index + 1 && d.position == 'right').length > 0) {
                     result.source = [0, 0]
                     result.target = [0, 0]
-                }
-                else if (d.position == 'left') {
+                } else if (d.position == 'left') {
                     if (d.start == 'True') {
                         result.source = [0, 0]
                         result.target = [0, 0]
                     } else {
-                        result.source = [4 * pad + (wid) / pattern_length * d.index + 150 + s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
+                        result.source = [4 * pad + (wid) / pattern_length * d.index + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
                             (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
-                        result.target = [4 * pad + (wid) / pattern_length * (d.index - 1) + 150 + s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
+                        result.target = [4 * pad + (wid) / pattern_length * (d.index - 1) + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
                             (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                     }
                 } else if (d.position == 'right') {
@@ -559,14 +554,13 @@ function to_context_tree(keyword,select) {
             .style('stroke', function (d, i) {
                 return 'black'
             })
-            .attr('stroke-width', 0.1)
+            .attr('stroke-width', 1.5)
             .attr('d', function (d, i) {
                 // console.log(d)
                 return diag(diagonal(d, i))
             })
             .style("fill", "none")
-            .style("opacity", 1);
-
+            .style("opacity", 0.2);
 
 
         function diagonal_c(d, i) {
@@ -576,9 +570,9 @@ function to_context_tree(keyword,select) {
             }
             var rel = horiz(d.relate)
             if (d.position == 'left') {
-                result.source = [4 * pad + (wid) / pattern_length * d.index + 150 + s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
+                result.source = [4 * pad + (wid) / pattern_length * d.index  + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
                     (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
-                result.target = [4 * pad + (wid) / pattern_length * (d.index - 1) + 150 + s / d.length * d.time1 + rel,
+                result.target = [4 * pad + (wid) / pattern_length * (d.index - 1)  + 60+s / d.length * d.time1 + rel,
                     (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
             } else {
                 result.source = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel,
@@ -598,9 +592,9 @@ function to_context_tree(keyword,select) {
             if ((d.index != 3 && d.position == 'left') || (d.index != 0 && d.position == 'right')) {
                 var rel = horiz(d.relate)
                 if (d.position == 'left') {
-                    result.source = [4 * pad + (wid) / pattern_length * d.index + 150 + s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
+                    result.source = [4 * pad + (wid) / pattern_length * d.index  + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
                         (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
-                    result.target = [4 * pad + (wid) / pattern_length * (parseInt(d.index) + 1) + 150 + s / d.length * d.time1 + rel,
+                    result.target = [4 * pad + (wid) / pattern_length * (parseInt(d.index) + 1)  + 60+s / d.length * d.time1 + rel,
                         (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
                 } else {
                     result.source = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel,
@@ -624,23 +618,23 @@ function to_context_tree(keyword,select) {
             .style('stroke', function (d, i) {
                 return 'black'
             })
-            .attr('stroke-width', 0.1)
+            .attr('stroke-width', 1.5)
             .attr('d', function (d, i) {
                 return diag(diagonal_c(d, i))
             })
             .style("fill", "none")
-            .style("opacity", 1);
+            .style("opacity", 0.2);
 
         connect_c.append('path')
             .style('stroke', function (d, i) {
                 return 'black'
             })
-            .attr('stroke-width', 0.1)
+            .attr('stroke-width', 1.5)
             .attr('d', function (d, i) {
                 return diag(diagonal_t(d, i))
             })
             .style("fill", "none")
-            .style("opacity", 1);
+            .style("opacity", 0.2);
 
 
         svg.selectAll("text_center")
@@ -680,35 +674,35 @@ function to_context_tree(keyword,select) {
 
         var timeticks = svg.selectAll("timetick").data(timetick).enter().append("svg:g")
         timeticks.append("text")
-            .attr("x", d => 155 + s / d.len * d.idx + d.relate)
+            .attr("x", d =>  60 + s / d.len * d.idx + d.relate)
             .attr("y", d => (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.len * d.idx)
             .attr("dy", ".15em")
             .attr("dx", ".15em")
-            .attr("font-size", 5)
+            .attr("font-size", 8)
             .text(function (d) {
                 return d.tick;
             })
             .on('mouseover', function (d) {
-                d3.select(this).attr("color", "#000000").attr("font-size", 10)
+                d3.select(this).attr("color", "#000000").attr("font-size", 12)
             })
             .on('mouseleave', function (d) {
-                d3.select(this).attr("color", "#000000").attr("font-size", 5)
+                d3.select(this).attr("color", "#000000").attr("font-size", 8)
             })
 
         timeticks.append("text")
-            .attr("x", d => graph.width / 2 + mid + 310 + s / d.len * d.idx - d.relate)
+            .attr("x", d => graph.width / 2 + mid + 320 + s / d.len * d.idx - d.relate)
             .attr("y", d => (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.len * d.idx)
             .attr("dy", ".15em")
             .attr("dx", ".15em")
-            .attr("font-size", 5)
+            .attr("font-size", 8)
             .text(function (d) {
                 return d.tick;
             })
             .on('mouseover', function (d) {
-                d3.select(this).attr("color", "#000000").attr("font-size", 10)
+                d3.select(this).attr("color", "#000000").attr("font-size", 12)
             })
             .on('mouseleave', function (d) {
-                d3.select(this).attr("color", "#000000").attr("font-size", 5)
+                d3.select(this).attr("color", "#000000").attr("font-size", 8)
             })
 
 
@@ -767,10 +761,10 @@ function to_context_tree(keyword,select) {
         text.on('mouseleave', function (d) {
             text.selectAll('text')
                 .style('opacity', 1)
-            link.style('opacity', 0.5)
+            link.style('opacity', 0.2)
             sparkline.selectAll("polyline").style('opacity', 0)
-            connect_c.selectAll('path').style('opacity', 1)
-            connect.selectAll('path').style('opacity', 1)
+            connect_c.selectAll('path').style('opacity', 0.2)
+            connect.selectAll('path').style('opacity', 0.2)
         })
             .on('mouseover', function (d) {
                 connect.selectAll('path').style('opacity', function (p) {
@@ -815,8 +809,7 @@ function to_context_tree(keyword,select) {
                 link.style('opacity', function (x, j) {
                     if (plat.indexOf(j) > -1) {
                         return 0.5
-                    }
-                    else {
+                    } else {
                         return 0.1
                     }
                 })
@@ -860,24 +853,25 @@ function to_context_tree(keyword,select) {
             var w = graph.width / 2;
             var rel = horiz(d.hor)
             var points = "";
+            var y = -10;
             if (i < l) {
-                y = h * i + pad
+                y += h * i + pad
                 x = w - mid - pad + rel
                 x1 = x - wid
                 points += x1 + "," + y + ","
                 points += x + "," + y + ","
-                y = h * (i + 1) - pad
+                y = h * (i + 1) - 2*pad
                 x2 = x + s
                 x3 = x1 + s
                 points += x2 + "," + y + ","
                 points += x3 + "," + y + ","
             } else {
-                y = h * (i - l) + pad
+                y += h * (i - l) + pad
                 x1 = w + mid + pad - rel
                 x2 = x1 + wid
                 points += x2 + "," + y + ","
                 points += x1 + "," + y + ","
-                y = h * (i - l + 1) - pad
+                y = h * (i - l + 1) - 2*pad
                 x3 = x1 + s
                 x4 = x2 + s
                 points += x3 + "," + y + ","
@@ -934,8 +928,8 @@ function to_context_tree(keyword,select) {
                 // return linkColors(d.relate)
             })
             // .style("filter", "url(#md-shadow)")
-            .style("opacity",function (d) {
-                if (d.name === ''){
+            .style("opacity", function (d) {
+                if (d.name === '') {
                     return 0
                 }
                 return 1
@@ -946,26 +940,27 @@ function to_context_tree(keyword,select) {
                 var rel = horiz(d.relate)
                 x = 0
                 if (d.position == 'left') {
-                    x= 4 * pad + (wid) / pattern_length * d.index + 150 + s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel
+                    x = 4 * pad + (wid) / pattern_length * d.index  + 60 +s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel
                 } else {
-                    x= graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel
+                    x = graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel
                 }
                 return x
             })
             .attr("y", function (d) {
-                y=0
+                y = 0
                 if (d.position == 'left') {
-                    y= (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
+                    y = (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
                 } else {
-                    y= (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
+                    y = (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
                 }
-                return y-10
+                let del = d.freq > 150 ? 20:10
+                return y - del
             })
             .attr("width", function (d) {
-                return scaler(d.freq) * d.name.length/2
+                return scaler(d.freq) * d.name.length / 2
             })
             .attr("height", function (d) {
-                return scaler(d.freq)*1.2
+                return scaler(d.freq) * 1.2
             })
 
         text.append('text')
@@ -973,9 +968,9 @@ function to_context_tree(keyword,select) {
             .attr("x", function (d, i) {
                 var rel = horiz(d.relate)
                 if (d.position == 'left') {
-                    return 4 * pad + (wid) / pattern_length * d.index + 150 + s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel
+                    return 4 * pad + (wid) / pattern_length * d.index + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel
                 } else {
-                    return graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel
+                    return graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index +s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel
                 }
             })
             .attr("y", function (d) {
@@ -985,8 +980,8 @@ function to_context_tree(keyword,select) {
                     return (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
                 }
             })
-            .style('background-color','black')
-            .style('position','static')
+            .style('background-color', 'black')
+            .style('position', 'static')
             .text(d => d.name)
             .attr("font-size", function (d) {
                 return scaler(d.freq)
@@ -1011,7 +1006,7 @@ function histChart(data = []) {
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
-        // .call(brush)
+    // .call(brush)
     var svg = svg_all.append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -1031,7 +1026,7 @@ function histChart(data = []) {
 
 
     function brushended() {
-        brushScale=brushScaleBrush
+        brushScale = brushScaleBrush
         const selection = d3.event.selection;
         const start = xb(selection[0])
         const startDay = start.getDate()
@@ -1041,27 +1036,100 @@ function histChart(data = []) {
 
         const endDay = end.getDate()
         const endHour = end.getHours()
-        const time_index={"68": 0, "69": 1, "610": 2, "611": 3, "612": 4, "613": 5, "614": 6, "615": 7, "616": 8, "617": 9, "618": 10, "619": 11, "620": 12, "621": 13, "622": 14, "623": 15, "70": 16, "71": 17, "72": 18, "73": 19, "74": 20, "75": 21, "76": 22, "77": 23, "78": 24, "79": 25, "710": 26, "711": 27, "712": 28, "713": 29, "714": 30, "715": 31, "716": 32, "717": 33, "718": 34, "719": 35, "720": 36, "721": 37, "722": 38, "723": 39, "80": 40, "81": 41, "82": 42, "83": 43, "84": 44, "85": 45, "86": 46, "87": 47, "88": 48, "89": 49, "810": 50, "811": 51, "812": 52, "813": 53, "814": 54, "815": 55, "816": 56, "817": 57, "818": 58, "819": 59, "820": 60, "821": 61, "822": 62, "823": 63, "90": 64, "91": 65, "92": 66, "93": 67, "94": 68, "95": 69, "96": 70, "97": 71}
-        const ss = time_index[String(startDay)+String(startHour)]
-        const ee = time_index[String(endDay)+String(endHour)]
+        const time_index = {
+            "68": 0,
+            "69": 1,
+            "610": 2,
+            "611": 3,
+            "612": 4,
+            "613": 5,
+            "614": 6,
+            "615": 7,
+            "616": 8,
+            "617": 9,
+            "618": 10,
+            "619": 11,
+            "620": 12,
+            "621": 13,
+            "622": 14,
+            "623": 15,
+            "70": 16,
+            "71": 17,
+            "72": 18,
+            "73": 19,
+            "74": 20,
+            "75": 21,
+            "76": 22,
+            "77": 23,
+            "78": 24,
+            "79": 25,
+            "710": 26,
+            "711": 27,
+            "712": 28,
+            "713": 29,
+            "714": 30,
+            "715": 31,
+            "716": 32,
+            "717": 33,
+            "718": 34,
+            "719": 35,
+            "720": 36,
+            "721": 37,
+            "722": 38,
+            "723": 39,
+            "80": 40,
+            "81": 41,
+            "82": 42,
+            "83": 43,
+            "84": 44,
+            "85": 45,
+            "86": 46,
+            "87": 47,
+            "88": 48,
+            "89": 49,
+            "810": 50,
+            "811": 51,
+            "812": 52,
+            "813": 53,
+            "814": 54,
+            "815": 55,
+            "816": 56,
+            "817": 57,
+            "818": 58,
+            "819": 59,
+            "820": 60,
+            "821": 61,
+            "822": 62,
+            "823": 63,
+            "90": 64,
+            "91": 65,
+            "92": 66,
+            "93": 67,
+            "94": 68,
+            "95": 69,
+            "96": 70,
+            "97": 71
+        }
+        const ss = time_index[String(startDay) + String(startHour)]
+        const ee = time_index[String(endDay) + String(endHour)]
 
-        function update_data(ss,ee){
+        function update_data(ss, ee) {
 
             const mydata = []
             for (let i = 0; i < myrawdata.length; i++) {
                 const d = myrawdata[i];
-                if (d.time>=ss && d.time <=ee){
+                if (d.time >= ss && d.time <= ee) {
                     mydata.push(d)
                 }
             }
             myBubbleChart('#vis', mydata);
         }
-        update_data(ss,ee)
+
+        update_data(ss, ee)
         // if (!event.sourceEvent || !selection) return;
         // const [x0, x1] = selection.map(d => interval.round(x.invert(d)));
         // d3.select(this).transition().call(brush.move, x1 > x0 ? [x0, x1].map(x) : null);
     }
-
 
 
     svg.append("g")
@@ -1087,8 +1155,10 @@ function histChart(data = []) {
     // // Y axis: scale and draw:
     var y = d3.scaleLinear()
         .range([height, 0])
-        .domain([0, d3.max(bins1, function (d) {return d.length;})]);
-        // d3.hist has to be called before the Y axis obviously
+        .domain([0, d3.max(bins1, function (d) {
+            return d.length;
+        })]);
+    // d3.hist has to be called before the Y axis obviously
 
     // append the bars for series 1
     svg.selectAll("rect")
@@ -1125,11 +1195,6 @@ function histChart(data = []) {
         })
         .style("fill", "#b4d5e3")
         .style("opacity", 0.8)
-
-
-
-
-
 
 
     // Handmade legend
@@ -1200,7 +1265,7 @@ function histChart(data = []) {
 //
 
 
-        // svg1.append('image').attr("xlink:href", "court.png")
+    // svg1.append('image').attr("xlink:href", "court.png")
     //     .attr('x', 150)
     //     .attr('width', 50)
     //     .attr('height', 120)
@@ -1226,11 +1291,11 @@ svg.append('image').attr("xlink:href", "biden.png")
     .attr('x', 590)
     .attr('width', 40)
     .attr('height', 40)
-    .on('click', function (d){
+    .on('click', function (d) {
         brushScale = brushScaleAll
-        d3.selectAll("#vis").attr('class','visible')
-        d3.selectAll("#vis1").attr('class','visible')
-        d3.selectAll("#vis_tree").attr('class','hidden')
+        d3.selectAll("#vis").attr('class', 'visible')
+        d3.selectAll("#vis1").attr('class', 'visible')
+        d3.selectAll("#vis_tree").attr('class', 'hidden')
         myBubbleChart('#vis', myrawdata);
     })
 // svg.append('text')
@@ -1242,7 +1307,7 @@ svg.append('image').attr("xlink:href", "biden.png")
 var svg = d3.select("#rect2").append("svg").attr("width", 1200).attr("height", 40)
 // Add the path using this helper function
 svg.append('rect')
-    .attr('y',20)
+    .attr('y', 20)
     .attr('width', 1200)
     .attr('height', 1.5)
     .attr('stroke', '#fc9b9a')
@@ -1251,11 +1316,11 @@ svg.append('image').attr("xlink:href", "trump.png")
     .attr('x', 590)
     .attr('width', 50)
     .attr('height', 40)
-    .on('click', function (d){
+    .on('click', function (d) {
         brushScale = brushScaleAll
-        d3.selectAll("#vis").attr('class','visible')
-        d3.selectAll("#vis1").attr('class','visible')
-        d3.selectAll("#vis_tree").attr('class','hidden')
+        d3.selectAll("#vis").attr('class', 'visible')
+        d3.selectAll("#vis1").attr('class', 'visible')
+        d3.selectAll("#vis_tree").attr('class', 'hidden')
         myBubbleChart('#vis', myrawdata);
     })
 // .attr('stroke', 'black')
@@ -1265,7 +1330,7 @@ let height = 500;
 let centerX = null;
 let XSize = 0;
 
-let centerY = [1, height/9,2*height/9,3*height/9,4*height/9,5*height/9,6*height/9,7*height/9,8*height/9,
+let centerY = [1, height / 9, 2 * height / 9, 3 * height / 9, 4 * height / 9, 5 * height / 9, 6 * height / 9, 7 * height / 9, 8 * height / 9,
     height]
 
 // update_data(myrawdata,context_data,hour);
@@ -1314,7 +1379,7 @@ function bubbleChart() {
             .domain([0, maxAmount]);
 
         var myNodes = rawData
-        if (MyFilter['label'] !== -1){
+        if (MyFilter['label'] !== -1) {
             myNodes = myNodes.filter(function (d) {
                 return d.label === MyFilter['label']
             })
@@ -1328,7 +1393,7 @@ function bubbleChart() {
             if (d.name === '1') {
                 console.log(d)
             }
-            let cell = Math.round(d.position/0.1);
+            let cell = Math.round(d.position / 0.1);
             dateList.add(d.time)
             min = Math.min(min, d.time)
             max = Math.max(max, d.time)
@@ -1343,19 +1408,19 @@ function bubbleChart() {
                 x: Math.random() * 900,
                 y: d.position * 800,
                 cen: cell > 9 ? 9 : cell,
-                position:d.position,
-                num:1
+                position: d.position,
+                num: 1
             };
         });
-        let base = (max-min)/6
-        if (base < 1){
+        let base = (max - min) / 6
+        if (base < 1) {
             base = 1
         }
-        const groupList = [0,1,2,3,4,5]
+        const groupList = [0, 1, 2, 3, 4, 5]
 
         myNodes = myNodes.map(function (d) {
-            var group = parseInt((d.group-min)/base);
-            if (groupList.indexOf(group) == -1){
+            var group = parseInt((d.group - min) / base);
+            if (groupList.indexOf(group) == -1) {
                 // console.log(d.group, group, min, base, dateList.size)
                 group = 5
             }
@@ -1366,14 +1431,14 @@ function bubbleChart() {
 
         const xArray = []
         for (let i = 0; i < groupList.length; i++) {
-            xArray[i]=(i)*width/groupList.length
+            xArray[i] = (i) * width / groupList.length
 
         }
         // console.log(xArray)
         // let sortedDates = Array.from(dateList).sort();
         centerX = {}
         for (let i = 0; i < groupList.length; i++) {
-            centerX[groupList[i]] = xArray[i]+100
+            centerX[groupList[i]] = xArray[i] + 100
         }
         XSize = groupList.length
 
@@ -1408,14 +1473,14 @@ function bubbleChart() {
 
         // convert raw data into nodes data
         nodes = createNodes(rawData);
-        const new_nodes={}
+        const new_nodes = {}
         for (let i = 0; i < nodes.length; i++) {
-            let d=nodes[i];
+            let d = nodes[i];
             var d_n = d.name + '-' + d.group;
-            if (new_nodes[d_n]){
-                new_nodes[d_n].value+=d.value;
-                new_nodes[d_n].position+=d.position;
-                new_nodes[d_n].num+=1;
+            if (new_nodes[d_n]) {
+                new_nodes[d_n].value += d.value;
+                new_nodes[d_n].position += d.position;
+                new_nodes[d_n].num += 1;
             } else {
                 new_nodes[d_n] = d
             }
@@ -1424,24 +1489,23 @@ function bubbleChart() {
         const new_nodes_array = []
         for (const nodesKey in new_nodes) {
             const node = new_nodes[nodesKey]
-            node.value = parseInt(node.value/1)
-            node.position = node.position/node.num
-            const cell = Math.round(node.position/0.1);
-            node.radius = radiusScale(+node.value/brushScale)
+            node.value = parseInt(node.value / 1)
+            node.position = node.position / node.num
+            const cell = Math.round(node.position / 0.1);
+            node.radius = radiusScale(+node.value / brushScale)
             node.cen = cell > 9 ? 9 : cell
             node.y = node.position * 800
             new_nodes_array.push(node)
         }
 
 
-
-        nodes=new_nodes_array;
+        nodes = new_nodes_array;
         d3.select('#bubble_svg').remove()
         // Create a SVG element inside the provided selector
         // with desired size.
         svg = d3.select(selector)
             .append('svg')
-            .attr('id','bubble_svg')
+            .attr('id', 'bubble_svg')
             .attr('width', width)
             .attr('height', height);
 
@@ -1475,7 +1539,7 @@ function bubbleChart() {
         // Fancy transition to make bubbles appear, ending with the
         // correct radius
         bubbles.transition()
-            .attr('id','bubbles_all')
+            .attr('id', 'bubbles_all')
             .duration(2000)
             .attr('r', function (d) {
                 return d.radius;
@@ -1493,7 +1557,7 @@ function bubbleChart() {
             .style("text-anchor", "middle")
             .attr("font-family", "Gill Sans", "Gill Sans MT")
             .attr("font-size", function (d) {
-                return radiusScale(d.value / (d.name.length * brushScale ));
+                return radiusScale(d.value / (d.name.length * brushScale));
             })
             .text(function (d) {
                 pos_dic[d.name + '-' + d.group] = {x: 0, y: 0}
@@ -1531,7 +1595,7 @@ function bubbleChart() {
                         "name": k,
                         "label": currDic[k].label,
                         "count": currDic[k].count,
-                        "time": i+1,
+                        "time": i + 1,
                         "position": currDic[k].pos
                     })
                 }
@@ -1541,43 +1605,65 @@ function bubbleChart() {
             active(m)
             hideDetail(null)
         }
+
         activateWord = selectWord
 
-        bubbles.on('click',function(m) {
-            if (bubbleMode === 1){
-                // console.log(d.name)
-                // if (brushScale == brushScaleLarge) {
+        bubbles.on('click', function (m) {
+            if (bubbleMode === 1) {
                 selectWord(m)
-                // console.log(pos_dic)
             } else if (bubbleMode === 2) {
+                if (contextWordSelect.length > 5) {
+                    alert("Words Exceeded!!")
+                    return
+                }
 
-                function draw_context(contextWordSelect){
+                function draw_context(contextWordSelect) {
                     let graph = {
                         height: 200,
                         width: 100,
                     }
-                    if (modesvg === null){
-                        modesvg = d3.select("#vis_tree_words").append('svg').attr("height", 800).attr('position', 'absolute').attr('top','100px')
+                    if (modesvg === null) {
+                        modesvg = d3.select("#vis_tree_words").append('svg').attr("height", 800).attr('position', 'absolute').attr('top', '100px')
                     }
 
                     let svg = modesvg
+
+                    svg.selectAll("rect")
+                        .data(contextWordSelect)
+                        .enter()
+                        .append("rect")
+                        .attr("x", function (d, i) {
+                            return 5
+                        })
+                        .attr("y", function (d, i) {
+                            return graph.height / 6 * i + 330
+                        })
+                        .style('width', function (d){return d.length*9})
+                        .style("opacity", 0.5)
+                        .style('height', 25)
+                        .style('fill', '#91d0fa')
+                        .style('rx',10)
+
                     svg.selectAll("text")
                         .data(contextWordSelect)
                         .enter()
                         .append("text")
-                        .attr("x", function (d,i){return 0})
-                        .attr("y", function (d,i){
-                            console.log(d,i)
-                            return graph.height/12*i+340})
-                        .text(function(d){
-                            return d;})
+                        .attr("x", function (d, i) {
+                            return d.length+5
+                        })
+                        .attr("y", function (d, i) {
+                            return graph.height / 6 * i + 345
+                        })
+                        .text(function (d) {
+                            return d;
+                        })
+
                 }
+
                 if (!contextWordSelect.includes(m.name)) {
                     contextWordSelect.push(m.name)
-                    // .html("<p>The words selected is " + contextWordSelect.toString()  + " </p>")
                 } else {
-                    contextWordSelect.splice(contextWordSelect.indexOf(m.name),1)
-                    // d3.select("#vis_tree_words").html("<p>The words selected is " + contextWordSelect.toString()  + " </p >")
+                    contextWordSelect.splice(contextWordSelect.indexOf(m.name), 1)
                 }
 
                 draw_context(contextWordSelect)
@@ -1586,17 +1672,17 @@ function bubbleChart() {
             }
 
 
-
         })
     };
 
 
-
-    function active(m){
-        bubbles.classed("bubble-selected", function(m) {return m.name})
-        if (m.name.length > 0){
-            d3.select("#status").html("<div>The word <span class=\"active\">"+m.name+"</span> is now active \n</div>")}
-        else{
+    function active(m) {
+        bubbles.classed("bubble-selected", function (m) {
+            return m.name
+        })
+        if (m.name.length > 0) {
+            d3.select("#status").html("<div>The word <span class=\"active\">" + m.name + "</span> is now active \n</div>")
+        } else {
             d3.select("#status").html("<div>No word is active</div>")
         }
     }
@@ -1640,14 +1726,13 @@ function bubbleChart() {
                 // }else{
                 //     console.log(d.group)
                 // }
-                const padding = width/XSize/2;
-                if(d.group===0){
-                    d.x = Math.max(centerX[d.group]-padding, Math.min(centerX[d.group]+padding-20, d.x))
-                } else if (d.group===5){
-                    d.x = Math.max(centerX[d.group]-padding+30, Math.min(centerX[d.group]+padding-30, d.x))
-                }
-                else{
-                    d.x = Math.max(centerX[d.group]-padding, Math.min(centerX[d.group]+padding, d.x))
+                const padding = width / XSize / 2;
+                if (d.group === 0) {
+                    d.x = Math.max(centerX[d.group] - padding, Math.min(centerX[d.group] + padding - 20, d.x))
+                } else if (d.group === 5) {
+                    d.x = Math.max(centerX[d.group] - padding + 30, Math.min(centerX[d.group] + padding - 30, d.x))
+                } else {
+                    d.x = Math.max(centerX[d.group] - padding, Math.min(centerX[d.group] + padding, d.x))
 
                 }
                 pos_dic[d.name + '-' + d.group].x = d.x;
@@ -1661,7 +1746,7 @@ function bubbleChart() {
                 return d.x;
             })
             .attr('cy', function (d) {
-                d.y = Math.max(30, Math.min(height-55 , d.y))
+                d.y = Math.max(30, Math.min(height - 55, d.y))
                 pos_dic[d.name + '-' + d.group].y = d.y;
                 return d.y;
             })
@@ -1702,7 +1787,6 @@ function bubbleChart() {
     }
 
 
-
     /*
      * Function called on mouseover to display the
      * details of a bubble in the tooltip.
@@ -1728,7 +1812,7 @@ function bubbleChart() {
      * Hides tooltip
      */
     function hideDetail(d) {
-        if (d){
+        if (d) {
             // reset outline
             d3.select(this)
                 .attr('strokewidth', 0);
@@ -1736,6 +1820,7 @@ function bubbleChart() {
 
         tooltip.hideTooltip();
     }
+
     /*
      * Externally accessible function (this is attached to the
      * returned chart function). Allows the visualization to toggle
@@ -1763,7 +1848,7 @@ var myBubbleChart = bubbleChart();
  */
 
 function display(data) {
-    myrawdata=JSON.parse(data)
+    myrawdata = JSON.parse(data)
     myBubbleChart('#vis', myrawdata);
 }
 
