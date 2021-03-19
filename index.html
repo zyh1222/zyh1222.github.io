@@ -91,12 +91,20 @@
         var value = selectObject.value;
         if (value!== "") {
             activateWord({"name":value})
+            d3.select('#nn').remove()
+            modesvg=null
+            contextWordSelect = []
+            // draw_context('vis_tree_words',nn)
         } else {
             brushScale = brushScaleAll
             d3.selectAll("#vis").attr('class','visible')
             d3.selectAll("#vis1").attr('class','visible')
             d3.selectAll("#vis_tree").attr('class','hidden')
             myBubbleChart('#vis', myrawdata);
+            d3.select('#nn').remove()
+            modesvg=null
+            contextWordSelect = []
+
         }
     }
 
@@ -127,15 +135,12 @@
             d3.selectAll("#submit").attr('class','visible')
             d3.selectAll("#submit1").attr('class','visible')
             d3.selectAll("#tip1").attr('class','visible')
-
         } else {
             bubbleMode = 1
             d3.selectAll("#input_control").attr('class','hidden');
             d3.selectAll("#submit").attr('class','hidden');
             d3.selectAll("#submit1").attr('class','hidden');
             d3.selectAll("#tip1").attr('class','hidden');
-
-
         }
         d3.select("#modetext").html("Current mode:" + (bubbleMode === 1 ? "explore" : "Pattern") + " ")
             // d3.select("#vis_tree_words").html("")

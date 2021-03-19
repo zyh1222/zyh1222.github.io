@@ -34,7 +34,47 @@ function chartByLabel(label) {
     }
     myBubbleChart('#vis', myrawdata);
 }
+function draw_context() {
+    let graph = {
+        height: 200,
+        width: 100,
+    }
+    if (modesvg === null) {
+        modesvg = d3.select("#vis_tree_words").append('svg').attr('id','nn').attr("height", 800).attr('position', 'absolute').attr('top', '100px')
+    }
+    let svg = modesvg
+    svg.selectAll("rect")
+        .data(contextWordSelect)
+        .enter()
+        .append("rect")
+        .attr("x", function (d, i) {
+            return 5
+        })
+        .attr("y", function (d, i) {
+            console.log(d)
+            return graph.height / 6 * i + 330
+        })
+        .style('width', function (d){return d.length*9})
+        .style("opacity", 0.5)
+        .style('height', 25)
+        .style('fill', '#91d0fa')
+        .style('rx',10)
 
+    svg.selectAll("text")
+        .data(contextWordSelect)
+        .enter()
+        .append("text")
+        .attr("x", function (d, i) {
+            return d.length+5
+        })
+        .attr("y", function (d, i) {
+            return graph.height / 6 * i + 345
+        })
+        .text(function (d) {
+            return d;
+        })
+
+}
 
 function to_context_tree(keyword, select) {
     // var keyword = keyword
@@ -1616,48 +1656,6 @@ function bubbleChart() {
                     return
                 }
 
-                function draw_context(contextWordSelect) {
-                    let graph = {
-                        height: 200,
-                        width: 100,
-                    }
-                    if (modesvg === null) {
-                        modesvg = d3.select("#vis_tree_words").append('svg').attr("height", 800).attr('position', 'absolute').attr('top', '100px')
-                    }
-
-                    let svg = modesvg
-
-                    svg.selectAll("rect")
-                        .data(contextWordSelect)
-                        .enter()
-                        .append("rect")
-                        .attr("x", function (d, i) {
-                            return 5
-                        })
-                        .attr("y", function (d, i) {
-                            return graph.height / 6 * i + 330
-                        })
-                        .style('width', function (d){return d.length*9})
-                        .style("opacity", 0.5)
-                        .style('height', 25)
-                        .style('fill', '#91d0fa')
-                        .style('rx',10)
-
-                    svg.selectAll("text")
-                        .data(contextWordSelect)
-                        .enter()
-                        .append("text")
-                        .attr("x", function (d, i) {
-                            return d.length+5
-                        })
-                        .attr("y", function (d, i) {
-                            return graph.height / 6 * i + 345
-                        })
-                        .text(function (d) {
-                            return d;
-                        })
-
-                }
 
                 if (!contextWordSelect.includes(m.name)) {
                     contextWordSelect.push(m.name)
@@ -1673,6 +1671,7 @@ function bubbleChart() {
 
         })
     };
+
 
 
     function active(m) {
