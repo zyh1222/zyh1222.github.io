@@ -39,9 +39,11 @@ function chartByLabel(label) {
 function to_context_tree(keyword,select) {
     // var keyword = keyword
     // var select = select
-    d3.selectAll("#vis").remove();
-    d3.selectAll("#vis1").remove();
-    d3.selectAll("#vis2").remove();
+    d3.selectAll("#vis").attr('class','hidden');
+    d3.selectAll("#vis_tree").attr('class','visible')
+    d3.select("#vis_tree").selectAll('svg').remove()
+    d3.selectAll("#vis1").attr('class','hidden');
+    d3.selectAll("#vis2").attr('class','hidden');
     context_tree(keyword,select)
     function context_tree(keyword,select) {
         // var keyword = 'covid'
@@ -512,6 +514,9 @@ function to_context_tree(keyword,select) {
                     result.source = [0, 0]
                     result.target = [0, 0]
                 } else if (keys_f.filter(x => x.platform == d.platform && x.index == d.index - 1 && d.position == 'left').length > 0) {
+                    result.source = [0, 0]
+                    result.target = [0, 0]
+                } else if (keys_f.filter(x => x.platform == d.platform && x.index == d.index + 1 && d.position == 'right').length > 0) {
                     result.source = [0, 0]
                     result.target = [0, 0]
                 } else if (d.position == 'left') {
@@ -1221,6 +1226,9 @@ svg.append('image').attr("xlink:href", "biden.png")
     .attr('height', 40)
     .on('click', function (d){
         brushScale = brushScaleAll
+        d3.selectAll("#vis").attr('class','visible')
+        d3.selectAll("#vis1").attr('class','visible')
+        d3.selectAll("#vis_tree").attr('class','hidden')
         myBubbleChart('#vis', myrawdata);
     })
 // svg.append('text')
@@ -1242,6 +1250,9 @@ svg.append('image').attr("xlink:href", "trump.png")
     .attr('width', 50)
     .attr('height', 40)
     .on('click', function (d){
+        d3.selectAll("#vis").attr('class','visible')
+        d3.selectAll("#vis1").attr('class','visible')
+        d3.selectAll("#vis_tree").attr('class','hidden')
         brushScale = brushScaleAll
         myBubbleChart('#vis', myrawdata);
     })
@@ -1589,7 +1600,18 @@ function bubbleChart() {
                 // console.log(pos_dic)
             } else if (bubbleMode === 2) {
                 if (!contextWordSelect.includes(m.name)) {
-                    contextWordSelect.push(m.name)
+                    console.log(contextWordSelect)
+//                    if(contextWordSelect.length==8){
+//                        showModalDialog("//www.jb51.net,'脚本之家'",dialogWidth:400px;dialogHeight:300px;
+//                            dialogLeft:200px;dialogTop:150px;center:yes;help:yes;resizable:yes;status:yes)
+//                    }
+//                    else{
+                        contextWordSelect.push(m.name)
+                        d3.select("#selecttext").html("<p>The words selected is " + contextWordSelect.toString()  + " </p>")
+//                    }
+                }
+                else {
+                    contextWordSelect.splice(contextWordSelect.indexOf(m.name),1)
                     d3.select("#selecttext").html("<p>The words selected is " + contextWordSelect.toString()  + " </p>")
                 }
             }
