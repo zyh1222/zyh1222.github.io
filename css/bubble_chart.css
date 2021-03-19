@@ -16,9 +16,9 @@ a:focus {outline-style:none; -moz-outline-style: none;}
 
 .cta {
     position: absolute;
-    right: 40px;top: 120px;
+    right: 0px;top: 120px;
 
-    padding: 19px 22px;
+    padding: 19px 2px;
     transition: all 0.2s ease;
     outline: none;
     /*float: right*/

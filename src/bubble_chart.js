@@ -13,6 +13,7 @@
 var bubbles = null;
 var myrawdata = null;
 var context_data = null;
+var activateWord = null;
 var texts = null;
 var nodes = [];
 var pos_dic = {}
@@ -26,7 +27,6 @@ const colors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272'
 var modesvg = null
 const MyFilter = {'name': -1, 'label':-1}
 
-
 function chartByLabel(label) {
     if (MyFilter['label'] === label) {
         MyFilter['label'] = -1
@@ -35,6 +35,7 @@ function chartByLabel(label) {
     }
     myBubbleChart('#vis', myrawdata);
 }
+
 
 
 function to_context_tree(keyword,select) {
@@ -319,7 +320,7 @@ function to_context_tree(keyword,select) {
 
 
         var graph = {
-            width: 1400,
+            width: 1200,
             height: 800
         };
 
@@ -516,7 +517,11 @@ function to_context_tree(keyword,select) {
                 } else if (keys_f.filter(x => x.platform == d.platform && x.index == d.index - 1 && d.position == 'left').length > 0) {
                     result.source = [0, 0]
                     result.target = [0, 0]
-                } else if (d.position == 'left') {
+                } else if (keys_f.filter(x => x.platform == d.platform && x.index == d.index + 1 && d.position == 'right').length > 0) {
+                    result.source = [0, 0]
+                    result.target = [0, 0]
+                }
+                else if (d.position == 'left') {
                     if (d.start == 'True') {
                         result.source = [0, 0]
                         result.target = [0, 0]
@@ -1277,42 +1282,8 @@ function bubbleChart() {
     // tooltip for mouseover functionality
     var tooltip = floatingTooltip('gates_tooltip', 240);
 
-
-    // These will be set in create_nodes and create_vis
     var svg = null;
 
-    // Charge function that is called for each node.
-    // As part of the ManyBody force.
-    // This is what creates the repulsion between nodes.
-    //
-    // Charge is proportional to the diameter of the
-    // circle (which is stored in the radius attribute
-    // of the circle's associated data.
-    //
-    // This is done to allow for accurate collision
-    // detection with nodes of different sizes.
-    //
-    // Charge is negative because we want nodes to repel.
-    // @v4 Before the charge was a stand-alone attribute
-    //  of the force layout. Now we can use it as a separate force!
-    // function charge(d) {
-    //     return -Math.pow(d.radius, 2.0) * forceStrength;
-    // }
-
-    // Here we create a force layout and
-    // @v4 We create a force simulation now and
-    //  add forces to it.
-
-
-    // var simulation = d3.forceSimulation()
-    //   .velocityDecay(0.2)
-    //
-    //   .force('y', d3.forceY().strength(forceStrength).y(center.y))
-    //   .force('charge', d3.forceManyBody().strength(5))
-    //     .force('collision', d3.forceCollide().radius(function(d) {
-    //       return d.radius
-    //     }))
-    //   .on('tick', ticked);
     var simulation = d3.forceSimulation()
         .force('charge', d3.forceManyBody().strength(0))
         .force('x', d3.forceX().x(function (d) {
@@ -1325,30 +1296,8 @@ function bubbleChart() {
             return d.radius;
         }))
         .on('tick', ticked);
-    // centerY=[height*1/5,height*2/5,height*2/5,height*4/5,height*5/5]
 
-    // simulation.force('x', d3.forceX())
-
-
-    // @v4 Force starts up automatically,
-    //  which we don't want as there aren't any nodes yet.
     simulation.stop();
-
-    // Nice looking colors - no reason to buck the trend
-    // @v4 scales now have a flattened naming scheme
-
-    /*
-     * This data manipulation function takes the raw data from
-     * the CSV file and converts it into an array of node objects.
-     * Each node will store data and visualization values to visualize
-     * a bubble.
-     *
-     * rawData is expected to be an array of data objects, read in from
-     * one of d3's loading functions like d3.csv.
-     *
-     * This function returns the new node array, with a node in that
-     * array for each element in the rawData input.
-     */
 
     function createNodes(rawData) {
         // Use the max total_amount in the data as the max in the scale's domain
@@ -1420,7 +1369,7 @@ function bubbleChart() {
             xArray[i]=(i)*width/groupList.length
 
         }
-        console.log(xArray)
+        // console.log(xArray)
         // let sortedDates = Array.from(dateList).sort();
         centerX = {}
         for (let i = 0; i < groupList.length; i++) {
@@ -1571,31 +1520,37 @@ function bubbleChart() {
         //     })
 
         // })
+        function selectWord(m) {
+            brushScale = brushScaleClick
+            rawDataNew = []
+            // }
+            for (let i = 0; i < context_data.length; i++) {
+                const currDic = context_data[i][m.name]
+                for (let k in currDic) {
+                    rawDataNew.push({
+                        "name": k,
+                        "label": currDic[k].label,
+                        "count": currDic[k].count,
+                        "time": i+1,
+                        "position": currDic[k].pos
+                    })
+                }
+            }
+            chart(selector, rawDataNew)
+
+            active(m)
+            hideDetail(null)
+        }
+        activateWord = selectWord
+
         bubbles.on('click',function(m) {
             if (bubbleMode === 1){
                 // console.log(d.name)
                 // if (brushScale == brushScaleLarge) {
-                brushScale = brushScaleClick
-                rawDataNew = []
-                // }
-                for (let i = 0; i < context_data.length; i++) {
-                    const currDic = context_data[i][m.name]
-                    for (let k in currDic) {
-                        rawDataNew.push({
-                            "name": k,
-                            "label": currDic[k].label,
-                            "count": currDic[k].count,
-                            "time": i+1,
-                            "position": currDic[k].pos
-                        })
-                    }
-                }
-                chart(selector, rawDataNew)
-
-                active(m)
-                hideDetail(null)
+                selectWord(m)
                 // console.log(pos_dic)
             } else if (bubbleMode === 2) {
+
                 function draw_context(contextWordSelect){
                     let graph = {
                         height: 200,
@@ -1634,6 +1589,9 @@ function bubbleChart() {
 
         })
     };
+
+
+
     function active(m){
         bubbles.classed("bubble-selected", function(m) {return m.name})
         if (m.name.length > 0){
@@ -1642,6 +1600,7 @@ function bubbleChart() {
             d3.select("#status").html("<div>No word is active</div>")
         }
     }
+
 
     /*
      * Callback function that is called after every tick of the

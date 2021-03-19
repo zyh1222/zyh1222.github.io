@@ -19,12 +19,27 @@
         <a href="#" onclick="changeMode()" class="cta" style="float: right" hidefocus=”true">
             <span id="modetext">Click to change mode</span>
         </a>
+
         <div id="input_control" style="top: 200px; position: absolute">
+            <b id="tip0">Select a keyword to form patterns</b>
+            <p></p>
             <label htmlFor="fname">Keyword:</label>
-            <input type="text" id="keyname" name="keyname"><br><br>
+            <select id = "opts" onchange="getComboA(this)">
+                <option value="">Select combo</option>
+                <option value="covid">covid</option>
+                <option value="woman">woman</option>
+                <option value="tax">tax</option>
+                <option value="court">court</option>
+                <option value="climate">climate</option>
+                <option value="racist">racist</option>
+            </select>
+            <p></p>
+            <b id="tip1">Select contexts in the left pools</b>
+<!--            <input type="text" id="" name="keyname"><br><br>-->
             <div id="selecttext"><p></p></div>
-            <Button onclick="clickNew()">Submit</Button>
         </div>
+        <Button id="submit" onclick="clickNew()" style="position: absolute; bottom: -50px ">Submit</Button>
+
     </div>
     <div id="vis2"></div>
     <div id="vis1"></div>
@@ -35,31 +50,17 @@
     <div id="rect2"></div>
     <div class="g-legend" style="position:relative;width:1200px;">
         <div class="g-overview" style="float: left">
-            <a onclick="chartByLabel(0)" class="button3" style="background-color: #5470c6">Covid</a>
-            <a onclick="chartByLabel(1)" class="button3" style="background-color: #91cc75">Woman</a>
-            <a onclick="chartByLabel(2)" class="button3" style="background-color: #fac858">Climate</a>
-            <a onclick="chartByLabel(3)" class="button3" style="background-color: #ee6666">Tax</a>
-            <a onclick="chartByLabel(4)" class="button3" style="background-color: #73c0de">Court</a>
-            <a onclick="chartByLabel(5)" class="button3" style="background-color: #3ba272">Racist</a>
+            <a onclick="chartByLabel(0)" class="button3" style="background-color: #5470c6">Epidemic</a>
+            <a onclick="chartByLabel(1)" class="button3" style="background-color: #91cc75">Sexuality</a>
+            <a onclick="chartByLabel(2)" class="button3" style="background-color: #fac858">Climate Change</a>
+            <a onclick="chartByLabel(3)" class="button3" style="background-color: #ee6666">Economy</a>
+            <a onclick="chartByLabel(4)" class="button3" style="background-color: #73c0de">Legislation</a>
+            <a onclick="chartByLabel(5)" class="button3" style="background-color: #3ba272">Racialism</a>
         </div>
         <div id='status' style="text-align:right;width: 30%; float: right;font-size: large"></div>
-
-<!--        <div id="modetext" style="text-align:right"><p></p></div>-->
-
-
-
-
-
-
     </div>
 
 
-
-<!--    <div class="footer" style="margin-top: 50px">-->
-<!--        &lt;!&ndash;      <strong>This version of the code uses D3v4!</strong>&ndash;&gt;-->
-<!--        <p style="margin-left: 5%">-->
-<!--            <a href="http://localhost:63342/%E6%80%BB%E7%BB%9F%E8%BE%A9%E8%AE%BA%E6%95%B0%E6%8D%AE/simple-search-js/demo/classic.html">search twitter</a></p>-->
-<!--    </div>-->
 </div>
 
 <script>
@@ -81,15 +82,32 @@
 <!--<script src="scr/pattern.js"></script>-->
 
 <script>
+    function getComboA(selectObject) {
+        var value = selectObject.value;
+        if (value!== "") {
+            activateWord({"name":value})
+        } else {
+            brushScale = brushScaleAll
+            d3.selectAll("#vis").attr('class','visible')
+            d3.selectAll("#vis1").attr('class','visible')
+            d3.selectAll("#vis_tree").attr('class','hidden')
+            myBubbleChart('#vis', myrawdata);
+        }
+    }
+
     if(bubbleMode==1){
         d3.selectAll("#input_control").attr('class','hidden');
+        d3.selectAll("#submit").attr('class','hidden');
+        d3.selectAll("#tip1").attr('class','hidden');
     }
     else{
         d3.selectAll("#input_control").attr('class','visible')
+        d3.selectAll("#submit").attr('class','visible')
+        d3.selectAll("#tip1").attr('class','visible')
     }
 
     function clickNew() {
-        let key_word=d3.select("#keyname").node().value
+        let key_word=d3.select("#opts").node().value
         var wl = contextWordSelect
         to_context_tree(key_word,wl)
     }
@@ -99,9 +117,16 @@
             bubbleMode = 2
             contextWordSelect = []
             d3.selectAll("#input_control").attr('class','visible')
+            d3.selectAll("#submit").attr('class','visible')
+            d3.selectAll("#tip1").attr('class','visible')
+
         } else {
             bubbleMode = 1
             d3.selectAll("#input_control").attr('class','hidden');
+            d3.selectAll("#submit").attr('class','hidden');
+            d3.selectAll("#tip1").attr('class','hidden');
+
+
         }
         d3.select("#modetext").html("Current mode:" + (bubbleMode === 1 ? "explore" : "Pattern") + " ")
             // d3.select("#vis_tree_words").html("")
