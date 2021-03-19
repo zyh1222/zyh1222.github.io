@@ -23,8 +23,9 @@ let brushScaleClick = 40
 let brushScale = brushScaleAll
 var rawDataNew = []
 const colors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
-
+var modesvg = null
 const MyFilter = {'name': -1, 'label':-1}
+
 
 function chartByLabel(label) {
     if (MyFilter['label'] === label) {
@@ -39,9 +40,11 @@ function chartByLabel(label) {
 function to_context_tree(keyword,select) {
     // var keyword = keyword
     // var select = select
-    d3.selectAll("#vis").remove();
-    d3.selectAll("#vis1").remove();
-    d3.selectAll("#vis2").remove();
+    d3.selectAll("#vis").attr('class','hidden');
+    d3.selectAll("#vis_tree").attr('class','visible')
+    d3.select("#vis_tree").selectAll('svg').remove()
+    d3.selectAll("#vis1").attr('class','hidden');
+    d3.selectAll("#vis2").attr('class','hidden');
     context_tree(keyword,select)
     function context_tree(keyword,select) {
         // var keyword = 'covid'
@@ -81,7 +84,6 @@ function to_context_tree(keyword,select) {
             if (a === undefined) {
                 continue
             }
-
             freq[key] = 0
 
             for (var k = 0; k < a.length; k++) {
@@ -1221,6 +1223,9 @@ svg.append('image').attr("xlink:href", "biden.png")
     .attr('height', 40)
     .on('click', function (d){
         brushScale = brushScaleAll
+        d3.selectAll("#vis").attr('class','visible')
+        d3.selectAll("#vis1").attr('class','visible')
+        d3.selectAll("#vis_tree").attr('class','hidden')
         myBubbleChart('#vis', myrawdata);
     })
 // svg.append('text')
@@ -1243,6 +1248,9 @@ svg.append('image').attr("xlink:href", "trump.png")
     .attr('height', 40)
     .on('click', function (d){
         brushScale = brushScaleAll
+        d3.selectAll("#vis").attr('class','visible')
+        d3.selectAll("#vis1").attr('class','visible')
+        d3.selectAll("#vis_tree").attr('class','hidden')
         myBubbleChart('#vis', myrawdata);
     })
 // .attr('stroke', 'black')
@@ -1588,10 +1596,38 @@ function bubbleChart() {
                 hideDetail(null)
                 // console.log(pos_dic)
             } else if (bubbleMode === 2) {
+                function draw_context(contextWordSelect){
+                    let graph = {
+                        height: 200,
+                        width: 100,
+                    }
+                    if (modesvg === null){
+                        modesvg = d3.select("#vis_tree_words").append('svg').attr("height", 800).attr('position', 'absolute').attr('top','100px')
+                    }
+
+                    let svg = modesvg
+                    svg.selectAll("text")
+                        .data(contextWordSelect)
+                        .enter()
+                        .append("text")
+                        .attr("x", function (d,i){return 0})
+                        .attr("y", function (d,i){
+                            console.log(d,i)
+                            return graph.height/12*i+340})
+                        .text(function(d){
+                            return d;})
+                }
                 if (!contextWordSelect.includes(m.name)) {
                     contextWordSelect.push(m.name)
-                    d3.select("#selecttext").html("<p>The words selected is " + contextWordSelect.toString()  + " </p>")
+                    // .html("<p>The words selected is " + contextWordSelect.toString()  + " </p>")
+                } else {
+                    contextWordSelect.splice(contextWordSelect.indexOf(m.name),1)
+                    // d3.select("#vis_tree_words").html("<p>The words selected is " + contextWordSelect.toString()  + " </p >")
                 }
+
+                draw_context(contextWordSelect)
+
+
             }
 
 

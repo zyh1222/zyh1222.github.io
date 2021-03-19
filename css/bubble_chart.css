@@ -1,64 +1,68 @@
-a {
-  /*color: #444;*/
-    text-decoration: none;
-    color: #111
-}
 /*a {*/
-/*    !*text-decoration: none;*!*/
-/*    !*color: inherit;*!*/
+/*    color: #111;*/
+/*    text-decoration: none;*/
+/*    !*color: #111*!*/
 /*}*/
+a {
+    text-decoration: none;
+    color: inherit;
+}
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: auto;
 }
 
-/*a {*/
-/*    text-decoration: none;*/
-/*    color: inherit;*/
-/*}*/
+a:focus {outline-style:none; -moz-outline-style: none;}
 
 .cta {
-    position: relative;
-    margin: auto;
+    position: absolute;
+    right: 40px;top: 120px;
+
     padding: 19px 22px;
     transition: all 0.2s ease;
+    outline: none;
+    /*float: right*/
 }
 .cta:before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 0px;
     display: block;
     border-radius: 28px;
     background: rgba(255, 171, 157, 0.5);
-    width: 56px;
-    height: 56px;
+    width: 45px;
+    height: 45px;
     transition: all 0.3s ease;
+    outline: none;
 }
 .cta span {
     position: relative;
-    font-size: 16px;
+    font-size: 10px;
     line-height: 18px;
     font-weight: 900;
-    letter-spacing: 0.25em;
+    font-color: #111111;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     vertical-align: middle;
+    outline: none;
 }
 .cta svg {
     position: relative;
-    top: 0;
-    margin-left: 10px;
+    margin-top: 0px;
+    /*margin-top: 0px;*/
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke: #111;
     stroke-width: 2;
-    transform: translateX(-5px);
+    transform: translateX(5px);
     transition: all 0.3s ease;
 }
 .cta:hover:before {
     width: 100%;
     background: #ffab9d;
+    outline: none;
 }
 .cta:hover svg {
     transform: translateX(0);
@@ -81,6 +85,16 @@ a {
     clear: both;
     margin-bottom: 0px;
     margin-top: 0px;
+}
+#vis_tree_words {
+
+    right: 40px;top: 120px;
+    position: absolute;
+    width: 200px;
+    height: 500px;
+    clear: both;
+    /*margin-bottom: 0px;*/
+    /*margin-left: 1000px;*/
 }
 /*#vis{*/
 /*    width: 500px;*/
@@ -127,7 +141,7 @@ a {
   text-align: center;
 }
 .g-legend {
-    /*color: #999;*/
+    font-color: #111;
     font: 15px/1.3em sans-serif;
     /*height: 30px;*/
     /*width: 100px;*/
@@ -152,7 +166,7 @@ a.button3{
     text-decoration:none;
     font-family:"Gill Sans","Gill Sans MT";
     font-weight:200;
-    /*font-color:#FFFFFF;*/
+    font-color:#111;
     /*background-color:#FFFFFF;*/
     text-align:center;
     transition: all 0.2s;

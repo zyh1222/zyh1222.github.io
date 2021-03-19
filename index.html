@@ -13,14 +13,27 @@
 
 </head>
 <body>
+
 <div class="container">
+    <div id="vis_tree_words">
+        <a href="#" onclick="changeMode()" class="cta" style="float: right" hidefocus=”true">
+            <span id="modetext">Click to change mode</span>
+        </a>
+        <div id="input_control" style="top: 200px; position: absolute">
+            <label htmlFor="fname">Keyword:</label>
+            <input type="text" id="keyname" name="keyname"><br><br>
+            <div id="selecttext"><p></p></div>
+            <Button onclick="clickNew()">Submit</Button>
+        </div>
+    </div>
     <div id="vis2"></div>
     <div id="vis1"></div>
     <div id="rect1"></div>
     <div id="vis"></div>
-    <div id="vis_tree"></div>
+    <div id="vis_tree">
+    </div>
     <div id="rect2"></div>
-    <div class="g-legend" style="position:relative;width:1100px;">
+    <div class="g-legend" style="position:relative;width:1200px;">
         <div class="g-overview" style="float: left">
             <a onclick="chartByLabel(0)" class="button3" style="background-color: #5470c6">Covid</a>
             <a onclick="chartByLabel(1)" class="button3" style="background-color: #91cc75">Woman</a>
@@ -28,28 +41,18 @@
             <a onclick="chartByLabel(3)" class="button3" style="background-color: #ee6666">Tax</a>
             <a onclick="chartByLabel(4)" class="button3" style="background-color: #73c0de">Court</a>
             <a onclick="chartByLabel(5)" class="button3" style="background-color: #3ba272">Racist</a>
-
         </div>
-        <div id='status' style="text-align:right;width: 30%; float: left;font-size: large"></div>
-<!--        <a href="#" onclick="to_context_tree()" class="cta">-->
-<!--            <span>Click me</span>-->
-<!--            <svg width="13px" height="10px" viewBox="0 0 13 10">-->
-<!--                <path d="M1,5 L11,5"></path>-->
-<!--                <polyline points="8 1 12 5 8 9"></polyline>-->
-<!--            </svg>-->
-<!--        </a>-->
-    </div>
+        <div id='status' style="text-align:right;width: 30%; float: right;font-size: large"></div>
 
-    <div style="margin-top: 100px">
-            <label for="fname">Keyword:</label>
-            <input type="text" id="keyname" name="keyname"><br><br>
-        <div id="selecttext"><p></p></div>
-        <div id="modetext"><p></p></div>
-        <Button onclick="clickNew()">Submit</Button>
-        <Button onclick="changeMode()">Mode</Button>
+<!--        <div id="modetext" style="text-align:right"><p></p></div>-->
+
+
+
+
 
 
     </div>
+
 
 
 <!--    <div class="footer" style="margin-top: 50px">-->
@@ -78,11 +81,16 @@
 <!--<script src="scr/pattern.js"></script>-->
 
 <script>
+    if(bubbleMode==1){
+        d3.selectAll("#input_control").attr('class','hidden');
+    }
+    else{
+        d3.selectAll("#input_control").attr('class','visible')
+    }
+
     function clickNew() {
         let key_word=d3.select("#keyname").node().value
         var wl = contextWordSelect
-        console.log(key_word, contextWordSelect)
-
         to_context_tree(key_word,wl)
     }
 
@@ -90,12 +98,13 @@
         if (bubbleMode === 1){
             bubbleMode = 2
             contextWordSelect = []
+            d3.selectAll("#input_control").attr('class','visible')
         } else {
             bubbleMode = 1
+            d3.selectAll("#input_control").attr('class','hidden');
         }
-        d3.select("#modetext").html("<p>The mode current is " + (bubbleMode === 1 ? "explore":"Pattern")  + " </p>")
-        d3.select("#selecttext").html("<p></p>")
-
+        d3.select("#modetext").html("Current mode:" + (bubbleMode === 1 ? "explore" : "Pattern") + " ")
+            // d3.select("#vis_tree_words").html("")
     }
 </script>
 <!-- PLEASE REMOVE AFTER CLONING -->
