@@ -9,7 +9,6 @@
  * @type {number}
  */
 
-
 var bubbles = null;
 var myrawdata = null;
 var context_data = null;
