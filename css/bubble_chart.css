@@ -10,6 +10,8 @@ a {
 .container {
   max-width: 1400px;
   margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 a:focus {outline-style:none; -moz-outline-style: none;}
@@ -83,8 +85,11 @@ a:focus {outline-style:none; -moz-outline-style: none;}
     /*width: 1200px;*/
     /*height: 700px;*/
     clear: both;
+    width:95%;
     margin-bottom: 0px;
     margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 10px;
 }
 #vis_tree_words {
 

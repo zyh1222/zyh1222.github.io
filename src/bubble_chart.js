@@ -353,7 +353,7 @@ function to_context_tree(keyword, select) {
         var s = -30
 
         // const linkColors = ['#f1beb1','#f88477','#d6c9ec','#f5c6e0','#d78ea8','#ca6c90','#b093dc']
-        const linkColors = d3.scaleLinear().domain([0, 1]).range(["#b1ddf9", "#eed0d5"])
+        const linkColors = d3.scaleLinear().domain([-0.1, 1]).range(["#7bcafc", "#eed0d5"])
         const horiz = d3.scaleLinear().range([-50, 50]).domain([d3.min(Object.values(horizon)), d3.max(Object.values(horizon))])
         // .range(['#f1beb1','#f88477','#d6c9ec','#f5c6e0','#d78ea8','#ca6c90'])
 
@@ -369,7 +369,7 @@ function to_context_tree(keyword, select) {
             .attr("width", graph.width)
             .attr("height", graph.height)
             .append('svg:g')
-            .attr('transform', 'translate( 25'+', 0)')
+            .attr('transform', 'translate( 10'+', 0)')
 
         var id = "md-shadow";
         var deviation = 2;
@@ -378,7 +378,7 @@ function to_context_tree(keyword, select) {
         var pad = 10
         var left = 20
         var mid = 180
-        var wid = 300
+        var wid = 285
         var scaler = d3.scalePow()
             .exponent(0.8)
             .range([12, 25])
@@ -561,9 +561,9 @@ function to_context_tree(keyword, select) {
                         result.target = [0, 0]
                     } else {
                         result.source = [4 * pad + (wid) / pattern_length * d.index + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
-                            (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                            (graph.height) / l * d.platform + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                         result.target = [4 * pad + (wid) / pattern_length * (d.index - 1) + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
-                            (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                            (graph.height) / l * d.platform + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                     }
                 } else if (d.position == 'right') {
                     if (d.start == 'True') {
@@ -571,9 +571,9 @@ function to_context_tree(keyword, select) {
                         result.target = [0, 0]
                     } else {
                         result.source = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel,
-                            (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                            (graph.height) / l * (d.platform - l) + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                         result.target = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * (d.index + 1) + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel,
-                            (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                            (graph.height) / l * (d.platform - l) + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                     }
                 }
             } else {
@@ -610,14 +610,14 @@ function to_context_tree(keyword, select) {
             var rel = horiz(d.relate)
             if (d.position == 'left') {
                 result.source = [4 * pad + (wid) / pattern_length * d.index  + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
-                    (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                    (graph.height) / l * d.platform +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                 result.target = [4 * pad + (wid) / pattern_length * (d.index - 1)  + 60+s / d.length * d.time1 + rel,
-                    (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
+                    (graph.height) / l * d.platform +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
             } else {
                 result.source = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel,
-                    (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                    (graph.height) / l * (d.platform - l) +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                 result.target = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * (d.index + 1) + s / d.length * d.time1 - rel,
-                    (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
+                    (graph.height) / l * (d.platform - l) +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
             }
             return result
         }
@@ -632,14 +632,14 @@ function to_context_tree(keyword, select) {
                 var rel = horiz(d.relate)
                 if (d.position == 'left') {
                     result.source = [4 * pad + (wid) / pattern_length * d.index  + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
-                        (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                        (graph.height) / l * d.platform +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                     result.target = [4 * pad + (wid) / pattern_length * (parseInt(d.index) + 1)  + 60+s / d.length * d.time1 + rel,
-                        (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
+                        (graph.height) / l * d.platform +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
                 } else {
                     result.source = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * d.index + s / d.length * d.time[Math.round(d.time.length / 2) - 1] - rel,
-                        (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                        (graph.height) / l * (d.platform - l) +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                     result.target = [graph.width / 2 + mid + 3 * pad + wid / pattern_length * (parseInt(d.index) - 1) + s / d.length * d.time1 - rel,
-                        (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
+                        (graph.height) / l * (d.platform - l) +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time1 - 3]
                 }
             } else {
                 result.source = [0, 0]
@@ -680,7 +680,7 @@ function to_context_tree(keyword, select) {
             .data([keyword])
             .enter()
             .append("text")
-            .attr("x", graph.width / 2 - 4 * pad)
+            .attr("x", graph.width / 2 - 4 * pad-10)
             .attr("y", graph.height / 2)
             .attr("font-size", 33).text(d => d)
 
@@ -713,11 +713,11 @@ function to_context_tree(keyword, select) {
 
         var timeticks = svg.selectAll("timetick").data(timetick).enter().append("svg:g")
         timeticks.append("text")
-            .attr("x", d =>  60 + s / d.len * d.idx + d.relate)
-            .attr("y", d => (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.len * d.idx)
+            .attr("x", d =>  70 + s / d.len * d.idx + d.relate)
+            .attr("y", d => (graph.height) / l * d.platform +  pad + ((graph.height) / l - 2 * pad) / d.len * d.idx)
             .attr("dy", ".15em")
             .attr("dx", ".15em")
-            .attr("font-size", 8)
+            .attr("font-size", 7)
             .text(function (d) {
                 return d.tick;
             })
@@ -725,12 +725,12 @@ function to_context_tree(keyword, select) {
                 d3.select(this).attr("color", "#000000").attr("font-size", 12)
             })
             .on('mouseleave', function (d) {
-                d3.select(this).attr("color", "#000000").attr("font-size", 8)
+                d3.select(this).attr("color", "#000000").attr("font-size", 7)
             })
 
         timeticks.append("text")
-            .attr("x", d => graph.width / 2 + mid + 320 + s / d.len * d.idx - d.relate)
-            .attr("y", d => (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.len * d.idx)
+            .attr("x", d => graph.width / 2 + mid + 300 + s / d.len * d.idx - d.relate)
+            .attr("y", d => (graph.height) / l * d.platform + pad + ((graph.height) / l - 2 * pad) / d.len * d.idx)
             .attr("dy", ".15em")
             .attr("dx", ".15em")
             .attr("font-size", 8)
@@ -781,7 +781,7 @@ function to_context_tree(keyword, select) {
             //     })
             link.style('opacity', function (x, j) {
                 if (plat.indexOf(j) > -1) {
-                    return 0.5
+                    return 0.7
                 }
                     <!--                        if(j>1 && plat.indexOf(j-l)>-1){-->
                     <!--                            return 0.5-->
@@ -800,7 +800,7 @@ function to_context_tree(keyword, select) {
         text.on('mouseleave', function (d) {
             text.selectAll('text')
                 .style('opacity', 1)
-            link.style('opacity', 0.2)
+            link.style('opacity', 0.7)
             sparkline.selectAll("polyline").style('opacity', 0)
             connect_c.selectAll('path').style('opacity', 0.2)
             connect.selectAll('path').style('opacity', 0.2)
@@ -862,10 +862,10 @@ function to_context_tree(keyword, select) {
             }
             var rel = horiz(d.hor)
             if (i < l) {
-                result.source = [graph.width / 2 - 4 * pad, graph.height / 2 - 10]
+                result.source = [graph.width / 2 - 4 * pad-10, graph.height / 2 - 10]
                 result.target = [graph.width / 2 - mid - pad - 10 + rel, graph.height / l * i + graph.height / l / 2]
             } else {
-                result.source = [graph.width / 2 + 4 * pad, graph.height / 2 - 10]
+                result.source = [graph.width / 2 + 4 * pad-10, graph.height / 2 - 10]
                 result.target = [graph.width / 2 + mid - pad + 0 - rel, graph.height / l * (i - l) + graph.height / l / 2]
             }
             return result
@@ -988,9 +988,9 @@ function to_context_tree(keyword, select) {
             .attr("y", function (d) {
                 y = 0
                 if (d.position == 'left') {
-                    y = (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
+                    y = (graph.height) / l * d.platform + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
                 } else {
-                    y = (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
+                    y = (graph.height) / l * (d.platform - l) + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
                 }
                 let del = d.freq > 150 ? 20:10
                 return y - del
@@ -1014,9 +1014,9 @@ function to_context_tree(keyword, select) {
             })
             .attr("y", function (d) {
                 if (d.position == 'left') {
-                    return (graph.height) / l * d.platform + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
+                    return (graph.height) / l * d.platform +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
                 } else {
-                    return (graph.height) / l * (d.platform - l) + 2 * pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
+                    return (graph.height) / l * (d.platform - l) +  pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1]
                 }
             })
             .style('background-color', 'black')
