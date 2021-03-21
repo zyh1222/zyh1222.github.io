@@ -21,7 +21,9 @@ let brushScaleAll = 10
 let brushScaleBrush = 10
 let brushScaleClick = 40
 let brushScale = brushScaleAll
-var rawDataNew = []
+let rawDataNew = []
+let zyhKeyword = ""
+let zyhKeySvg = null
 const colors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc']
 var modesvg = null
 const MyFilter = {'name': -1, 'label': -1}
@@ -73,6 +75,7 @@ function draw_context() {
         .text(function (d) {
             return d;
         })
+        .attr('font-family', "Gill Sans","Gill Sans MT")
 
 }
 
@@ -98,6 +101,9 @@ function to_context_tree(keyword, select) {
             k = select[i]
             if (dis_y[keyword].hasOwnProperty(k)) {
                 disData[k] = dis_y[keyword][k]
+            }
+            if (dis_x[keyword].hasOwnProperty(k)) {
+                horizon[k] = dis_x[keyword][k]
             }
         }
         select = Object.keys(disData).sort(function (a, b) {
@@ -363,14 +369,13 @@ function to_context_tree(keyword, select) {
             height: 700
         };
 
-        var timeticks = ['Tue 8am', 'Tue 6 20pm', 'Wes 7 8am', 'Wes 7 20pm', 'Thu 8 8am', 'Thu 20pm']
+        var timeticks = ['Tue 8am', 'Tue 20pm', 'Wes 8am', 'Wes 20pm', 'Thu 8am', 'Thu 20pm']
 
         var svg = d3.select("#vis_tree").append('svg:svg')
             .attr("width", graph.width)
             .attr("height", graph.height)
             .append('svg:g')
             .attr('transform', 'translate( 10'+', 0)')
-
         var id = "md-shadow";
         var deviation = 2;
         var offset = 5;
@@ -1451,11 +1456,20 @@ function bubbleChart() {
                 num: 1
             };
         });
+
         let base = (max - min) / 6
         if (base < 1) {
             base = 1
         }
         const groupList = [0, 1, 2, 3, 4, 5]
+
+        // [
+        //   [min day in range 1, max day in range 1], // range 1
+        //   [min day in range 2, max day in range 2], // range 2
+        //    ...
+        //   [min day in range 6, max day in range 6]  // range 6
+        // ]
+        const groupRange = [[100,0],[100,0],[100,0],[100,0],[100,0],[100,0]]
 
         myNodes = myNodes.map(function (d) {
             var group = parseInt((d.group - min) / base);
@@ -1463,6 +1477,8 @@ function bubbleChart() {
                 // console.log(d.group, group, min, base, dateList.size)
                 group = 5
             }
+            groupRange[group][0] = Math.min(groupRange[group][0], d.group)
+            groupRange[group][1] = Math.max(groupRange[group][1], d.group)
             d.group = group
             return d;
         });
@@ -1649,21 +1665,60 @@ function bubbleChart() {
 
         bubbles.on('click', function (m) {
             if (bubbleMode === 1) {
+                zyhKeyword = m.name
+                contextWordSelect = []
                 selectWord(m)
+                // d3.select("#zyhKeyword").html("<span style='background-color: #2fa1d6'>"+zyhKeyword+"</span>")
+// console.log(m)
+                if (zyhKeySvg === null) {
+                    zyhKeySvg = d3.select("#zyhKeyword").append("svg")
+                        .attr('id','zyhkk').attr("height", 50).attr('position', 'absolute')
+                        // .attr('top', '50px')
+                }
+                zyhKeySvg.selectAll("rect")
+                    .data([zyhKeyword])
+                    .enter()
+                    .append("rect")
+                    .attr("x",5)
+                    .attr("y", 5)
+                    .style('width', function (d){return d.length*11})
+                    .style("opacity", 0.5)
+                    .style('height', 30)
+                    .style('fill', '#91d0fa')
+                    .style('rx',10)
+
+                zyhKeySvg.selectAll("text")
+                    .data([zyhKeyword])
+                    .enter()
+                    .append("text")
+                    .attr("x",10)
+                    .attr("y", 25)
+                    .text(function (d) {
+                        return d;
+                    })
+                    .attr('font-size',15)
+                    .attr('font-family',"Gill Sans","Gill Sans MT")
             } else if (bubbleMode === 2) {
+
                 if (contextWordSelect.length > 5) {
                     alert("Words Exceeded!!")
                     return
                 }
 
-
                 if (!contextWordSelect.includes(m.name)) {
-                    contextWordSelect.push(m.name)
+                    let key_word=zyhKeyword
+
+                    // console.log(m, key_word)
+                    if (dis_x[key_word].hasOwnProperty(m.name)) {
+                        contextWordSelect.push(m.name)
+                    }
+
                 } else {
                     contextWordSelect.splice(contextWordSelect.indexOf(m.name), 1)
                 }
 
                 draw_context(contextWordSelect)
+
 
 
             }

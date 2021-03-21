@@ -8,7 +8,7 @@ a {
     color: inherit;
 }
 .container {
-  max-width: 1400px;
+  max-width: 1500px;
   margin-left: 100px;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -82,10 +82,10 @@ a:focus {outline-style:none; -moz-outline-style: none;}
     margin-top: 0px;
 }
 #vis_tree {
-    /*width: 1200px;*/
+    width: 1300px;
     /*height: 700px;*/
     clear: both;
-    width:95%;
+    /*width:95%;*/
     margin-bottom: 0px;
     margin-top: 0px;
     margin-left: 0px;
@@ -98,6 +98,7 @@ a:focus {outline-style:none; -moz-outline-style: none;}
     width: 200px;
     height: 500px;
     clear: both;
+
     /*margin-bottom: 0px;*/
     /*margin-left: 1000px;*/
 }

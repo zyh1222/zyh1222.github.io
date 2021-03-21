@@ -23,16 +23,17 @@
         <div id="input_control" style="top: 200px; position: absolute">
             <b id="tip0">Select a keyword to form patterns</b>
             <p></p>
-            <label htmlFor="fname">Keyword:</label>
-            <select id = "opts" onchange="getComboA(this)">
-                <option value="">Select combo</option>
-                <option value="covid">covid</option>
-                <option value="woman">woman</option>
-                <option value="tax">tax</option>
-                <option value="court">court</option>
-                <option value="climate">climate</option>
-                <option value="racist">racist</option>
-            </select>
+<!--            <label htmlFor="fname">Central word:</label>-->
+            <div id="zyhKeyword"></div>
+<!--            <select id = "opts" onchange="getComboA(this)">-->
+<!--                <option value="">Select combo</option>-->
+<!--                <option value="covid">covid</option>-->
+<!--                <option value="woman">woman</option>-->
+<!--                <option value="tax">tax</option>-->
+<!--                <option value="court">court</option>-->
+<!--                <option value="climate">climate</option>-->
+<!--                <option value="racist">racist</option>-->
+<!--            </select>-->
             <p></p>
             <b id="tip1">Select contexts in the left pools</b>
 <!--            <input type="text" id="" name="keyname"><br><br>-->
@@ -100,6 +101,7 @@
             d3.selectAll("#vis").attr('class','visible')
             d3.selectAll("#vis1").attr('class','visible')
             d3.selectAll("#vis_tree").attr('class','hidden')
+            d3.selectAll("#zyhKeyword").attr('class','hidden')
             myBubbleChart('#vis', myrawdata);
             d3.select('#nn').remove()
             modesvg=null
@@ -113,16 +115,30 @@
         d3.selectAll("#submit").attr('class','hidden');
         d3.selectAll("#submit1").attr('class','hidden');
         d3.selectAll("#tip1").attr('class','hidden');
+        d3.selectAll("#zyhKeyword").attr('class','hidden')
+        d3.select('#nn').remove()
+        d3.select('#zyhkk').remove()
+        modesvg=null
+        contextWordSelect = []
+        zyhKeySvg=null
+        zyhKeyword=null
     }
     else{
         d3.selectAll("#input_control").attr('class','visible')
         d3.selectAll("#submit").attr('class','visible')
         d3.selectAll("#submit1").attr('class','visible')
         d3.selectAll("#tip1").attr('class','visible')
+        d3.selectAll("#zyhKeyword").attr('class','visible')
+        d3.select('#nn').remove()
+        d3.select('#zyhkk').remove()
+        modesvg=null
+        contextWordSelect = []
+        zyhKeySvg=null
+        zyhKeyword=null
     }
 
     function clickNew() {
-        let key_word=d3.select("#opts").node().value
+        let key_word=zyhKeyword
         var wl = contextWordSelect
         to_context_tree(key_word,wl)
     }
@@ -135,12 +151,21 @@
             d3.selectAll("#submit").attr('class','visible')
             d3.selectAll("#submit1").attr('class','visible')
             d3.selectAll("#tip1").attr('class','visible')
+            d3.selectAll("#zyhKeyword").attr('class','visible')
+
         } else {
             bubbleMode = 1
             d3.selectAll("#input_control").attr('class','hidden');
             d3.selectAll("#submit").attr('class','hidden');
             d3.selectAll("#submit1").attr('class','hidden');
             d3.selectAll("#tip1").attr('class','hidden');
+            d3.selectAll("#zyhKeyword").attr('class','hidden')
+            d3.select('#nn').remove()
+            d3.select('#zyhkk').remove()
+            modesvg=null
+            contextWordSelect = []
+            zyhKeySvg=null
+            zyhKeyword=null
         }
         d3.select("#modetext").html("Current mode:" + (bubbleMode === 1 ? "explore" : "Pattern") + " ")
             // d3.select("#vis_tree_words").html("")
