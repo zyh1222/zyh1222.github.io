@@ -14,61 +14,69 @@
 </head>
 <body>
 
-<div class="container">
-    <div id="vis_tree_words">
-        <a href="#" onclick="changeMode()" class="cta" style="float: right" hidefocus=”true">
-            <span id="modetext">Click to change mode</span>
-        </a>
-
-        <div id="input_control" style="top: 200px; position: absolute">
-            <b id="tip0">Select a keyword to form patterns</b>
-            <p></p>
-<!--            <label htmlFor="fname">Central word:</label>-->
-            <div id="zyhKeyword"></div>
-<!--            <select id = "opts" onchange="getComboA(this)">-->
-<!--                <option value="">Select combo</option>-->
-<!--                <option value="covid">covid</option>-->
-<!--                <option value="woman">woman</option>-->
-<!--                <option value="tax">tax</option>-->
-<!--                <option value="court">court</option>-->
-<!--                <option value="climate">climate</option>-->
-<!--                <option value="racist">racist</option>-->
-<!--            </select>-->
-            <p></p>
-            <b id="tip1">Select contexts in the left pools</b>
-<!--            <input type="text" id="" name="keyname"><br><br>-->
-            <div id="selecttext"><p></p></div>
-        </div>
-        <div id="submit1" style="position: absolute; left:100px;bottom: 50px;">
-            <a href="#"  onclick="clickNew()" class="cta"  hidefocus="true">
-                <span id="modetext1">Go Patterns!</span>
+<div style="width: 3200px">
+    <div style="width: 50%; float: left" class="container">
+        <div id="vis_tree_words">
+            <a href="#" onclick="changeMode()" class="cta" style="float: right" hidefocus=”true">
+                <span id="modetext">Click to change mode</span>
             </a>
+
+            <div id="input_control" style="top: 200px; position: absolute">
+                <b id="tip0">Select a keyword to form patterns</b>
+                <p></p>
+                <!--            <label htmlFor="fname">Central word:</label>-->
+                <div id="zyhKeyword"></div>
+                <!--            <select id = "opts" onchange="getComboA(this)">-->
+                <!--                <option value="">Select combo</option>-->
+                <!--                <option value="covid">covid</option>-->
+                <!--                <option value="woman">woman</option>-->
+                <!--                <option value="tax">tax</option>-->
+                <!--                <option value="court">court</option>-->
+                <!--                <option value="climate">climate</option>-->
+                <!--                <option value="racist">racist</option>-->
+                <!--            </select>-->
+                <p></p>
+                <b id="tip1">Select contexts in the left pools</b>
+                <!--            <input type="text" id="" name="keyname"><br><br>-->
+                <div id="selecttext"><p></p></div>
+            </div>
+            <div id="submit1" style="position: absolute; left:100px;bottom: 50px;">
+                <a href="#"  onclick="clickNew()" class="cta"  hidefocus="true">
+                    <span id="modetext1">Go Patterns!</span>
+                </a>
+            </div>
+
+            <!--        <Button id="submit" onclick="clickNew()" style="position: absolute; bottom: -50px ">Submit</Button>-->
+
+        </div>
+        <div id="vis2"></div>
+        <div id="vis1"></div>
+        <div id="rect1"></div>
+        <div id="vis"></div>
+        <div id="rect2"></div>
+        <div class="g-legend" style="position:relative;width:1200px;">
+            <div class="g-overview" style="float: left">
+                <a onclick="chartByLabel(0)" class="button3" style="background-color: #5470c6">Epidemic</a>
+                <a onclick="chartByLabel(1)" class="button3" style="background-color: #91cc75">Sexuality</a>
+                <a onclick="chartByLabel(2)" class="button3" style="background-color: #fac858">Climate Change</a>
+                <a onclick="chartByLabel(3)" class="button3" style="background-color: #ee6666">Economy</a>
+                <a onclick="chartByLabel(4)" class="button3" style="background-color: #73c0de">Legislation</a>
+                <a onclick="chartByLabel(5)" class="button3" style="background-color: #3ba272">Racialism</a>
+            </div>
+            <div id='status' style="text-align:right;width: 30%; float: right;font-size: large"></div>
         </div>
 
-<!--        <Button id="submit" onclick="clickNew()" style="position: absolute; bottom: -50px ">Submit</Button>-->
+    </div>
 
-    </div>
-    <div id="vis2"></div>
-    <div id="vis1"></div>
-    <div id="rect1"></div>
-    <div id="vis"></div>
-    <div id="vis_tree">
-    </div>
-    <div id="rect2"></div>
-    <div class="g-legend" style="position:relative;width:1200px;">
-        <div class="g-overview" style="float: left">
-            <a onclick="chartByLabel(0)" class="button3" style="background-color: #5470c6">Epidemic</a>
-            <a onclick="chartByLabel(1)" class="button3" style="background-color: #91cc75">Sexuality</a>
-            <a onclick="chartByLabel(2)" class="button3" style="background-color: #fac858">Climate Change</a>
-            <a onclick="chartByLabel(3)" class="button3" style="background-color: #ee6666">Economy</a>
-            <a onclick="chartByLabel(4)" class="button3" style="background-color: #73c0de">Legislation</a>
-            <a onclick="chartByLabel(5)" class="button3" style="background-color: #3ba272">Racialism</a>
-        </div>
-        <div id='status' style="text-align:right;width: 30%; float: right;font-size: large"></div>
+    <div style="width: 50%; float: left" id="vis_new">
+        <div style="margin-top: 110px" id="rect1_new"></div>
+        <div id="vis_tree"></div>
+        <div id="rect2_new"></div>
     </div>
 
 
 </div>
+
 <script>
     let bubbleMode = 1
     let contextWordSelect = []
@@ -102,6 +110,8 @@
             d3.selectAll("#vis1").attr('class','visible')
             d3.selectAll("#vis_tree").attr('class','hidden')
             d3.selectAll("#zyhKeyword").attr('class','hidden')
+            d3.selectAll("#rect1_new").attr('class','hidden')
+            d3.selectAll("#rect2_new").attr('class','hidden')
             myBubbleChart('#vis', myrawdata);
             d3.select('#nn').remove()
             modesvg=null
@@ -116,6 +126,8 @@
         d3.selectAll("#submit1").attr('class','hidden');
         d3.selectAll("#tip1").attr('class','hidden');
         d3.selectAll("#zyhKeyword").attr('class','hidden')
+        d3.selectAll("#rect1_new").attr('class','hidden')
+        d3.selectAll("#rect2_new").attr('class','hidden')
         d3.select('#nn').remove()
         d3.select('#zyhkk').remove()
         modesvg=null
@@ -129,6 +141,8 @@
         d3.selectAll("#submit1").attr('class','visible')
         d3.selectAll("#tip1").attr('class','visible')
         d3.selectAll("#zyhKeyword").attr('class','visible')
+        d3.selectAll("#rect1_new").attr('class','visible')
+        d3.selectAll("#rect2_new").attr('class','visible')
         d3.select('#nn').remove()
         d3.select('#zyhkk').remove()
         modesvg=null
@@ -168,7 +182,7 @@
             zyhKeyword=null
         }
         d3.select("#modetext").html("Current mode:" + (bubbleMode === 1 ? "explore" : "Pattern") + " ")
-            // d3.select("#vis_tree_words").html("")
+        // d3.select("#vis_tree_words").html("")
     }
 </script>
 <!-- PLEASE REMOVE AFTER CLONING -->
@@ -185,3 +199,4 @@
 <!-- END REMOVE -->
 </body>
 </html>
+

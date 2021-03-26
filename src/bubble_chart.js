@@ -82,11 +82,13 @@ function draw_context() {
 function to_context_tree(keyword, select) {
     // var keyword = keyword
     // var select = select
-    d3.selectAll("#vis").attr('class', 'hidden');
+    // d3.selectAll("#vis").attr('class', 'hidden');
+    d3.selectAll("#rect1_new").attr('class', 'visible')
+    d3.selectAll("#rect2_new").attr('class', 'visible')
     d3.selectAll("#vis_tree").attr('class', 'visible')
     d3.select("#vis_tree").selectAll('svg').remove()
-    d3.selectAll("#vis1").attr('class', 'hidden');
-    d3.selectAll("#vis2").attr('class', 'hidden');
+    // d3.selectAll("#vis1").attr('class', 'hidden');
+    // d3.selectAll("#vis2").attr('class', 'hidden');
     context_tree(keyword, select)
 
     function context_tree(keyword, select) {
@@ -1340,6 +1342,8 @@ svg.append('image').attr("xlink:href", "biden.png")
         d3.selectAll("#vis").attr('class', 'visible')
         d3.selectAll("#vis1").attr('class', 'visible')
         d3.selectAll("#vis_tree").attr('class', 'hidden')
+        d3.selectAll("#rect1_new").attr('class', 'hidden')
+        d3.selectAll("#rect2_new").attr('class', 'hidden')
         myBubbleChart('#vis', myrawdata);
     })
 // svg.append('text')
@@ -1367,10 +1371,61 @@ svg.append('image').attr("xlink:href", "trump.png")
         d3.selectAll("#vis_tree").attr('class', 'hidden')
         myBubbleChart('#vis', myrawdata);
     })
+//
+//
+//
+var svg = d3.select("#rect1_new").append("svg").attr("width", 1200).attr("height", 40)
+
+// Add the path using this helper function
+svg.append('rect')
+    .attr('y', 20)
+    .attr('width', 1200)
+    .attr('height', 1.5)
+    .attr('stroke', '#b4d5e3')
+    .attr('fill', '#b4d5e3').style('opacity', 0.7);
+svg.append('image').attr("xlink:href", "biden.png")
+    .attr('x', 590)
+    .attr('width', 40)
+    .attr('height', 40)
+    .on('click', function (d) {
+        brushScale = brushScaleAll
+        d3.selectAll("#vis").attr('class', 'visible')
+        d3.selectAll("#vis1").attr('class', 'visible')
+        d3.selectAll("#vis_tree").attr('class', 'hidden')
+        myBubbleChart('#vis', myrawdata);
+    })
+// svg.append('text')
+//     .attr("xlink:href", "biden.png")
+//     .attr('x', 590)
+//     .attr('width', 50)
+//     .attr('height', 45)
+
+var svg = d3.select("#rect2_new").append("svg").attr("width", 1200).attr("height", 40)
+// Add the path using this helper function
+svg.append('rect')
+    .attr('y', 20)
+    .attr('width', 1200)
+    .attr('height', 1.5)
+    .attr('stroke', '#fc9b9a')
+    .attr('fill', '#fc9b9a');
+svg.append('image').attr("xlink:href", "trump.png")
+    .attr('x', 590)
+    .attr('width', 50)
+    .attr('height', 40)
+    .on('click', function (d) {
+        brushScale = brushScaleAll
+        d3.selectAll("#vis").attr('class', 'visible')
+        d3.selectAll("#vis1").attr('class', 'visible')
+        d3.selectAll("#vis_tree").attr('class', 'hidden')
+        myBubbleChart('#vis', myrawdata);
+    })
+
+
+
 // .attr('stroke', 'black')
 // .attr('fill', '#b4d5e3');
 let width = 1200;
-let height = 500;
+let height = 600;
 let centerX = null;
 let XSize = 0;
 
@@ -1708,7 +1763,7 @@ function bubbleChart() {
                 if (!contextWordSelect.includes(m.name)) {
                     let key_word=zyhKeyword
 
-                    // console.log(m, key_word)
+                    console.log(m, key_word)
                     if (dis_x[key_word].hasOwnProperty(m.name)) {
                         contextWordSelect.push(m.name)
                     }
