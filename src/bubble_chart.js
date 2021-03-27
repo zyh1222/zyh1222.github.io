@@ -191,6 +191,7 @@ function to_context_tree(keyword, select) {
                             num_left += 1
                             t_left.push(k)
                             f_left += a[k][0][0][i][1]
+//                            Start = 'False'
                         } else if (name == key) {
                             start_k = Start
                             if (name_l.hasOwnProperty(i)) {
@@ -199,7 +200,7 @@ function to_context_tree(keyword, select) {
                             } else {
                                 name_l[i] = {'time': [k], 'freq': a[k][0][0][i][1]}
                             }
-
+                            Start = 'False'
                         } else if (name != "" && Start == 'True') {
                             frequency = a[k][0][0][i][1]
                             //name是词，time是时间，position是左/右，index是左/右边的第几个词，platform是第几块板子，
@@ -235,7 +236,7 @@ function to_context_tree(keyword, select) {
                             })
                         }
                     }
-
+                    Start = 'False'
                     for (var i = 0; i < a[k][0][1].length; i++) {
                         name = a[k][0][1][i][0]
                         if (name == key && i == 0) {
@@ -330,7 +331,7 @@ function to_context_tree(keyword, select) {
                     'name': key,
                     'time': name_l[i].time,
                     'position': 'left',
-                    'index': i,
+                    'index': parseInt(i),
                     'platform': id,
                     'length': a.length,
                     'frac': p,
@@ -556,10 +557,10 @@ function to_context_tree(keyword, select) {
                 } else if (d.position == 'right' && d.name == "") {
                     result.source = [0, 0]
                     result.target = [0, 0]
-                } else if (keys_f.filter(x => x.platform == d.platform && x.index == d.index - 1 && d.position == 'left').length > 0) {
+                } else if (d.position == 'left' && keys_f.filter(x => x.platform == d.platform && x.index == d.index - 1&& x.time.indexOf(d.time[0])>-1  ).length > 0) {
                     result.source = [0, 0]
                     result.target = [0, 0]
-                } else if (keys_f.filter(x => x.platform == d.platform && x.index == d.index + 1 && d.position == 'right').length > 0) {
+                } else if (d.position == 'right'&&keys_f.filter(x => x.platform == d.platform && x.index == d.index + 1&& x.time.indexOf(d.time[0])>-1  ).length > 0) {
                     result.source = [0, 0]
                     result.target = [0, 0]
                 } else if (d.position == 'left') {
@@ -571,6 +572,9 @@ function to_context_tree(keyword, select) {
                             (graph.height) / l * d.platform + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
                         result.target = [4 * pad + (wid) / pattern_length * (d.index - 1) + 60+s / d.length * d.time[Math.round(d.time.length / 2) - 1] + rel,
                             (graph.height) / l * d.platform + pad + ((graph.height) / l - 2 * pad) / d.length * d.time[Math.round(d.time.length / 2) - 1] - 3]
+                    console.log(d.name)
+                    console.log(result.source)
+                     console.log(result.target)
                     }
                 } else if (d.position == 'right') {
                     if (d.start == 'True') {
