@@ -1764,15 +1764,12 @@ function bubbleChart() {
                     .attr('font-size', 15)
                     .attr('font-family', "Gill Sans", "Gill Sans MT")
             } else if (bubbleMode === 2) {
-
-                if (contextWordSelect.length > 5) {
-                    alert("Words Exceeded!!")
-                    return
-                }
-
                 if (!contextWordSelect.includes(m.name)) {
+                    if (contextWordSelect.length > 5) {
+                        alert("Words Exceeded!!")
+                        return
+                    }
                     let key_word = zyhKeyword
-
                     console.log(m, key_word)
                     if (dis_x[key_word].hasOwnProperty(m.name)) {
                         console.log(m, key_word)
