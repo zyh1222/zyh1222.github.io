@@ -1684,7 +1684,7 @@ function bubbleChart() {
                 return d.name;
 
             });
-
+        texts.on('click', click_bubble)
         // bubbles.on('click', function (m) {
         //     const org = MyFilter['org'];
         //     MyFilter['org'] = org === -1 ? m.org : -1
@@ -1722,7 +1722,9 @@ function bubbleChart() {
 
         activateWord = selectWord
 
-        bubbles.on('click', function (m) {
+        bubbles.on('click', click_bubble)
+
+        function click_bubble(m) {
             if (bubbleMode === 1) {
                 zyhKeyword = m.name
                 contextWordSelect = []
@@ -1793,9 +1795,7 @@ function bubbleChart() {
 
 
             }
-
-
-        })
+        }
     };
 
 
