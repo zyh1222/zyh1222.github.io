@@ -1687,7 +1687,7 @@ function bubbleChart() {
                 return d.name;
 
             });
-
+        texts.on('click', click_bubble)
         // bubbles.on('click', function (m) {
         //     const org = MyFilter['org'];
         //     MyFilter['org'] = org === -1 ? m.org : -1
@@ -1725,41 +1725,47 @@ function bubbleChart() {
 
         activateWord = selectWord
 
-        bubbles.on('click', function (m) {
+        bubbles.on('click', click_bubble)
+
+        function click_bubble(m) {
             if (bubbleMode === 1) {
                 zyhKeyword = m.name
                 contextWordSelect = []
                 selectWord(m)
                 // d3.select("#zyhKeyword").html("<span style='background-color: #2fa1d6'>"+zyhKeyword+"</span>")
 // console.log(m)
+                d3.select("#zyhKeyword").selectAll("rect").remove()
+                d3.select("#zyhKeyword").selectAll("text").remove()
                 if (zyhKeySvg === null) {
                     zyhKeySvg = d3.select("#zyhKeyword").append("svg")
-                        .attr('id','zyhkk').attr("height", 50).attr('position', 'absolute')
-                        // .attr('top', '50px')
+                        .attr('id', 'zyhkk').attr("height", 50).attr('position', 'absolute')
+                    // .attr('top', '50px')
                 }
-                zyhKeySvg.selectAll("rect")
+                zyhKeySvg.selectAll("rect_key")
                     .data([zyhKeyword])
                     .enter()
                     .append("rect")
-                    .attr("x",5)
+                    .attr("x", 5)
                     .attr("y", 5)
-                    .style('width', function (d){return d.length*11})
+                    .style('width', function (d) {
+                        return d.length * 11
+                    })
                     .style("opacity", 0.5)
                     .style('height', 30)
                     .style('fill', '#91d0fa')
-                    .style('rx',10)
+                    .style('rx', 10)
 
-                zyhKeySvg.selectAll("text")
+                zyhKeySvg.selectAll("text_key")
                     .data([zyhKeyword])
                     .enter()
                     .append("text")
-                    .attr("x",10)
+                    .attr("x", 10)
                     .attr("y", 25)
                     .text(function (d) {
                         return d;
                     })
-                    .attr('font-size',15)
-                    .attr('font-family',"Gill Sans","Gill Sans MT")
+                    .attr('font-size', 15)
+                    .attr('font-family', "Gill Sans", "Gill Sans MT")
             } else if (bubbleMode === 2) {
 
                 if (contextWordSelect.length > 5) {
@@ -1791,11 +1797,8 @@ function bubbleChart() {
                 draw_context(contextWordSelect)
 
 
-
             }
-
-
-        })
+        }
     };
 
 
