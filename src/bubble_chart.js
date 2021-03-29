@@ -41,13 +41,15 @@ function draw_context() {
         height: 200,
         width: 100,
     }
+    d3.select("#vis_tree_words").select('#nn').selectAll('svg').remove()
     if (modesvg === null) {
-        modesvg = d3.select("#vis_tree_words").append('svg').attr('id','nn').attr("height", 800).attr('position', 'absolute').attr('top', '100px')
+        modesvg = d3.select("#vis_tree_words").append('svg').attr('id', 'nn').attr("height", 800).attr('position', 'absolute').attr('top', '100px')
     }
     let svg = modesvg
-    svg.selectAll("rect")
+
+    svg.selectAll("rect_context")
         .data(contextWordSelect)
-        .enter()
+        .enter().append('svg')
         .append("rect")
         .attr("x", function (d, i) {
             return 5
@@ -56,18 +58,20 @@ function draw_context() {
             console.log(d)
             return graph.height / 6 * i + 330
         })
-        .style('width', function (d){return d.length*9})
+        .style('width', function (d) {
+            return d.length * 9
+        })
         .style("opacity", 0.5)
         .style('height', 25)
         .style('fill', '#91d0fa')
-        .style('rx',10)
+        .style('rx', 10)
 
-    svg.selectAll("text")
+    svg.selectAll("text_context")
         .data(contextWordSelect)
-        .enter()
+        .enter().append('svg')
         .append("text")
         .attr("x", function (d, i) {
-            return d.length+5
+            return d.length + 5
         })
         .attr("y", function (d, i) {
             return graph.height / 6 * i + 345
@@ -75,8 +79,7 @@ function draw_context() {
         .text(function (d) {
             return d;
         })
-        .attr('font-family', "Gill Sans","Gill Sans MT")
-
+        .attr('font-family', "Gill Sans", "Gill Sans MT")
 }
 
 function to_context_tree(keyword, select) {
@@ -1765,12 +1768,21 @@ function bubbleChart() {
                 }
 
                 if (!contextWordSelect.includes(m.name)) {
-                    let key_word=zyhKeyword
+                    let key_word = zyhKeyword
 
                     console.log(m, key_word)
                     if (dis_x[key_word].hasOwnProperty(m.name)) {
-                        contextWordSelect.push(m.name)
+                        console.log(m, key_word)
+                        if(!isNaN(dis_x[key_word][m.name])){
+                            console.log(m, key_word)
+                            contextWordSelect.push(m.name)
+                        }
+
                     }
+                    else{
+                            alert("Words cannot choose!")
+                            return
+                        }
 
                 } else {
                     contextWordSelect.splice(contextWordSelect.indexOf(m.name), 1)
