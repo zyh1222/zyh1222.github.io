@@ -15,6 +15,7 @@ var context_data = null;
 var activateWord = null;
 var texts = null;
 var nodes = [];
+var backbutton = [];
 var pos_dic = {}
 var radiusScale = null;
 let brushScaleAll = 10
@@ -1328,7 +1329,75 @@ function histChart(data = []) {
     // svg1.append('text').attr("cx", 100).attr("cy", 30).text()
 
 }
+function selectWord1(m) {
+    if(typeof m == 'undefined'){
+        brushScale = brushScaleAll
+        d3.select("#zyhKeyword").selectAll("rect").remove()
+        d3.select("#zyhKeyword").selectAll("text").remove()
+    }
+    else{
+        brushScale = brushScaleClick
+        zyhKeyword = m
+        d3.select("#zyhKeyword").selectAll("rect").remove()
+        d3.select("#zyhKeyword").selectAll("text").remove()
+        if (zyhKeySvg === null) {
+            zyhKeySvg = d3.select("#zyhKeyword").append("svg")
+                .attr('id', 'zyhkk').attr("height", 50).attr('position', 'absolute')
+            // .attr('top', '50px')
+        }
+        zyhKeySvg.selectAll("rect_key")
+            .data([zyhKeyword])
+            .enter()
+            .append("rect")
+            .attr("x", 5)
+            .attr("y", 5)
+            .style('width', function (d) {
+                return d.length * 11
+            })
+            .style("opacity", 0.5)
+            .style('height', 30)
+            .style('fill', '#91d0fa')
+            .style('rx', 10)
 
+        zyhKeySvg.selectAll("text_key")
+            .data([zyhKeyword])
+            .enter()
+            .append("text")
+            .attr("x", 10)
+            .attr("y", 25)
+            .text(function (d) {
+                return d;
+            })
+            .attr('font-size', 15)
+            .attr('font-family', "Gill Sans", "Gill Sans MT")
+    }
+
+
+    rawDataNew = []
+    // }
+    for (let i = 0; i < context_data.length; i++) {
+        const currDic = context_data[i][m]
+        for (let k in currDic) {
+            rawDataNew.push({
+                "name": k,
+                "label": currDic[k].label,
+                "count": currDic[k].count,
+                "time": i + 1,
+                "position": currDic[k].pos
+            })
+        }
+//                 console.log(rawDataNew)
+    }
+//            console.log(rawDataNew)
+
+
+    if(rawDataNew.length ==0){
+        myBubbleChart('#vis', myrawdata)
+    }
+    else{
+        myBubbleChart('#vis', rawDataNew)
+    }
+}
 var svg = d3.select("#rect1").append("svg").attr("width", 1200).attr("height", 40)
 
 // Add the path using this helper function
@@ -1342,15 +1411,12 @@ svg.append('image').attr("xlink:href", "biden.png")
     .attr('x', 590)
     .attr('width', 40)
     .attr('height', 40)
-    .on('click', function (d) {
-        brushScale = brushScaleAll
-        d3.selectAll("#vis").attr('class', 'visible')
-        d3.selectAll("#vis1").attr('class', 'visible')
-        d3.selectAll("#vis_tree").attr('class', 'hidden')
-        d3.selectAll("#rect1_new").attr('class', 'hidden')
-        d3.selectAll("#rect2_new").attr('class', 'hidden')
-        myBubbleChart('#vis', myrawdata);
+    .on('click',function(d){
+            backbutton.pop()
+            console.log(backbutton)
+            selectWord1(backbutton[backbutton.length-1])
     })
+
 // svg.append('text')
 //     .attr("xlink:href", "biden.png")
 //     .attr('x', 590)
@@ -1374,6 +1440,9 @@ svg.append('image').attr("xlink:href", "trump.png")
         d3.selectAll("#vis").attr('class', 'visible')
         d3.selectAll("#vis1").attr('class', 'visible')
         d3.selectAll("#vis_tree").attr('class', 'hidden')
+        d3.select("#zyhKeyword").selectAll("rect").remove()
+        d3.select("#zyhKeyword").selectAll("text").remove()
+        MyFilter['label'] = -1
         myBubbleChart('#vis', myrawdata);
     })
 //
@@ -1713,63 +1782,82 @@ function bubbleChart() {
                         "position": currDic[k].pos
                     })
                 }
+//                console.log(rawDataNew)
             }
+//            console.log(rawDataNew ===[])
+//            if(rawDataNew.length==0){
+//                    alert('Nothing to explore!')
+//                    return 0
+//                }
             chart(selector, rawDataNew)
 
             active(m)
             hideDetail(null)
+//            return 1
         }
 
-        activateWord = selectWord
+
+//        activateWord = selectWord
 
         bubbles.on('click', click_bubble)
 
         function click_bubble(m) {
             if (bubbleMode === 1) {
-                zyhKeyword = m.name
+
                 contextWordSelect = []
-                selectWord(m)
+//                if(selectWord(m) ==1){
+                    selectWord(m)
+                    backbutton.push(m.name)
+                    zyhKeyword = m.name
+                    d3.select("#zyhKeyword").selectAll("rect").remove()
+                    d3.select("#zyhKeyword").selectAll("text").remove()
+                    if (zyhKeySvg === null) {
+                        zyhKeySvg = d3.select("#zyhKeyword").append("svg")
+                            .attr('id', 'zyhkk').attr("height", 50).attr('position', 'absolute')
+                        // .attr('top', '50px')
+                    }
+                    zyhKeySvg.selectAll("rect_key")
+                        .data([zyhKeyword])
+                        .enter()
+                        .append("rect")
+                        .attr("x", 5)
+                        .attr("y", 5)
+                        .style('width', function (d) {
+                            return d.length * 11
+                        })
+                        .style("opacity", 0.5)
+                        .style('height', 30)
+                        .style('fill', '#91d0fa')
+                        .style('rx', 10)
+
+                    zyhKeySvg.selectAll("text_key")
+                        .data([zyhKeyword])
+                        .enter()
+                        .append("text")
+                        .attr("x", 10)
+                        .attr("y", 25)
+                        .text(function (d) {
+                            return d;
+                        })
+                        .attr('font-size', 15)
+                        .attr('font-family', "Gill Sans", "Gill Sans MT")
+//                }
+
+//                console.log(selectWord(m))
                 // d3.select("#zyhKeyword").html("<span style='background-color: #2fa1d6'>"+zyhKeyword+"</span>")
 // console.log(m)
-                d3.select("#zyhKeyword").selectAll("rect").remove()
-                d3.select("#zyhKeyword").selectAll("text").remove()
-                if (zyhKeySvg === null) {
-                    zyhKeySvg = d3.select("#zyhKeyword").append("svg")
-                        .attr('id', 'zyhkk').attr("height", 50).attr('position', 'absolute')
-                    // .attr('top', '50px')
-                }
-                zyhKeySvg.selectAll("rect_key")
-                    .data([zyhKeyword])
-                    .enter()
-                    .append("rect")
-                    .attr("x", 5)
-                    .attr("y", 5)
-                    .style('width', function (d) {
-                        return d.length * 11
-                    })
-                    .style("opacity", 0.5)
-                    .style('height', 30)
-                    .style('fill', '#91d0fa')
-                    .style('rx', 10)
 
-                zyhKeySvg.selectAll("text_key")
-                    .data([zyhKeyword])
-                    .enter()
-                    .append("text")
-                    .attr("x", 10)
-                    .attr("y", 25)
-                    .text(function (d) {
-                        return d;
-                    })
-                    .attr('font-size', 15)
-                    .attr('font-family', "Gill Sans", "Gill Sans MT")
             } else if (bubbleMode === 2) {
+
+
+
                 if (!contextWordSelect.includes(m.name)) {
                     if (contextWordSelect.length > 5) {
                         alert("Words Exceeded!!")
                         return
                     }
                     let key_word = zyhKeyword
+
                     console.log(m, key_word)
                     if (dis_x[key_word].hasOwnProperty(m.name)) {
                         console.log(m, key_word)
