@@ -192,11 +192,11 @@
     }
 
     if(bubbleMode==1){
-        d3.selectAll("#input_control").attr('class','hidden');
-        d3.selectAll("#submit").attr('class','hidden');
+        d3.selectAll("#input_control").attr('class','visible');
+<!--        d3.selectAll("#submit").attr('class','hidden');-->
         d3.selectAll("#submit1").attr('class','hidden');
         d3.selectAll("#tip1").attr('class','hidden');
-        d3.selectAll("#zyhKeyword").attr('class','hidden')
+        d3.selectAll("#zyhKeyword").attr('class','visible')
         d3.selectAll("#rect1_new").attr('class','hidden')
         d3.selectAll("#rect2_new").attr('class','hidden')
         d3.select('#nn').remove()
@@ -208,7 +208,7 @@
     }
     else{
         d3.selectAll("#input_control").attr('class','visible')
-        d3.selectAll("#submit").attr('class','visible')
+<!--        d3.selectAll("#submit").attr('class','visible')-->
         d3.selectAll("#submit1").attr('class','visible')
         d3.selectAll("#tip1").attr('class','visible')
         d3.selectAll("#zyhKeyword").attr('class','visible')
@@ -233,18 +233,18 @@
             bubbleMode = 2
             contextWordSelect = []
             d3.selectAll("#input_control").attr('class','visible')
-            d3.selectAll("#submit").attr('class','visible')
+<!--            d3.selectAll("#submit").attr('class','visible')-->
             d3.selectAll("#submit1").attr('class','visible')
             d3.selectAll("#tip1").attr('class','visible')
             d3.selectAll("#zyhKeyword").attr('class','visible')
 
         } else {
             bubbleMode = 1
-            d3.selectAll("#input_control").attr('class','hidden');
-            d3.selectAll("#submit").attr('class','hidden');
+            d3.selectAll("#input_control").attr('class','visible');
+<!--            d3.selectAll("#submit").attr('class','hidden');-->
             d3.selectAll("#submit1").attr('class','hidden');
             d3.selectAll("#tip1").attr('class','hidden');
-            d3.selectAll("#zyhKeyword").attr('class','hidden')
+            d3.selectAll("#zyhKeyword").attr('class','visible')
             d3.select('#nn').remove()
             d3.select('#zyhkk').remove()
             modesvg=null
