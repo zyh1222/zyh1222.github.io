@@ -54,7 +54,6 @@ function readTextFile(file, callback) {
     }
   }
   rawFile.send(null);
-
 }
 
 const rawdata = []
@@ -71,63 +70,17 @@ function parseData(text) {
     }
   }
 }
-const rawdata1=[]
-const rawdata2=[]
-const rawdata3=[]
-const rawdata4=[]
-const rawdata5=[]
-const rawdata6=[]
-const select_map = {
-  1:rawdata1,
-  2:rawdata2,
-  3:rawdata3,
-  4:rawdata4,
-  5:rawdata5,
-  6:rawdata6
-}
-readTextFile("../../../2020-10-21.json", function (text6) {
+
+readTextFile("../../2020-10-06.json", function (text6) {
   parseData(text6)
-  readTextFile("./../../../2020-10-22.json", function (text7) {
+  readTextFile("../../2020-10-07.json", function (text7) {
     parseData(text7)
-    readTextFile("./../../../2020-10-23.json", function (text8) {
+    readTextFile("../../2020-10-08.json", function (text8) {
       parseData(text8)
-
-      for (let i = 0; i < rawdata.length; i++) {
-        var d = rawdata[i];
-        if ((d["created_int"] > 1603324795000) && (d["created_int"] < 1603281600000)) {
-          rawdata1.push(d)
-        }
-        if ((d["created_int"] > 1603281600000) && (d["created_int"] < 1603324800000)) {
-          rawdata2.push(d)
-        }
-        if ((d["created_int"] > 1603324800000) && (d["created_int"] < 1603368000000)){
-          rawdata3.push(d)
-        }
-        if (d["created_int"] > 1603368000000 && (d["created_int"] < 1603411200000)){
-          rawdata4.push(d)
-        }
-        if ((d["created_int"] > 1603411200000) && (d["created_int"] < 1603454400000)){
-          rawdata5.push(d)
-        }
-        if (d["created_int"] > 1603454400000){
-          rawdata6.push(d)
-        }
-
-      }
     })})})
 
 
-let select_day = 1
 
-function getOption() {
-  selectElement = document.querySelector('#text-select');
-
-  select_day = parseInt(selectElement.options[selectElement.selectedIndex].value);
-  // document.querySelector('.output').textContent = output;
-  button_field.dispatchEvent(new Event('click'))
-}
-
-var button_field = null
 var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
   'use strict'
 
@@ -217,11 +170,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     // add keyframe styles for spinner to <HEAD>
     if (document.getElementById) {
       var style = '@-webkit-keyframes simpleSearchSpinner' +
-          '{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}' +
-          '@-moz-keyframes simpleSearchSpinner' +
-          '{from{-moz-transform:rotate(0deg)}to{-moz-transform:rotate(360deg)}}' +
-          '@-ms-keyframes simpleSearchSpinner' +
-          '{from{-ms-transform:rotate(0deg)}to{-ms-transform:rotate(360deg)}}'
+        '{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}' +
+        '@-moz-keyframes simpleSearchSpinner' +
+        '{from{-moz-transform:rotate(0deg)}to{-moz-transform:rotate(360deg)}}' +
+        '@-ms-keyframes simpleSearchSpinner' +
+        '{from{-ms-transform:rotate(0deg)}to{-ms-transform:rotate(360deg)}}'
 
       var st = document.createElement('style')
       st.setAttribute('id', 'simplesearch-style')
@@ -286,16 +239,16 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
 
       //  attach to search button click
       if (searchButton) {
-        button_field = document.querySelector(searchButton)
+        var button = document.querySelector(searchButton)
         // add input field reset button
-        if (button_field == null) {
-          button_field = document.createElement('button')
-          button_field.className = searchButton
-          button_field.innerHTML = ' Search '
-          reset.parentNode.insertBefore(button_field, reset.nextSibling)
+        if (button == null) {
+          button = document.createElement('button')
+          button.className = searchButton
+          button.innerHTML = ' Search '
+          reset.parentNode.insertBefore(button, reset.nextSibling)
         }
 
-        button_field.addEventListener('click', function () {
+        button.addEventListener('click', function () {
           search(inputField.value)
         })
       }
@@ -342,17 +295,16 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     }
 
     return url + v + '?q=' + q +
-        (config.query ? (' AND ' + config.query) : '') +
-        (l ? ('&limit=' + l) : '') +
-        (v !== 'search' && pm && pm.indexOf('include_docs=') === -1 ? '&include_docs=true' : '') +
-        (pm || '') +
-        (b ? ('&bookmark=' + b) : '')
+            (config.query ? (' AND ' + config.query) : '') +
+            (l ? ('&limit=' + l) : '') +
+            (v !== 'search' && pm && pm.indexOf('include_docs=') === -1 ? '&include_docs=true' : '') +
+            (pm || '') +
+            (b ? ('&bookmark=' + b) : '')
   }
 
   function search (searchquery, options, fromPaging) {
     var q = fromPaging ? paging.query : searchquery
     if (q) {
-      console.log(paging)
       console.log(searchquery, options, fromPaging)
 
       var searchurl = getSearchUrl(q, options)
@@ -360,34 +312,23 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
       var doneFunc = function (err, data_u) {
 
         const data =  {
-          'rows':[],
-          'fields':['created_at','replies_count','retweets_count','likes_count','tweet'],
-          'counts':[1]
+          'rows':[['replies','retweets','likes','tweet']],
+          'fields':[['replies','retweets','likes','tweet'],[1,1,1,'1']],
+          'counts':[10]
         }
 
-        const currRawdata = select_map[select_day]
-        searchquery = searchquery.toLowerCase()
-        let searchqueryArray = searchquery.split(" ")
-        for (let i = 0; i < currRawdata.length; i++) {
-          let found = true
-          for (let j = 0; j < searchqueryArray.length; j++) {
-            if (!currRawdata[i].tweet.toLowerCase().includes(searchqueryArray[j])){
-              found = false
+        for (let i = 0; i < rawdata.length; i++) {
+          if (rawdata[i].tweet.includes(searchquery)){
+            data.rows.push([rawdata[i].replies_count,rawdata[i].retweets_count, rawdata[i].likes_count,rawdata[i].tweet])
+            if (data.rows.length > 10) {
               break
             }
-          }
-
-          if (found){
-            // data.rows.push([rawdata[i].created_at,rawdata[i].replies_count,rawdata[i].retweets_count, rawdata[i].likes_count,rawdata[i].tweet])
-            data.rows.push(currRawdata[i])
-            // if (data.rows.length > 800) {
-            //   break
-            // }
           }
         }
 
 
         var response = xhrSuccess(data)
+        console.log(response)
 
         response.rest_uri = searchurl
         response.time = ((new Date()).getTime() - starttime)
@@ -484,26 +425,28 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
   }
 
   function xhrSuccess (data) {
-    var first = data.fields
+    console.log(data)
+    var first = data.fields[1]
     var results = {
       data: data,
       fields: [],
       facets: []
     }
 
-    if (first) {
-      for (var field in first) {
+    if (data.fields) {
+      for (var field in data.fields[0]) {
         if (field !== '_id' && field !== '_rev' && field !== '_order') {
           results.fields.push({
-            name: first[field],
+            name: data.fields[0][field],
             type: (typeof first[field] === 'number' ? 'number' : 'string')
           })
         }
       }
 
+
       for (var fld in data.counts) {
         results.facets.push({
-          name: 'Result',
+          name: fld,
           type: (typeof first[fld] === 'number' ? 'number' : 'string')
         })
       }
@@ -676,10 +619,10 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     }
 
     var tableHTML = getTablePagingHTML(paging.bookmarks.length - 1, paging.limit, total) +
-        '<table class="simplesearch-table">' +
-        '<thead>' + resultfields +
-        '</thead><tbody>' + resultrows +
-        '</tbody></table>'
+      '<table class="simplesearch-table">' +
+      '<thead>' + resultfields +
+      '</thead><tbody>' + resultrows +
+      '</tbody></table>'
 
     var table = document.createElement('div')
     table.className = 'simplesearch-results-table'
@@ -708,8 +651,13 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
       end = start
     }
 
-    var pagingDom = '<div class="simplesearch-count"></div>' +
-        '<div class="simplesearch-paging"></div>'
+    var pagingDom = '<div class="simplesearch-count"><span>Showing ' + start + ' - ' + end + ' of ' + total + '</span></div>' +
+      '<div class="simplesearch-paging"><button class="simplesearch-prev"' +
+      (start <= 1 ? ' disabled' : '') +
+      '>Prev</button> <button class="simplesearch-next"' +
+      (end >= total ? ' disabled' : '') +
+      '>Next</button></div>'
+
     return pagingDom
   }
 
@@ -764,8 +712,8 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     }
 
     var listHTML = '<div class="simplesearch-count">' + getCountHTML(total, paging) + '</div>' +
-        '<ul class="simplesearch-list">' + resultlist + '</ul>' +
-        (end >= total ? '' : '<div class="simplesearch-paging"><button class="simplesearch-more">More</button>')
+      '<ul class="simplesearch-list">' + resultlist + '</ul>' +
+      (end >= total ? '' : '<div class="simplesearch-paging"><button class="simplesearch-more">More</button>')
 
     var list = document.createElement('div')
     list.className = 'simplesearch-results-list'
@@ -833,7 +781,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
 
       for (var facetkey in countvalue) {
         facets += '<li class="simplesearch-facet-value">' +
-            getFacetsHTML(facetkey, countvalue[facetkey], countkey) + '</li>'
+          getFacetsHTML(facetkey, countvalue[facetkey], countkey) + '</li>'
       }
 
       facets += '</ul></div>'
@@ -851,11 +799,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     var v = facetkey.indexOf(' ') === -1 && isNaN(facetkey) ? facetkey : ('"' + facetkey + '"')
 
     return '<span class="simplesearch-facet-value-name" role="button" data-search-query=\'' +
-        k + ':' + v + '\'>' +
-        facetkey +
-        '</span> <span class="simplesearch-facet-value-count">(' +
-        facetvalue +
-        ')</span>'
+      k + ':' + v + '\'>' +
+      facetkey +
+      '</span> <span class="simplesearch-facet-value-count">(' +
+      facetvalue +
+      ')</span>'
   }
 
   function sanitizeQuery (current, next) {
@@ -863,8 +811,8 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
 
     // add quotes if facet contains space and is not already quoted
     var query = (keyvalue[0].indexOf(' ') === -1 || keyvalue[0].indexOf('"') === 0)
-        ? keyvalue[0]
-        : ('"' + keyvalue[0] + '"')
+          ? keyvalue[0]
+          : ('"' + keyvalue[0] + '"')
 
     // add quotes if value contains space and is not already quoted
     if (keyvalue[1]) {
@@ -1000,29 +948,29 @@ SimpleSearch.update = function (nodeid, callbacks, selectors, configs) {
     var serviceUrl = node.getAttribute('data-simple-search')
     var containers = {
       resultsTable: (selectors && selectors.resultsTable)
-          ? selectors.resultsTable
-          : node.getAttribute('data-search-table'),
+        ? selectors.resultsTable
+        : node.getAttribute('data-search-table'),
       resultsList: (selectors && selectors.resultsList)
-          ? selectors.resultsList
-          : node.getAttribute('data-search-list'),
+        ? selectors.resultsList
+        : node.getAttribute('data-search-list'),
       facetsList: (selectors && selectors.facetsList)
-          ? selectors.facetsList
-          : node.getAttribute('data-search-facets'),
+        ? selectors.facetsList
+        : node.getAttribute('data-search-facets'),
       inputField: node
     }
     var callbackFuncs = {
       onBefore: (callbacks && callbacks.onBefore)
-          ? callbacks.onBefore
-          : findCallback(node.getAttribute('data-search-onbefore')),
+        ? callbacks.onBefore
+        : findCallback(node.getAttribute('data-search-onbefore')),
       onData: (callbacks && callbacks.onData)
-          ? callbacks.onData
-          : findCallback(node.getAttribute('data-search-ondata')),
+        ? callbacks.onData
+        : findCallback(node.getAttribute('data-search-ondata')),
       onSuccess: (callbacks && callbacks.onSuccess)
-          ? callbacks.onSuccess
-          : findCallback(node.getAttribute('data-search-onsuccess')),
+        ? callbacks.onSuccess
+        : findCallback(node.getAttribute('data-search-onsuccess')),
       onFail: (callbacks && callbacks.onFail)
-          ? callbacks.onFail
-          : findCallback(node.getAttribute('data-search-onfail'))
+        ? callbacks.onFail
+        : findCallback(node.getAttribute('data-search-onfail'))
     }
 
     var dl = (configs && configs.hasOwnProperty('deepLinking'))

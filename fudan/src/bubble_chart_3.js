@@ -1076,12 +1076,12 @@ function histChart(data = []) {
 
     // X axis: scale and draw:
     var x = d3.scaleTime()
-        .domain([new Date("2021-02-20 00:00"), new Date("2021-02-23 00:00")])
+        .domain([new Date("2021-06-11 00:00"), new Date("2021-06-19 00:00")])
         .range([0, width]);
 
     var xb = d3.scaleTime()
         .domain([0, width])
-        .range([new Date("2021-02-20 00:00"), new Date("2021-02-23 00:00")]);
+        .range([new Date("2021-06-11 00:00"), new Date("2021-06-19 00:00")]);
 
 
     function brushended() {
@@ -1096,7 +1096,7 @@ function histChart(data = []) {
 
         const endDay = end.getDate()
         const endHour = end.getHours()
-        const time_index = {"200": 0, "201": 1, "202": 2, "203": 3, "204": 4, "205": 5, "206": 6, "207": 7, "208": 8, "209": 9, "2010": 10, "2011": 11, "2012": 12, "2013": 13, "2014": 14, "2015": 15, "2016": 16, "2017": 17, "2018": 18, "2019": 19, "2020": 20, "2021": 21, "2022": 22, "2023": 23, "210": 0, "211": 1, "212": 2, "213": 3, "214": 4, "215": 5, "216": 6, "217": 7, "218": 8, "219": 9, "2110": 10, "2111": 11, "2112": 12, "2113": 13, "2114": 14, "2115": 15, "2116": 16, "2117": 17, "2118": 18, "2119": 19, "2120": 20, "2121": 21, "2122": 22, "2123": 23}
+        const time_index = {'110': 0, '113': 1, '116': 2, '119': 3, '1112': 4, '1115': 5, '1118': 6, '1121': 7, '120': 8, '123': 9, '126': 10, '129': 11, '1212': 12, '1215': 13, '1218': 14, '1221': 15, '130': 16, '133': 17, '136': 18, '139': 19, '1312': 20, '1315': 21, '1318': 22, '1321': 23, '140': 24, '143': 25, '146': 26, '149': 27, '1412': 28, '1415': 29, '1418': 30, '1421': 31, '150': 32, '153': 33, '156': 34, '159': 35, '1512': 36, '1515': 37, '1518': 38, '1521': 39, '160': 40, '163': 41, '166': 42, '169': 43, '1612': 44, '1615': 45, '1618': 46, '1621': 47, '170': 48, '173': 49, '176': 50, '179': 51, '1712': 52, '1715': 53, '1718': 54, '1721': 55, '180': 56, '183': 57, '186': 58, '189': 59, '1812': 60, '1815': 61, '1818': 62, '1821': 63, '190': 64, '193': 65, '196': 66, '199': 67, '1912': 68, '1915': 69, '1918': 70, '1921': 71}
 
         const ss = time_index[String(startDay) + String(startHour)]
         const ee = time_index[String(endDay) + String(endHour)]
@@ -1135,10 +1135,10 @@ function histChart(data = []) {
 
     // // And apply twice this function to data to get the bins.
     var bins1 = histogram(data.filter(function (d) {
-        return d.type === "沈逸"
+        return d.type === "姜文华"
     }));
     var bins2 = histogram(data.filter(function (d) {
-        return d.type === "冬亚"
+        return d.type === "王永珍"
     }));
 
     // // Y axis: scale and draw:
@@ -1151,24 +1151,6 @@ function histChart(data = []) {
 
     // append the bars for series 1
     svg.selectAll("rect")
-        .data(bins1)
-        .enter()
-        .append("rect")
-        .attr("x", 1)
-        .attr("transform", function (d) {
-            return "translate(" + x(d.x0) + "," + y(d.length) + ")";
-        })
-        .attr("width", function (d) {
-            return x(d.x1) - x(d.x0) - 1;
-        })
-        .attr("height", function (d) {
-            return height - y(d.length);
-        })
-        .style("fill", "#b4d5e3")
-        .style("opacity", 0.8)
-
-    // // append the bars for series 2
-    svg.selectAll("rect2")
         .data(bins2)
         .enter()
         .append("rect")
@@ -1183,6 +1165,24 @@ function histChart(data = []) {
             return height - y(d.length);
         })
         .style("fill", "#fc9b9a")
+        .style("opacity", 0.8)
+
+    // // append the bars for series 2
+    svg.selectAll("rect2")
+        .data(bins1)
+        .enter()
+        .append("rect")
+        .attr("x", 1)
+        .attr("transform", function (d) {
+            return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+        })
+        .attr("width", function (d) {
+            return x(d.x1) - x(d.x0) - 1;
+        })
+        .attr("height", function (d) {
+            return height - y(d.length);
+        })
+        .style("fill", "#b4d5e3")
         .style("opacity", 0.8)
 
 }
@@ -1264,15 +1264,15 @@ svg.append('rect')
     .attr('height', 1.5)
     .attr('stroke', '#b4d5e3')
     .attr('fill', '#b4d5e3').style('opacity', 0.7);
-svg.append('image').attr("xlink:href", "sy.png")
-    .attr('x', 590)
-    .attr('width', 40)
-    .attr('height', 40)
-    .on('click',function(d){
-        backbutton.pop()
-        console.log(backbutton)
-        selectWord1(backbutton[backbutton.length-1])
-    })
+// svg.append('image').attr("xlink:href", "sy.png")
+//     .attr('x', 590)
+//     .attr('width', 40)
+//     .attr('height', 40)
+//     .on('click',function(d){
+//         backbutton.pop()
+//         console.log(backbutton)
+//         selectWord1(backbutton[backbutton.length-1])
+//     })
 
 // svg.append('text')
 //     .attr("xlink:href", "biden.png")
@@ -1288,20 +1288,20 @@ svg.append('rect')
     .attr('height', 1.5)
     .attr('stroke', '#fc9b9a')
     .attr('fill', '#fc9b9a');
-svg.append('image').attr("xlink:href", "dy.png")
-    .attr('x', 590)
-    .attr('width', 50)
-    .attr('height', 40)
-    .on('click', function (d) {
-        brushScale = brushScaleAll
-        d3.selectAll("#vis").attr('class', 'visible')
-        d3.selectAll("#vis1").attr('class', 'visible')
-        d3.selectAll("#vis_tree").attr('class', 'hidden')
-        d3.select("#zyhKeyword").selectAll("rect").remove()
-        d3.select("#zyhKeyword").selectAll("text").remove()
-        MyFilter['label'] = -1
-        myBubbleChart('#vis', myrawdata);
-    })
+// svg.append('image').attr("xlink:href", "dy.png")
+//     .attr('x', 590)
+//     .attr('width', 50)
+//     .attr('height', 40)
+//     .on('click', function (d) {
+//         brushScale = brushScaleAll
+//         d3.selectAll("#vis").attr('class', 'visible')
+//         d3.selectAll("#vis1").attr('class', 'visible')
+//         d3.selectAll("#vis_tree").attr('class', 'hidden')
+//         d3.select("#zyhKeyword").selectAll("rect").remove()
+//         d3.select("#zyhKeyword").selectAll("text").remove()
+//         MyFilter['label'] = -1
+//         myBubbleChart('#vis', myrawdata);
+//     })
 //
 //
 //

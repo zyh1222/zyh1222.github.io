@@ -85,11 +85,11 @@ const select_map = {
   5:rawdata5,
   6:rawdata6
 }
-readTextFile("../../../2020-10-21.json", function (text6) {
+readTextFile("../../2020-10-21.json", function (text6) {
   parseData(text6)
-  readTextFile("./../../../2020-10-22.json", function (text7) {
+  readTextFile("../../2020-10-21.json", function (text7) {
     parseData(text7)
-    readTextFile("./../../../2020-10-23.json", function (text8) {
+    readTextFile("../../2020-10-21.json", function (text8) {
       parseData(text8)
 
       for (let i = 0; i < rawdata.length; i++) {
@@ -217,11 +217,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     // add keyframe styles for spinner to <HEAD>
     if (document.getElementById) {
       var style = '@-webkit-keyframes simpleSearchSpinner' +
-          '{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}' +
-          '@-moz-keyframes simpleSearchSpinner' +
-          '{from{-moz-transform:rotate(0deg)}to{-moz-transform:rotate(360deg)}}' +
-          '@-ms-keyframes simpleSearchSpinner' +
-          '{from{-ms-transform:rotate(0deg)}to{-ms-transform:rotate(360deg)}}'
+        '{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}' +
+        '@-moz-keyframes simpleSearchSpinner' +
+        '{from{-moz-transform:rotate(0deg)}to{-moz-transform:rotate(360deg)}}' +
+        '@-ms-keyframes simpleSearchSpinner' +
+        '{from{-ms-transform:rotate(0deg)}to{-ms-transform:rotate(360deg)}}'
 
       var st = document.createElement('style')
       st.setAttribute('id', 'simplesearch-style')
@@ -342,11 +342,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     }
 
     return url + v + '?q=' + q +
-        (config.query ? (' AND ' + config.query) : '') +
-        (l ? ('&limit=' + l) : '') +
-        (v !== 'search' && pm && pm.indexOf('include_docs=') === -1 ? '&include_docs=true' : '') +
-        (pm || '') +
-        (b ? ('&bookmark=' + b) : '')
+            (config.query ? (' AND ' + config.query) : '') +
+            (l ? ('&limit=' + l) : '') +
+            (v !== 'search' && pm && pm.indexOf('include_docs=') === -1 ? '&include_docs=true' : '') +
+            (pm || '') +
+            (b ? ('&bookmark=' + b) : '')
   }
 
   function search (searchquery, options, fromPaging) {
@@ -366,12 +366,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
         }
 
         const currRawdata = select_map[select_day]
-        searchquery = searchquery.toLowerCase()
         let searchqueryArray = searchquery.split(" ")
         for (let i = 0; i < currRawdata.length; i++) {
           let found = true
           for (let j = 0; j < searchqueryArray.length; j++) {
-            if (!currRawdata[i].tweet.toLowerCase().includes(searchqueryArray[j])){
+            if (!currRawdata[i].tweet.includes(searchqueryArray[j])){
               found = false
               break
             }
@@ -676,10 +675,10 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     }
 
     var tableHTML = getTablePagingHTML(paging.bookmarks.length - 1, paging.limit, total) +
-        '<table class="simplesearch-table">' +
-        '<thead>' + resultfields +
-        '</thead><tbody>' + resultrows +
-        '</tbody></table>'
+      '<table class="simplesearch-table">' +
+      '<thead>' + resultfields +
+      '</thead><tbody>' + resultrows +
+      '</tbody></table>'
 
     var table = document.createElement('div')
     table.className = 'simplesearch-results-table'
@@ -709,7 +708,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     }
 
     var pagingDom = '<div class="simplesearch-count"></div>' +
-        '<div class="simplesearch-paging"></div>'
+      '<div class="simplesearch-paging"></div>'
     return pagingDom
   }
 
@@ -764,8 +763,8 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     }
 
     var listHTML = '<div class="simplesearch-count">' + getCountHTML(total, paging) + '</div>' +
-        '<ul class="simplesearch-list">' + resultlist + '</ul>' +
-        (end >= total ? '' : '<div class="simplesearch-paging"><button class="simplesearch-more">More</button>')
+      '<ul class="simplesearch-list">' + resultlist + '</ul>' +
+      (end >= total ? '' : '<div class="simplesearch-paging"><button class="simplesearch-more">More</button>')
 
     var list = document.createElement('div')
     list.className = 'simplesearch-results-list'
@@ -833,7 +832,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
 
       for (var facetkey in countvalue) {
         facets += '<li class="simplesearch-facet-value">' +
-            getFacetsHTML(facetkey, countvalue[facetkey], countkey) + '</li>'
+          getFacetsHTML(facetkey, countvalue[facetkey], countkey) + '</li>'
       }
 
       facets += '</ul></div>'
@@ -851,11 +850,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     var v = facetkey.indexOf(' ') === -1 && isNaN(facetkey) ? facetkey : ('"' + facetkey + '"')
 
     return '<span class="simplesearch-facet-value-name" role="button" data-search-query=\'' +
-        k + ':' + v + '\'>' +
-        facetkey +
-        '</span> <span class="simplesearch-facet-value-count">(' +
-        facetvalue +
-        ')</span>'
+      k + ':' + v + '\'>' +
+      facetkey +
+      '</span> <span class="simplesearch-facet-value-count">(' +
+      facetvalue +
+      ')</span>'
   }
 
   function sanitizeQuery (current, next) {
@@ -863,8 +862,8 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
 
     // add quotes if facet contains space and is not already quoted
     var query = (keyvalue[0].indexOf(' ') === -1 || keyvalue[0].indexOf('"') === 0)
-        ? keyvalue[0]
-        : ('"' + keyvalue[0] + '"')
+          ? keyvalue[0]
+          : ('"' + keyvalue[0] + '"')
 
     // add quotes if value contains space and is not already quoted
     if (keyvalue[1]) {
@@ -1000,29 +999,29 @@ SimpleSearch.update = function (nodeid, callbacks, selectors, configs) {
     var serviceUrl = node.getAttribute('data-simple-search')
     var containers = {
       resultsTable: (selectors && selectors.resultsTable)
-          ? selectors.resultsTable
-          : node.getAttribute('data-search-table'),
+        ? selectors.resultsTable
+        : node.getAttribute('data-search-table'),
       resultsList: (selectors && selectors.resultsList)
-          ? selectors.resultsList
-          : node.getAttribute('data-search-list'),
+        ? selectors.resultsList
+        : node.getAttribute('data-search-list'),
       facetsList: (selectors && selectors.facetsList)
-          ? selectors.facetsList
-          : node.getAttribute('data-search-facets'),
+        ? selectors.facetsList
+        : node.getAttribute('data-search-facets'),
       inputField: node
     }
     var callbackFuncs = {
       onBefore: (callbacks && callbacks.onBefore)
-          ? callbacks.onBefore
-          : findCallback(node.getAttribute('data-search-onbefore')),
+        ? callbacks.onBefore
+        : findCallback(node.getAttribute('data-search-onbefore')),
       onData: (callbacks && callbacks.onData)
-          ? callbacks.onData
-          : findCallback(node.getAttribute('data-search-ondata')),
+        ? callbacks.onData
+        : findCallback(node.getAttribute('data-search-ondata')),
       onSuccess: (callbacks && callbacks.onSuccess)
-          ? callbacks.onSuccess
-          : findCallback(node.getAttribute('data-search-onsuccess')),
+        ? callbacks.onSuccess
+        : findCallback(node.getAttribute('data-search-onsuccess')),
       onFail: (callbacks && callbacks.onFail)
-          ? callbacks.onFail
-          : findCallback(node.getAttribute('data-search-onfail'))
+        ? callbacks.onFail
+        : findCallback(node.getAttribute('data-search-onfail'))
     }
 
     var dl = (configs && configs.hasOwnProperty('deepLinking'))
