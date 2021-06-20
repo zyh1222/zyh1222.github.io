@@ -377,7 +377,7 @@ function to_context_tree(keyword, select) {
             height: 700
         };
 
-        var timeticks = ['20th 00pm', '20th 12am', '21th 00pm', '21th 12am', '22th 00pm', '22th 12am']
+        var timeticks = ['11th 00pm', '12th 12am', '14th 00pm', '15th 12am', '17th 00pm', '18th 12am']
 
         var svg = d3.select("#vis_tree").append('svg:svg')
             .attr("width", graph.width)
