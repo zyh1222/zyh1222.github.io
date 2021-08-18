@@ -44,6 +44,7 @@
  *
  */
 
+
 function readTextFile(file, callback) {
   var rawFile = new XMLHttpRequest();
   rawFile.overrideMimeType("application/json");
@@ -54,9 +55,7 @@ function readTextFile(file, callback) {
     }
   }
   rawFile.send(null);
-
 }
-
 const rawdata = []
 function parseData(text) {
   var lines = text.split('\n');
@@ -85,11 +84,12 @@ const select_map = {
   5:rawdata5,
   6:rawdata6
 }
-readTextFile("../../../2020-10-21.json", function (text6) {
+
+readTextFile("./21.json", function (text6) {
   parseData(text6)
-  readTextFile("./../../../2020-10-22.json", function (text7) {
+  readTextFile("./22.json", function (text7) {
     parseData(text7)
-    readTextFile("./../../../2020-10-23.json", function (text8) {
+    readTextFile("./23.json", function (text8) {
       parseData(text8)
 
       for (let i = 0; i < rawdata.length; i++) {
@@ -112,7 +112,6 @@ readTextFile("../../../2020-10-21.json", function (text6) {
         if (d["created_int"] > 1603454400000){
           rawdata6.push(d)
         }
-
       }
     })})})
 
@@ -120,8 +119,8 @@ readTextFile("../../../2020-10-21.json", function (text6) {
 let select_day = 1
 
 function getOption() {
-  selectElement = document.querySelector('#text-select');
 
+  selectElement = document.querySelector('#text-select');
   select_day = parseInt(selectElement.options[selectElement.selectedIndex].value);
   // document.querySelector('.output').textContent = output;
   button_field.dispatchEvent(new Event('click'))
@@ -134,27 +133,27 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
   var selectors = containers || {}
   var callbackFunc = callbacks || {}
   var config = configuration || {}
-
   var paging = {
     query: '*:*',
     limit: 10,
     bookmarks: [],
     hasMore: false
   }
-
   var inputField = null
+
   if (selectors && selectors.inputField) {
+
     inputField = (typeof selectors.inputField === 'string') ? document.querySelector(selectors.inputField) : selectors.inputField
+
   } else {
     inputField = document.querySelector('[data-simple-search],[data-search-table],[data-search-list],[data-search-facets]')
   }
-
   if (config.deepLinking === true && getUrlQueryString('q')) {
+
     inputField.value = getUrlQueryString('q')
   } else {
     inputField.value = (selectors.query || inputField.value || '')
   }
-
   // check data-search-* attributes
   if (!selectors.resultsTable) {
     var tb = inputField.getAttribute('data-search-table')
@@ -306,9 +305,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     var key = escape(queryparam).replace(/[\.\+\*]/g, '\\$&')
     var regex = new RegExp('^(?:.*[&\\?]' + key + '(?:\\=([^&]*))?)?.*$', 'i')
     return unescape(window.location.search.replace(regex, '$1'))
+
   }
 
   function getSearchUrl (searchquery, options) {
+
     var q = null
     var l = null
     var b = null
@@ -348,13 +349,10 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
         (pm || '') +
         (b ? ('&bookmark=' + b) : '')
   }
-
   function search (searchquery, options, fromPaging) {
+
     var q = fromPaging ? paging.query : searchquery
     if (q) {
-      console.log(paging)
-      console.log(searchquery, options, fromPaging)
-
       var searchurl = getSearchUrl(q, options)
 
       var doneFunc = function (err, data_u) {
@@ -645,6 +643,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
       for (var i = 0; i < tagcloud.length; i++) {
         tagcloud[i].addEventListener('click', function (event) {
           var query = sanitizeQuery(inputField.value, event.target.getAttribute('data-search-query'))
+          console.log(query,inputField.value,event.target.getAttribute('data-search-query'))
           search(query)
         })
       }
@@ -671,8 +670,11 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
       resultfields += '<th>' + fields[field].name + '</th>'
     }
 
+
     for (var row in rows) {
-      resultrows += getRowHTML(rows[row], fields)
+      var line = getRowHTML(rows[row], fields)
+      resultrows += line
+      // console.log(rows[row].replace(regExp, "<span class='highlight'>" + searchText + '</span>'))
     }
 
     var tableHTML = getTablePagingHTML(paging.bookmarks.length - 1, paging.limit, total) +
@@ -714,6 +716,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
   }
 
   function getRowHTML (row, fields) {
+
     var rowDom = '<tr class="simplesearch-result">'
 
     for (var field in fields) {
@@ -729,6 +732,15 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
 
         rowDom += '</ul></td>'
       } else {
+        // if (fields[field].name == "tweet"){
+        //   var rr = ""
+        //   for (const searchquerynnKey in searchquerynn.split(" ")) {
+        //     var reg =
+        //     rr = n.replace()
+        //   }
+        //   rowDom += '<td><span>' + (n || '') + '</span></td>'
+        // }
+        // "<span class='highlight'>" + searchText + '</span>'
         rowDom += '<td><span>' + (n || '') + '</span></td>'
       }
     }
@@ -742,23 +754,18 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     var resultlist = ''
     var start = ((paging.bookmarks.length - 1) * paging.limit) + 1
     var end = start + paging.limit - 1
-
     if (start < 1) {
       start = 1
     }
-
     if (total < 1) {
       start = 0
     }
-
     if (end > total) {
       end = total
     }
-
     if (start > end) {
       end = start
     }
-
     for (var row in rows) {
       resultlist += getListHTML(rows[row], fields)
     }
@@ -902,7 +909,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
     if (query.length === 0) {
       query = '*:*'
     }
-
+    console.log(query,query.trim())
     return query.trim()
   }
 
@@ -910,6 +917,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
   initInputField()
 
   function _search (query, limit) {
+    console.log(query)
     search(query, {limit: limit})
   }
 
@@ -924,6 +932,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
   function _prev () {
     if (paging.bookmarks.length > 1) {
       paging.bookmarks.splice(-2, 2)
+      console.log(paging.query)
       if (paging.bookmarks.length > 0) {
         search(paging.query, {bookmark: paging.bookmarks[paging.bookmarks.length - 1]}, true)
       } else {
@@ -935,6 +944,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
   }
 
   if (inputField && inputField.value) {
+    console.log(inputField.value)
     search(inputField.value)
   }
 
@@ -964,6 +974,7 @@ var SimpleSearch = function (serviceUrl, callbacks, containers, configuration) {
 }
 
 SimpleSearch.update = function (nodeid, callbacks, selectors, configs) {
+
   var inputs = []
   if (nodeid) {
     var ssearch = SimpleSearch.inputs[nodeid]
@@ -979,7 +990,9 @@ SimpleSearch.update = function (nodeid, callbacks, selectors, configs) {
     inputs = document.querySelectorAll('[data-simple-search]')
   }
 
+
   function findCallback (cb) {
+
     if (typeof cb === 'string') {
       var c = cb.split('.')
       var w = window
@@ -1049,6 +1062,7 @@ SimpleSearch.update = function (nodeid, callbacks, selectors, configs) {
     }
 
     var key = node.id || serviceUrl
+    console.log(key,containers)
     if (key && !SimpleSearch.inputs[key]) {
       SimpleSearch.inputs[key] = new SimpleSearch(serviceUrl, callbackFuncs, containers, configuration)
     } else {

@@ -602,7 +602,6 @@ function to_context_tree(keyword, select) {
             })
             .attr('stroke-width', 1.5)
             .attr('d', function (d, i) {
-                // console.log(d)
                 return diag(diagonal(d, i))
             })
             .style("fill", "none")
@@ -933,7 +932,6 @@ function to_context_tree(keyword, select) {
         keywords.append('text')
             .attr("font-style", "italic")
             .attr("x", function (d, i) {
-                console.log(d)
                 var rel = horiz(d.hor)
                 if (i < l) {
                     return graph.width / 2 - mid - pad - wid + rel
@@ -969,11 +967,8 @@ function to_context_tree(keyword, select) {
         text
             .append("rect")
             .style("fill", function (d, i) {
-                // return "black";
                 return platform_color[d.platform]
-                // return linkColors(d.relate)
             })
-            // .style("filter", "url(#md-shadow)")
             .style("opacity", function (d) {
                 if (d.name === '') {
                     return 0

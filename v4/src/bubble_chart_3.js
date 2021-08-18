@@ -8,7 +8,7 @@
  * 2 - select word
  * @type {number}
  */
-
+var clicked_input = null
 var bubbles = null;
 var myrawdata = null;
 var context_data = null;
@@ -45,7 +45,7 @@ function draw_context() {
     }
     d3.select("#vis_tree_words").select('#nn').selectAll('svg').remove()
     if (modesvg === null) {
-        modesvg = d3.select("#vis_tree_words").append('svg').attr('id', 'nn').attr("height", 800).attr('position', 'absolute').attr('top', '100px')
+        modesvg = d3.select("#vis_tree_words").append('svg').attr('id', 'nn').attr("height", 800).attr('position', 'absolute').attr('top', '100px').attr('left', '15px')
     }
     let svg = modesvg
 
@@ -54,10 +54,10 @@ function draw_context() {
         .enter().append('svg')
         .append("rect")
         .attr("x", function (d, i) {
-            return 5
+            return 15
         })
         .attr("y", function (d, i) {
-            console.log(d)
+            // console.log(d)
             return graph.height / 6 * i + 330
         })
         .style('width', function (d) {
@@ -73,7 +73,7 @@ function draw_context() {
         .enter().append('svg')
         .append("text")
         .attr("x", function (d, i) {
-            return d.length + 5
+            return d.length + 15
         })
         .attr("y", function (d, i) {
             return graph.height / 6 * i + 345
@@ -345,7 +345,7 @@ function to_context_tree(keyword, select) {
                 })
             }
             for (i in name_r) {
-                console.log(i)
+                // console.log(i)
                 data_change.push({
                     'name': key,
                     'time': name_r[i].time,
@@ -373,7 +373,7 @@ function to_context_tree(keyword, select) {
 
         var graph = {
             width: 1200,
-            height: 700
+            height: 750
         };
 
         var timeticks = ['Tue 8am', 'Tue 20pm', 'Wes 8am', 'Wes 20pm', 'Thu 8am', 'Thu 20pm']
@@ -808,7 +808,7 @@ function to_context_tree(keyword, select) {
         var text = svg.selectAll('text_p')
             .data(data_change)
             .enter().append("svg:g")
-
+        var pattern_search = []
         text.on('mouseleave', function (d) {
             text.selectAll('text')
                 .style('opacity', 1)
@@ -816,6 +816,7 @@ function to_context_tree(keyword, select) {
             sparkline.selectAll("polyline").style('opacity', 0)
             connect_c.selectAll('path').style('opacity', 0.2)
             connect.selectAll('path').style('opacity', 0.2)
+            pattern_search = []
         })
             .on('mouseover', function (d) {
                 connect.selectAll('path').style('opacity', function (p) {
@@ -846,6 +847,12 @@ function to_context_tree(keyword, select) {
                         return p
                     }
                 })
+                pattern_search=[]
+                for (const i in t) {
+                    if(t[i].name != ""){
+                        pattern_search.push(t[i].name)
+                    }
+                }
                 text.selectAll('text')
                     .style('opacity', function (x, j) {
                         if (t.indexOf(x) > -1) {
@@ -865,7 +872,10 @@ function to_context_tree(keyword, select) {
                     }
                 })
             })
-
+            .on("click",function (d) {
+                $('#simplesearchinput').val(pattern_search.join(" "));
+                pattern_search = []
+            })
 
         function diagonal_k(d, i) {
             var result = {
@@ -938,7 +948,6 @@ function to_context_tree(keyword, select) {
         keywords.append('text')
             .attr("font-style", "italic")
             .attr("x", function (d, i) {
-                console.log(d)
                 var rel = horiz(d.hor)
                 if (i < l) {
                     return graph.width / 2 - mid - pad - wid + rel
@@ -987,7 +996,6 @@ function to_context_tree(keyword, select) {
             })
             .attr("class", "bars")
             .attr("x", function (d, i) {
-                // console.log(d)
                 var rel = horiz(d.relate)
                 x = 0
                 if (d.position == 'left') {
@@ -1014,6 +1022,30 @@ function to_context_tree(keyword, select) {
                 return scaler(d.freq) * 1.2
             })
 
+        var tooltip = floatingTooltip('gates_tooltip', 240);
+        function showDetail1(d) {
+            // change outline to indicate hover state.
+            // d3.select(this).attr('stroke', 'black');
+            var content =
+                // '<span class="name">Word: </span><span class="value">' +
+                // d.name +
+                // '</span><br/>' +
+                '<span class="name">Pattern frequency after contains "'+d.name+'": </span><span class="value">' +
+                d.freq +
+                '</span>';
+            tooltip.showTooltip(content, d3.event);
+        }
+
+        function hideDetail1(d) {
+            // if (d) {
+            //     // reset outline
+            //     d3.select(this)
+            //         .attr('strokewidth', 0);
+            // }
+
+            tooltip.hideTooltip();
+        }
+
         text.append('text')
             .attr("font-style", "italic")
             .attr("x", function (d, i) {
@@ -1037,7 +1069,8 @@ function to_context_tree(keyword, select) {
             .attr("font-size", function (d) {
                 return scaler(d.freq)
             })
-
+            .on('mouseenter', showDetail1)
+            .on('mouseout', hideDetail1);
     }
 }
 
@@ -1079,7 +1112,6 @@ function histChart(data = []) {
     function brushended() {
         brushScale = brushScaleBrush
         const selection = d3.event.selection;
-        console.log(selection)
         const start = xb(selection[0])
         const startDay = start.getDate()
         const startHour = start.getHours()
@@ -1248,86 +1280,6 @@ function histChart(data = []) {
         .style("fill", "#b4d5e3")
         .style("opacity", 0.8)
 
-
-    // Handmade legend
-    // svg1.append("circle").attr("cx", 1200).attr("cy", 30).attr("r", 6).style("fill", "#fc9b9a")
-    // svg1.append("circle").attr("cx", 1200).attr("cy", 60).attr("r", 6).style("fill", "#b4d5e3")
-    // svg1.append("text").attr("x", 1210).attr("y", 30).text("trump").style("font-size", "15px").attr("alignment-baseline", "middle")
-    // svg1.append("text").attr("x", 1210).attr("y", 60).text("biden").style("font-size", "15px").attr("alignment-baseline", "middle")
-
-    // svg1.append('image').attr("xlink:href", "trump_19.png")
-    //     .attr('x', 40)
-    //     .attr('width', 60)
-    //     .attr('height', 130)
-    //     .on('mouseenter',function (){tooltip.showTooltip("Trump Tests Positive For Coronavirus", d3.event)})
-    //     .on('mouseout', function (){
-    //         tooltip.hideTooltip()
-    //     })
-    // svg1.append('image').attr("xlink:href", "biden says.png")
-    //     .attr('x', 180)
-    //     .attr('width', 50)
-    //     .attr('height', 100)
-    //     .on('mouseenter',function (){tooltip.showTooltip("Biden suggests people were able to quarantine because 'some Black woman was able to stack the grocery shelf' in viral clip.", d3.event)})
-    //     .on('mouseout', function (){
-    //     tooltip.hideTooltip()
-    //     })
-    // svg1.append('image').attr("xlink:href", "court.png")
-    //     .attr('x', 280)
-    //     .attr('width', 180)
-    //     .attr('height', 60)
-    //     .on('mouseenter',function (){tooltip.showTooltip("US Supreme Court allows release of Trump tax returns.", d3.event)})
-    //     .on('mouseout', function (){
-    //         tooltip.hideTooltip()
-    //     })
-    // svg1.append('image').attr("xlink:href", "be.png")
-    //     .attr('x', 500)
-    //     .attr('width', 50)
-    //     .attr('height', 150)
-    //     .on('mouseenter',function (){tooltip.showTooltip("It would open a confirmation hearing for President Donald Trump’s Supreme Court nominee, Amy Coney Barrett. The public are concerning about whether an outbreak of COVID-19 will interfere with the schedule."
-    //         , d3.event)})
-    //     .on('mouseout', function (){
-    //         tooltip.hideTooltip()
-    //     })
-    //
-    // svg1.append('image').attr("xlink:href", "vpdebate.png")
-    //     .attr('x', 670)
-    //     .attr('width', 80)
-    //     .attr('height', 80)
-    //     .on('mouseenter',function (){tooltip.showTooltip("VPDEBATE:Vice President Mike Pence defended President Trump stance on white supremacists during Wednesday night’s vice presidential debate and denied the existence of systemic racism by law enforcement. </br> However, many people on the internet think Pence and Trump are liars.", d3.event)})
-    //     .on('mouseout', function (){
-    //         tooltip.hideTooltip()
-    //     })
-    // svg1.append('image').attr("xlink:href", "climate.png")
-    //     .attr('x', 870)
-    //     .attr('width', 90)
-    //     .attr('height', 150)
-    //     .on('mouseenter',function (){tooltip.showTooltip("Republican Vice President Mike Pence and Senator Kamala Harris clashed over fracking, the Green New Deal, and whether climate change poses an existential threat to humanity.</br> Mike Pence refuses to say climate change is an 'existential threat', which Senator Harris strongly refuted.", d3.event)})
-    //     .on('mouseout', function (){
-    //         tooltip.hideTooltip()
-    //     })
-    // svg1.append('image').attr("xlink:href", "tax.png")
-    //     .attr('x', 1050)
-    //     .attr('width', 90)
-    //     .attr('height', 100)
-    //     .on('mouseenter',function (){tooltip.showTooltip("Trump cut taxes for the rich </br>But Biden wants to raise them. </br> @@:The Republican Party is lack of concern for the most American people. Still fighting to take away our healthcare with no replacement! Trump paid$750 in taxes & just received $100K in treatment.</br> ", d3.event)})
-    //     .on('mouseout', function (){
-    //         tooltip.hideTooltip()
-    //     })
-
-//
-
-
-    // svg1.append('image').attr("xlink:href", "court.png")
-    //     .attr('x', 150)
-    //     .attr('width', 50)
-    //     .attr('height', 120)
-    //     .on('mouseenter',function (){tooltip.showTooltip("Trump’s Diagnosis Imperils Quick Supreme Court Confirmation Timeline"
-    //         , d3.event)})
-    //     .on('mouseout', function (){
-    //         tooltip.hideTooltip()
-    //     })
-    // svg1.append('text').attr("cx", 100).attr("cy", 30).text()
-
 }
 function selectWord1(m) {
     if(typeof m == 'undefined'){
@@ -1386,11 +1338,7 @@ function selectWord1(m) {
                 "position": currDic[k].pos
             })
         }
-//                 console.log(rawDataNew)
     }
-//            console.log(rawDataNew)
-
-
     if(rawDataNew.length ==0){
         myBubbleChart('#vis', myrawdata)
     }
@@ -1398,6 +1346,7 @@ function selectWord1(m) {
         myBubbleChart('#vis', rawDataNew)
     }
 }
+
 var svg = d3.select("#rect1").append("svg").attr("width", 1200).attr("height", 40)
 
 // Add the path using this helper function
@@ -1412,18 +1361,19 @@ svg.append('image').attr("xlink:href", "biden.png")
     .attr('width', 40)
     .attr('height', 40)
     .on('click',function(d){
-            backbutton.pop()
-            console.log(backbutton)
-            selectWord1(backbutton[backbutton.length-1])
+        gobackup()
     })
-
+    function gobackup() {
+        backbutton.pop()
+        selectWord1(backbutton[backbutton.length-1])
+    }
 // svg.append('text')
 //     .attr("xlink:href", "biden.png")
 //     .attr('x', 590)
 //     .attr('width', 50)
 //     .attr('height', 45)
 
-var svg = d3.select("#rect2").append("svg").attr("width", 1200).attr("height", 40)
+var svg = d3.select("#rect2").append("svg").attr("height", 40).attr("width", 1200)
 // Add the path using this helper function
 svg.append('rect')
     .attr('y', 20)
@@ -1436,6 +1386,10 @@ svg.append('image').attr("xlink:href", "trump.png")
     .attr('width', 50)
     .attr('height', 40)
     .on('click', function (d) {
+        go_original()
+    })
+
+    function go_original(){
         brushScale = brushScaleAll
         d3.selectAll("#vis").attr('class', 'visible')
         d3.selectAll("#vis1").attr('class', 'visible')
@@ -1444,11 +1398,10 @@ svg.append('image').attr("xlink:href", "trump.png")
         d3.select("#zyhKeyword").selectAll("text").remove()
         MyFilter['label'] = -1
         myBubbleChart('#vis', myrawdata);
-    })
+    }
 //
 //
-//
-var svg = d3.select("#rect1_new").append("svg").attr("width", 1200).attr("height", 40)
+var svg = d3.select("#rect1_new").append("svg").attr("height", 40).attr("width", 1200)
 
 // Add the path using this helper function
 svg.append('rect')
@@ -1474,7 +1427,7 @@ svg.append('image').attr("xlink:href", "biden.png")
 //     .attr('width', 50)
 //     .attr('height', 45)
 
-var svg = d3.select("#rect2_new").append("svg").attr("width", 1200).attr("height", 40)
+var svg = d3.select("#rect2_new").append("svg").attr("height", 40).attr("width", 1200)
 // Add the path using this helper function
 svg.append('rect')
     .attr('y', 20)
@@ -1497,7 +1450,7 @@ svg.append('image').attr("xlink:href", "trump.png")
 
 // .attr('stroke', 'black')
 // .attr('fill', '#b4d5e3');
-let width = 1200;
+var width = 1200;
 let height = 600;
 let centerX = null;
 let XSize = 0;
@@ -1558,13 +1511,10 @@ function bubbleChart() {
         }
 
         const dateList = new Set()
-        let min = 1000
+        let min = 1200
         let max = 0
         // Use map() to convert raw data into node data.
         myNodes = myNodes.map(function (d) {
-            if (d.name === '1') {
-                console.log(d)
-            }
             let cell = Math.round(d.position / 0.1);
             dateList.add(d.time)
             min = Math.min(min, d.time)
@@ -1802,18 +1752,21 @@ function bubbleChart() {
         bubbles.on('click', click_bubble)
 
         function click_bubble(m) {
+            d3.selectAll("#submit2").attr('class','visible');
+            d3.selectAll("#submit3").attr('class','visible');
             if (bubbleMode === 1) {
-
                 contextWordSelect = []
 //                if(selectWord(m) ==1){
                     selectWord(m)
                     backbutton.push(m.name)
                     zyhKeyword = m.name
+
                     d3.select("#zyhKeyword").selectAll("rect").remove()
                     d3.select("#zyhKeyword").selectAll("text").remove()
                     if (zyhKeySvg === null) {
                         zyhKeySvg = d3.select("#zyhKeyword").append("svg")
                             .attr('id', 'zyhkk').attr("height", 50).attr('position', 'absolute')
+                            .attr('class','hidden')
                         // .attr('top', '50px')
                     }
                     zyhKeySvg.selectAll("rect_key")
@@ -1848,8 +1801,7 @@ function bubbleChart() {
 // console.log(m)
 
             } else if (bubbleMode === 2) {
-
-
+                // d3.selectAll("#zyhkk").attr('class','visible')
 
                 if (!contextWordSelect.includes(m.name)) {
                     if (contextWordSelect.length > 5) {
@@ -1858,11 +1810,11 @@ function bubbleChart() {
                     }
                     let key_word = zyhKeyword
 
-                    console.log(m, key_word)
+                    // console.log(m, key_word)
                     if (dis_x[key_word].hasOwnProperty(m.name)) {
-                        console.log(m, key_word)
+                        // console.log(m, key_word)
                         if(!isNaN(dis_x[key_word][m.name])){
-                            console.log(m, key_word)
+                            // console.log(m, key_word)
                             contextWordSelect.push(m.name)
                         }
 
@@ -1877,8 +1829,6 @@ function bubbleChart() {
                 }
 
                 draw_context(contextWordSelect)
-
-
             }
         }
     };
@@ -1932,7 +1882,7 @@ function bubbleChart() {
                 // } else if (d.group === 4) {
                 //     d.x = Math.max(9 * width / 12 + 100, Math.min(11 * width / 12 + 50, d.x))
                 // }else{
-                //     console.log(d.group)
+                //     console.(d.group)
                 // }
                 const padding = width / XSize / 2;
                 if (d.group === 0) {
@@ -2003,13 +1953,13 @@ function bubbleChart() {
         // change outline to indicate hover state.
         d3.select(this).attr('stroke', 'black');
 
-        var content = '<span class="name">Title: </span><span class="value">' +
+        var content = '<span class="name">Word: </span><span class="value">' +
             d.name +
             '</span><br/>' +
-            '<span class="name">Count: </span><span class="value">' +
+            '<span class="name">Frequency: </span><span class="value">' +
             d.value +
             '</span><br/>' +
-            '<span class="name">Correlation degree: </span><span class="value">' +
+            '<span class="name">Correlation degree with key actors: </span><span class="value">' +
             d.position +
             '</span>';
 
@@ -2025,7 +1975,6 @@ function bubbleChart() {
             d3.select(this)
                 .attr('strokewidth', 0);
         }
-
         tooltip.hideTooltip();
     }
 
