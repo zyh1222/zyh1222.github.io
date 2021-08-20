@@ -19,7 +19,7 @@ var backbutton = [];
 var pos_dic = {}
 var radiusScale = null;
 let brushScaleAll = 10
-let brushScaleBrush = 10
+let brushScaleBrush = 20
 let brushScaleClick = 40
 let brushScale = brushScaleAll
 let rawDataNew = []
@@ -1952,6 +1952,46 @@ function bubbleChart() {
     function showDetail(d) {
         // change outline to indicate hover state.
         d3.select(this).attr('stroke', 'black');
+        var lines = []
+        var bubble_color = null
+        bubbles.style('opacity', function (x) {
+                if (d.name == x.name) {
+                    lines.push([x.x,x.y])
+                    bubble_color = colors[d.org]
+                    return 1
+                } else {
+                    return 0.1
+                }
+            })
+
+
+        var linePath = d3.line()
+            .x(function (value) {
+                return value[0]
+            })
+            .y(function (value) {
+                return value[1]
+            });
+
+        var mapped = lines.map(function(ar,i){
+            return {value:ar[0],index:i}   //输出一个object对象，value为排序的数字的值，index为数字所在的数组在一维数组中的索引值
+        })
+        mapped.sort(function(a,b){
+            return a.value-b.value;
+        })
+        var result = mapped.map(function(ar){
+            return lines[ar.index];
+        })
+        const curve = d3.line().curve(d3.curveNatural);
+
+        // var svg = d3.select("body")
+        svg.append('path')
+            .attr('id',"bubble_path")
+            .attr('d',curve(result))
+            .attr('stroke',bubble_color)
+            .attr('stroke-width',2)
+            .attr('opacity',0.6)
+            .attr('fill','none')
 
         var content = '<span class="name">Word: </span><span class="value">' +
             d.name +
@@ -1972,10 +2012,13 @@ function bubbleChart() {
     function hideDetail(d) {
         if (d) {
             // reset outline
-            d3.select(this)
-                .attr('strokewidth', 0);
+            d3.select(this).attr('strokewidth', 0);
+            d3.select("#bubble_path").remove();
+            bubbles.style("opacity", function (d) {
+                return d.radius / 30;
+            })
+            tooltip.hideTooltip();
         }
-        tooltip.hideTooltip();
     }
 
     /*
