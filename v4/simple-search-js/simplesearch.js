@@ -85,11 +85,11 @@ const select_map = {
   6:rawdata6
 }
 
-readTextFile("./21.json", function (text6) {
+readTextFile("./2020-10-21.json", function (text6) {
   parseData(text6)
-  readTextFile("./22.json", function (text7) {
+  readTextFile("./2020-10-22.json", function (text7) {
     parseData(text7)
-    readTextFile("./23.json", function (text8) {
+    readTextFile("./2020-10-23.json", function (text8) {
       parseData(text8)
 
       for (let i = 0; i < rawdata.length; i++) {

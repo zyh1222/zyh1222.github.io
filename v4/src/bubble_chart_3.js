@@ -376,7 +376,7 @@ function to_context_tree(keyword, select) {
             height: 750
         };
 
-        var timeticks = ['Tue 8am', 'Tue 20pm', 'Wes 8am', 'Wes 20pm', 'Thu 8am', 'Thu 20pm']
+        var timeticks = ['Wes 8am', 'Wes 20pm', 'Thu 8am', 'Thu 20pm', 'Fri 8am', 'Fri 20pm']
 
         var svg = d3.select("#vis_tree").append('svg:svg')
             .attr("width", graph.width)
@@ -847,12 +847,37 @@ function to_context_tree(keyword, select) {
                         return p
                     }
                 })
+                // console.log(t)
                 pattern_search=[]
+                pattern_search_right=[]
+
                 for (const i in t) {
                     if(t[i].name != ""){
-                        pattern_search.push(t[i].name)
+                        if(t[i].position == "left"){
+                            pattern_search.push([t[i].name,+t[i].index])
+                        }else{
+                            pattern_search_right.push([t[i].name,+t[i].index])
+                        }
                     }
                 }
+                var sort_2d = function(arr) {
+                    var mapped = arr.map(function(ar,i){
+                        return {value:ar[1],index:i}   //输出一个object对象，value为排序的数字的值，index为数字所在的数组在一维数组中的索引值
+                    })
+                    mapped.sort(function(a,b){
+                        return a.value-b.value;
+                    })
+                    var result = mapped.map(function(ar){
+                        return arr[ar.index];
+                    })
+                    var rr = []
+                    for (let j = 0; j < result.length; j++) {
+                        rr.push(result[j][0])
+                    }
+                    return rr
+                }
+
+                pattern_search = [sort_2d(pattern_search),[keyword],sort_2d(pattern_search_right)].flat()
                 text.selectAll('text')
                     .style('opacity', function (x, j) {
                         if (t.indexOf(x) > -1) {
@@ -873,6 +898,7 @@ function to_context_tree(keyword, select) {
                 })
             })
             .on("click",function (d) {
+
                 $('#simplesearchinput').val(pattern_search.join(" "));
                 pattern_search = []
             })
@@ -1115,9 +1141,7 @@ function histChart(data = []) {
         const start = xb(selection[0])
         const startDay = start.getDate()
         const startHour = start.getHours()
-
         const end = xb(selection[1])
-
         const endDay = end.getDate()
         const endHour = end.getHours()
         const time_index = {
@@ -1196,7 +1220,6 @@ function histChart(data = []) {
         }
         const ss = time_index[String(startDay) + String(startHour)]
         const ee = time_index[String(endDay) + String(endHour)]
-
         function update_data(ss, ee) {
 
             const mydata = []
@@ -1210,9 +1233,6 @@ function histChart(data = []) {
         }
 
         update_data(ss, ee)
-        // if (!event.sourceEvent || !selection) return;
-        // const [x0, x1] = selection.map(d => interval.round(x.invert(d)));
-        // d3.select(this).transition().call(brush.move, x1 > x0 ? [x0, x1].map(x) : null);
     }
 
 
@@ -1322,6 +1342,7 @@ function selectWord1(m) {
             })
             .attr('font-size', 15)
             .attr('font-family', "Gill Sans", "Gill Sans MT")
+        // active(m)
     }
 
 
@@ -1366,6 +1387,9 @@ svg.append('image').attr("xlink:href", "biden.png")
     function gobackup() {
         backbutton.pop()
         selectWord1(backbutton[backbutton.length-1])
+        if(backbutton[backbutton.length-1]){
+            d3.select("#status").html("<div>The word <span class=\"active\">" + backbutton[backbutton.length-1] + "</span> is now active \n</div>")
+        }
     }
 // svg.append('text')
 //     .attr("xlink:href", "biden.png")
@@ -1397,7 +1421,9 @@ svg.append('image').attr("xlink:href", "trump.png")
         d3.select("#zyhKeyword").selectAll("rect").remove()
         d3.select("#zyhKeyword").selectAll("text").remove()
         MyFilter['label'] = -1
-        myBubbleChart('#vis', myrawdata);
+        myBubbleChart('#vis', myrawdata)
+        d3.selectAll("#rect1_new").attr('class', 'hidden')
+        d3.selectAll("#rect2_new").attr('class', 'hidden')
     }
 //
 //
@@ -1797,7 +1823,7 @@ function bubbleChart() {
 //                }
 
 //                console.log(selectWord(m))
-                // d3.select("#zyhKeyword").html("<span style='background-color: #2fa1d6'>"+zyhKeyword+"</span>")
+                // d3.select("#zyhKeyword").("<span style='background-color: #2fa1d6'>"+zyhKeyword+"</span>")
 // console.log(m)
 
             } else if (bubbleMode === 2) {
