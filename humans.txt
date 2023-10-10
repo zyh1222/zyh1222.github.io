@@ -1,0 +1,10 @@
+/* TEAM */
+	Author/Theme: Yuheng Zhao
+	Twitter: @YuhengZhao_
+	From: Pittsburgh, PA
+
+/* SITE */
+	Language: English
+	Doctype: HTML5
+	IDE: Sublime Text, VIM, VSCode
+	Software: Jekyll
