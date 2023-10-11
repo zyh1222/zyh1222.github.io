@@ -110,4 +110,3 @@ My research interest lies in harnessing the confluence of Visualization, Human-C
   <i class="fas fa-chevron-circle-right"></i>
   Show All Publications
 </a>
-

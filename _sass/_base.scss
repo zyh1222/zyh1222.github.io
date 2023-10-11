@@ -132,6 +132,11 @@ a {
   }
 }
 
+canvas {
+  position: fixed; opacity: 1; right: 15px; bottom: 50px; z-index: 200;
+  width: 350px;
+  cursor: move;
+}
 
 
 /**

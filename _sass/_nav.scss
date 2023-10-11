@@ -1,9 +1,10 @@
 .page-header {
   border-top: 6px;
-  border-bottom: 1px solid $border-color;
+  // border-bottom: 1px solid $border-color;
   padding-top: 6px;
   padding-bottom: 6px;
   margin-bottom: 30px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 nav {
