@@ -78,7 +78,7 @@ My research interest lies in harnessing the confluence of Visualization, Human-C
               {{ author }}{% unless forloop.last %}, {% endunless %}
             {% endif %}
           {% endfor %}
-        </span>.
+        </span>
         <br><i>{% if pub.venue %}{{ pub.venue }}, {% endif %}{{ pub.year }}</i>.
         {% for award in pub.awards %}
           <br/>
