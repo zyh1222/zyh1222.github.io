@@ -1,3 +1,10 @@
+- title: LEVA
+  paper: 
+  video: 
+  image: leva.png
+  description: "LEVA is a framework that integrates LLMs to enhance user's visual analytics workflow in three pivotal stages: onboarding, exploration, and summarization."
+  highlight: 1
+
 - title: ContextWing
   paper: /papers/2023-ContextWing.pdf
   video: https://vimeo.com/872510750
