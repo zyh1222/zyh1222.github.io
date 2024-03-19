@@ -45,8 +45,8 @@ class: pubs
   <i class="fas fa-times-circle" aria-hidden="true"></i> Clear all filters. <span id="count_hidden">X</span> of <span id="count_total">X</span> publications are hidden by the filters.
 </p>
 
-{% assign pubyears = site.publications | group_by:"year" %}
-{% assign sorted_pubyears = pubyears | sort: "name", "last" %}
+{% assign pubyears = site.publications | group_by:"year"  %}
+{% assign sorted_pubyears = pubyears %}
 {% for year in sorted_pubyears %}
 ## {{ year.name }}
 {:#y{{ year.name }} .year}
