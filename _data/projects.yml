@@ -1,6 +1,6 @@
 - title: LEVA
   paper: https://ieeexplore.ieee.org/document/10458347
-  video: 
+  video: https://doi.org/10.1109/TVCG.2024.3368060/mm2
   image: leva.png
   description: "LEVA is a framework that integrates LLMs to enhance user's visual analytics workflow in three pivotal stages: onboarding, exploration, and summarization."
   highlight: 1
@@ -17,7 +17,8 @@
   code: https://github.com/oldvis
   paper: https://arxiv.org/pdf/2308.16053.pdf
   image: image-gallery.png
-  description: "I am a co-author of OldVisOnline. This work curates the first large-scale dataset (13K) dedicated to historical visualization."
+  description: "I am a co-author of OldVisOnline. This work curates the first large-scale dataset (13K) dedicated to historical visualization and propose a workflow
+to scrape and process heterogeneous metadata. "
   highlight: 2
 
 - title: Metaverse
