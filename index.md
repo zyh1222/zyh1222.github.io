@@ -13,7 +13,7 @@ Hello! I am Yuheng Zhao, a PhD candidate in Department of Data science at [Fudan
 
 My research interest lies in harnessing the confluence of Visualization, Human-Computer Interaction, Data
             Science, and Artificial Intelligence to enhance data expression and comprehension. Specifically, I am
-            focused on visual analytics, natural language processing and Human-AI collaboration. Lately, my primary focus has been on intelligent visualization enhanced by language models.
+            focused on visual analytics, natural language processing and Human-AI collaboration. Lately, my primary focus has been on intelligent data analysis enhanced by foundation models.
 
 <div class="news-section">
   <b>💬 News</b>
