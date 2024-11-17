@@ -1,5 +1,6 @@
 - title: LightVA
-  paper: https://arxiv.org/pdf/2411.05651
+  paper: https://ieeexplore.ieee.org/document/10753451
+  video: https://ieeexplore.ieee.org/document/10753451/media#media
   image: lightva.png
   description: "LightVA is a lightweight VA framework through human-agent collaboration based on LLM agent-based task planning and execution."
   highlight: 1
