@@ -9,20 +9,14 @@ class: home
 <div class="columns" markdown="1">
 
 <div class="intro" markdown="1">
-Hello! I am Yuheng Zhao, a PhD candidate in Department of Data science at [Fudan University](https://www.fudan.edu.cn/en/). I am supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). Before that, I received my master degree with first class honors from [The Hong Kong University of Science and Technology (HKUST)](https://hkust.edu.hk/) in 2021, with major in Data-driven Modeling, advised by Prof. [Wong Kwok Yee Michael](https://people.phys.ust.hk/phkywong/). I have also taken a research internship at Huawei advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
+Hello! I am Yuheng Zhao (赵宇恒), a third-year PhD candidate in Department of Data science at [Fudan University](https://www.fudan.edu.cn/en/). I am supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). Before that, I received my master degree with first class honors from [The Hong Kong University of Science and Technology (HKUST)](https://hkust.edu.hk/) in 2021, with major in Data-driven Modeling, advised by Prof. [Wong Kwok Yee Michael](https://people.phys.ust.hk/phkywong/). I have also taken a research internship at Huawei advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
 
 My research interest lies in harnessing the confluence of Visualization, Human-Computer Interaction, Data
             Science, and Artificial Intelligence to enhance data expression and comprehension. Specifically, I am
             focused on visual analytics, natural language processing and Human-AI collaboration. Lately, my primary focus has been on intelligent data analysis enhanced by foundation models.
 
-<div class="news-section">
-  <b>💬 News</b>
-  {% for item in site.data.news %}
-    <div class="news-item">
-      <div class="news-content">- {{ item.message }}</div>
-      <span class="time-span"><time datetime="{{ item.date | date: "%Y-%m-%d" }}">{{ item.date | date: "%b %d, %y" }}</time></span>
-    </div>
-  {% endfor %}
+<div class="highlight" markdown="1">
+👀 **I am actively looking for a Postdoc position starting in 2026!**  Please feel free to contact me if you have any opportunities! 😊
 </div>
 
 </div>
@@ -44,6 +38,17 @@ My research interest lies in harnessing the confluence of Visualization, Human-C
 
 
 </div>
+
+<div class="news-section">
+  <b>💬 News</b>
+  {% for item in site.data.news %}
+    <div class="news-item">
+      <div class="news-content">- {{ item.message }}</div>
+      <span class="time-span"><time datetime="{{ item.date | date: "%Y-%m-%d" }}">{{ item.date | date: "%b %d, %y" }}</time></span>
+    </div>
+  {% endfor %}
+</div>
+
 
 ## 🍒 <a href="{{ "/projects/" | relative_url }}">Projects</a>
 
@@ -71,7 +76,7 @@ My research interest lies in harnessing the confluence of Visualization, Human-C
         <br>
         <span class="authors">
           {% for author in pub.authors %}
-            {% if author == "Yuheng Zhao" %}
+            {% if author contains "Yuheng Zhao" %}
               <strong><u>{{ author }}</u></strong>{% unless forloop.last %}, {% endunless %}
             {% else %}
               {{ author }}{% unless forloop.last %}, {% endunless %}
