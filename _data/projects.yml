@@ -1,26 +1,34 @@
+- title: ProactiveVA
+  paper: 
+  video: https://drive.google.com/file/d/12L67AiL3e24FdWT4Qc8DboRI2hG3rE-t/view?usp=drive_link
+  image: proactiveVA.png
+  description: "We propose a proactive visual analytics frameowork that utilizes LLM-powered UI agent to help users with context-aware assistance proactively. The agent can conduct interactive and visual reasoning in visualization system."
+  highlight: 1
+
 - title: LightVA
   paper: https://ieeexplore.ieee.org/document/10753451
   video: https://ieeexplore.ieee.org/document/10753451/media#media
   image: lightva.png
   description: "LightVA is a lightweight VA framework through human-agent collaboration based on LLM agent-based task planning and execution."
-  highlight: 1
+  highlight: 2
   
 - title: LEVA
   paper: https://ieeexplore.ieee.org/document/10458347
   video: https://doi.org/10.1109/TVCG.2024.3368060/mm2
+  talk: https://www.youtube.com/watch?v=El6O9JS4kIQ&t=115s
   image: leva.png
   description: "LEVA is a framework that integrates LLMs to enhance user's visual analytics workflow in three pivotal stages: onboarding, exploration, and summarization."
-  highlight: 2
+  highlight: 3
 
 - title: ContextWing
   paper: /papers/2023-ContextWing.pdf
   video: https://vimeo.com/872510750
   image: contextwing.jpg
   description: "ContextWing is a visual analytics system which support pair-wise comparison in social media data streams."
-  highlight: 3
-
-- title: Metaverse
-  paper: /papers/2022-Metaverse.pdf
-  image: metaverse.jpg
-  description: "A framework that summarizes how graphics, interaction, and visualization techniques support the visual construction of the metaverse and user-centric exploration."
   highlight: 4
+
+# - title: Metaverse
+#   paper: /papers/2022-Metaverse.pdf
+#   image: metaverse.jpg
+#   description: "A framework that summarizes how graphics, interaction, and visualization techniques support the visual construction of the metaverse and user-centric exploration."
+#   highlight: 5
