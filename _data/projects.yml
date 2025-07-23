@@ -1,6 +1,6 @@
 - title: ProactiveVA
   paper: 
-  video: https://drive.google.com/file/d/12L67AiL3e24FdWT4Qc8DboRI2hG3rE-t/view?usp=drive_link
+  video: https://drive.google.com/file/d/12L67AiL3e24FdWT4Qc8DboRI2hG3rE-t/view?usp=sharing
   image: proactiveVA.png
   description: "We propose a proactive visual analytics frameowork that utilizes LLM-powered UI agent to help users with context-aware assistance proactively. The agent can conduct interactive and visual reasoning in visualization system."
   highlight: 1
