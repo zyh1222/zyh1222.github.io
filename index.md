@@ -9,11 +9,9 @@ class: home
 <div class="columns" markdown="1">
 
 <div class="intro" markdown="1">
-Hello! I am Yuheng Zhao (赵宇恒), a third-year PhD candidate in the School of Data Science at Fudan University. I am supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). Before that, I received my master degree with first class honors from [The Hong Kong University of Science and Technology (HKUST)](https://hkust.edu.hk/) in 2021, with major in Data-driven Modeling, advised by Prof. [Wong Kwok Yee Michael](https://people.phys.ust.hk/phkywong/). I have also taken a research internship at Huawei advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
+Hello! I am Yuheng Zhao (赵宇恒), a third-year PhD candidate in the School of Data Science at Fudan University, supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). I am also a visiting PhD student at the University of Edinburgh, supervised by Prof. [Benjamin Bach](https://benjbach.github.io/) in VisHub(https://vishub.net/). I received my Master’s degree with First Class Honors from [The Hong Kong University of Science and Technology (HKUST)](https://hkust.edu.hk/) in 2021, majoring in Data-driven Modeling under the supervision of Prof. [Wong Kwok Yee Michael](https://people.phys.ust.hk/phkywong/). I also completed a research internship at Huawei, advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
 
-My research interest lies in harnessing the confluence of Visualization, Human-Computer Interaction, Data
-            Science, and Artificial Intelligence to enhance data expression and comprehension. Specifically, I am
-            focused on visual analytics, natural language processing and Human-AI collaboration. Lately, my primary focus has been on intelligent data analysis enhanced by foundation models.
+My research interest lies in harnessing the confluence of Artificial Intelligence, Human-Computer Interaction and Visualization techniques, to facilitate data expression and comprehension. Lately, my primary focus has been on mixed-initiative data analysis, LLM reasoning and task planning, UI agent.
 
 <div class="highlight" markdown="1">
 👀 **I am actively looking for a Postdoc position starting in 2026!**  Please feel free to contact me if you have any opportunities! 😊
