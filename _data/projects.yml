@@ -1,4 +1,5 @@
 - title: ProactiveVA
+  url: https://zyh1222.github.io/ProactiveVA/
   paper: https://www.arxiv.org/pdf/2507.18165
   video: https://drive.google.com/file/d/12L67AiL3e24FdWT4Qc8DboRI2hG3rE-t/view?usp=sharing
   image: proactiveVA.png
@@ -6,6 +7,7 @@
   highlight: 1
 
 - title: LightVA
+  url: https://zyh1222.github.io/LightVA/
   paper: https://ieeexplore.ieee.org/document/10753451
   video: https://ieeexplore.ieee.org/document/10753451/media#media
   image: lightva.png
