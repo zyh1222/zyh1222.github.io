@@ -31,6 +31,12 @@
     </div>
     {% endif %}
 
+    <div class="pub-badges">
+      <span class="pub-badge ccf">CCF: {% if pub.ccf %}{{ pub.ccf }}{% else %}N/A{% endif %}</span>
+      <span class="pub-badge esi{% if pub.esi_highly_cited %} active{% endif %}">ESI: {% if pub.esi_highly_cited %}Highly Cited{% else %}No{% endif %}</span>
+      <span class="pub-badge award{% if pub.awards %} active{% endif %}">Award: {% if pub.awards %}{{ pub.awards | join: '; ' }}{% else %}No{% endif %}</span>
+    </div>
+
     {% if pub.description %}
     <p class="description">
       {{ pub.description | markdownify | remove: '<p>' | remove: '</p>' }}
@@ -57,8 +63,10 @@
         <a href="https://arxiv.org/pdf/{{ pub.arxiv | cgi_escape }}.pdf"><i class="far fa-file-pdf"></i> PDF</a>
       {% endif %}
 
-      {% if pub.link %}
-        <a href="{{ pub.link }}"><i class="fas fa-link"></i> Project</a>
+      {% if pub.website %}
+        <a href="{{ pub.website }}"><i class="fas fa-link"></i> Website</a>
+      {% elsif pub.link %}
+        <a href="{{ pub.link }}"><i class="fas fa-link"></i> Website</a>
       {% endif %}
 
       {% if pub.html %}

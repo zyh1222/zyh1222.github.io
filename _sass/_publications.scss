@@ -175,6 +175,48 @@
       color: firebrick;
     }
 
+    .pub-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4em;
+      margin: 0.35em 0 0.2em 0;
+      font-size: 0.85em;
+      font-weight: 500;
+    }
+
+    .pub-badge {
+      display: inline-block;
+      padding: 0.15em 0.5em;
+      border-radius: 6px;
+      background: #eef1f5;
+      color: #334155;
+    }
+
+    .pub-badge.ccf {
+      background: #e6f2ff;
+      color: #1d4ed8;
+    }
+
+    .pub-badge.esi {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .pub-badge.esi.active {
+      background: #ecfdf3;
+      color: #0f7b36;
+    }
+
+    .pub-badge.award {
+      background: #fff4e5;
+      color: #b45309;
+    }
+
+    .pub-badge.award.active {
+      background: #fde68a;
+      color: #92400e;
+    }
+
     .tweet {
       &:hover {
         text-decoration: none;

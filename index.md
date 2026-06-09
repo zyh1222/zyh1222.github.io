@@ -48,21 +48,6 @@ My research interest lies in harnessing the confluence of Artificial Intelligenc
 </div>
 
 
-## 🍒 <a href="{{ "/projects/" | relative_url }}">Projects</a>
-
-<div class="featured-projects">
-  {% assign sorted_projects = site.data.projects | sort: 'highlight' %}
-  {% for project in sorted_projects %}
-    {% if project.highlight %}
-      {% include project.html project=project %}
-    {% endif %}
-  {% endfor %}
-</div>
-<a href="{{ "/projects/" | relative_url }}" class="button">
-  <i class="fas fa-chevron-circle-right"></i>
-  Show More Projects
-</a>
-
 ## 📖 <a href="{{ "/publications/" | relative_url }}">Publications</a>
 
 <div class="featured-publications">
