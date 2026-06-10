@@ -128,11 +128,18 @@
   }
 
   .publication {
-    // margin-bottom: 2em;
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 1.3em;
+    align-items: start;
+    margin-bottom: 1.8em;
+    padding-bottom: 1.8em;
+    border-bottom: 1px solid $border-color;
 
     h3 {
       font-size: 1.2em;
-      margin: 0em;
+      line-height: 1.35;
+      margin: 0;
       font-weight: 500;
 
       max-height: 600px;
@@ -141,6 +148,35 @@
       &.hidden {
         max-height: 0;
       }
+    }
+
+    .publication-figure {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 1px solid $border-color;
+      border-radius: 6px;
+      background: $grey-color-lightest;
+    }
+
+    .publication-figure img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .publication-figure-placeholder {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $grey-color-light;
+      font-size: 2.2em;
+    }
+
+    .publication-body {
+      min-width: 0;
     }
 
     .award-icon {
@@ -157,7 +193,8 @@
     }
 
     .authors {
-      margin-bottom: 0.3em;
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
       font-weight: 300;
       a {
         color: $text-color;
@@ -168,7 +205,9 @@
     .venue a {
       color: $grey-color;
     }
-
+    .venue{
+      margin: 0.32em 0 0.15em 0;
+    }
     .awards {
       margin-top: 0.1em;
       font-weight: 500;
@@ -179,22 +218,23 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.4em;
-      margin: 0.35em 0 0.2em 0;
+      margin: 0.45em 0 0.25em 0;
       font-size: 0.85em;
       font-weight: 500;
     }
 
     .pub-badge {
       display: inline-block;
-      padding: 0.15em 0.5em;
-      border-radius: 6px;
+      padding: 0.12em 0.5em;
+      border-radius: 4px;
       background: #eef1f5;
       color: #334155;
+      line-height: 1.5;
     }
 
     .pub-badge.ccf {
-      background: #e6f2ff;
-      color: #1d4ed8;
+      background: #eef4ff;
+      color: #2453a6;
     }
 
     .pub-badge.esi {
@@ -208,12 +248,12 @@
     }
 
     .pub-badge.award {
-      background: #fff4e5;
-      color: #b45309;
+      background: #fff7e6;
+      color: #9f5f00;
     }
 
     .pub-badge.award.active {
-      background: #fde68a;
+      background: #fff0c2;
       color: #92400e;
     }
 
@@ -237,19 +277,284 @@
     }
 
     .extra-links {
-      margin-top: 0.5em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45em;
+      margin-top: 0.65em;
       font-weight: 300;
       font-size: 0.9em;
-
+      color: $brand-button-color;
       a {
-        margin-right: 1em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
+        margin-right: 0;
+        padding: 0.24em 0.65em;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        background: #fff;
         white-space: nowrap;
+        color: $link-color;
 
         &:hover {
           text-decoration: none;
-          border-bottom: 1px solid $link-color;
+          border-color: $link-color;
+          background: #f7fbff;
         }
       }
     }
+  }
+
+  .awards-section {
+    margin-top: 0.6em;
+    margin-bottom: 2em;
+
+    h3 {
+      font-size: 1.05em;
+      margin: 0.9em 0 0.25em 0;
+      color: $dark-text-color;
+    }
+
+    ul {
+      margin-left: 1.2em;
+      margin-bottom: 0.65em;
+    }
+
+    li {
+      margin-bottom: 0.18em;
+      line-height: 1.45;
+    }
+  }
+}
+
+@include media-query($on-laptop) {
+  .pubs {
+    .publication {
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 1em;
+    }
+  }
+}
+
+@include media-query($on-palm) {
+  .pubs {
+    .publication {
+      grid-template-columns: 1fr;
+      gap: 0.8em;
+    }
+
+    .publication .publication-figure {
+      max-width: 320px;
+    }
+  }
+}
+
+.pubs .publication-card,
+.home .featured-publications .publication-card {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 0.9em;
+  align-items: start;
+  margin-bottom: 1.05em;
+  padding-bottom: 1.05em;
+  border-bottom: 1px solid $border-color;
+  color: $text-color;
+  font-size: 15px;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+    h3 {
+      font-size: 1.05em;
+      line-height: 1.3;
+      margin: 0;
+      font-weight: 700;
+    }
+
+  .publication-figure {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    background: $grey-color-lightest;
+  }
+
+  .publication-figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .publication-figure-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $grey-color-light;
+    font-size: 2em;
+  }
+
+  .publication-body {
+    min-width: 0;
+  }
+
+  .authors {
+    margin-top: 0.15em;
+    margin-bottom: 0.1em;
+    line-height: 1.35;
+    font-weight: 300;
+    font-size: 15px;
+    a {
+      color: $text-color;
+    }
+  }
+
+  .venue,
+  .venue a {
+    color: $grey-color;
+    line-height: 1.35;
+  }
+
+  .venue {
+    margin: 0.32em 0 0.15em 0;
+    font-size: 15px;
+  }
+
+  .venue-inline-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    vertical-align: baseline;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08em 0.46em;
+      border-radius: 4px;
+      border: 1px solid #ef9dbb;
+      background: #fff0f6;
+      color: #a83e68;
+      font-size: 0.82em;
+      font-weight: 700;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+  }
+
+  .pub-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em;
+    margin: 0.32em 0 0.15em 0;
+    font-size: 0.82em;
+    font-weight: 500;
+  }
+
+  .pub-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    padding: 0.08em 0.45em;
+    border-radius: 4px;
+    background: #eef1f5;
+    color: #334155;
+    line-height: 1.45;
+  }
+
+  .extra-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.34em;
+    margin-top: 0.45em;
+    font-weight: 300;
+    font-size: 0.86em;
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      margin-right: 0;
+      padding: 0.16em 0.52em;
+      border: 1px solid lighten($brand-button-color, 30%);
+      border-radius: 4px;
+      background: #fff;
+      white-space: nowrap;
+      color: $brand-button-color;
+
+      &:hover {
+        text-decoration: none;
+        border-color: $brand-button-color;
+        background: lighten($brand-button-color, 56%);
+      }
+    }
+  }
+}
+
+@include media-query($on-laptop) {
+  .pubs .publication-card,
+  .home .featured-publications .publication-card {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 0.8em;
+  }
+}
+
+@include media-query($on-palm) {
+  .pubs .publication-card,
+  .home .featured-publications .publication-card {
+    grid-template-columns: 1fr;
+  }
+
+  .pubs .publication-card .publication-figure,
+  .home .featured-publications .publication-card .publication-figure {
+    max-width: 320px;
+  }
+}
+
+.pubs .publication-card,
+.home .featured-publications .publication-card {
+  .publication-figure {
+    position: relative;
+    cursor: move;
+  }
+
+  .publication-figure img {
+    transition: transform 0.35s ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .publication-figure:hover img {
+    transform: scale(1.22);
+  }
+
+  .publication-figure:hover img:hover {
+    transform: scale(1.22) translate(var(--figure-x, 0), var(--figure-y, 0));
+  }
+
+  .pub-badge {
+    border: 1px solid currentColor;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .pub-badge.ccf {
+    background: lighten($brand-color, 55%);
+    color: $brand-color;
+    border-color: lighten($brand-color, 28%);
+  }
+
+  .pub-badge.esi {
+    background: #e9fff3;
+    color: #047344;
+    border-color: #60c58d;
+  }
+
+  .pub-badge.award {
+    background: #fff0c2;
+    color: #8a4b00;
+    border-color: #d89a20;
   }
 }

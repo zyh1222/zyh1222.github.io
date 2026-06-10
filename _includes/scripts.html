@@ -9,4 +9,19 @@
     var title = h.innerHTML;
     h.innerHTML = '<a href="#' + name + '" class="anchor"><i class="fas fa-hashtag"></i></a>' + trim(title);
   }
+
+  document.querySelectorAll(".publication-figure").forEach(function(figure) {
+    figure.addEventListener("mousemove", function(event) {
+      var rect = figure.getBoundingClientRect();
+      var x = (event.clientX - rect.left) / rect.width - 0.5;
+      var y = (event.clientY - rect.top) / rect.height - 0.5;
+      figure.style.setProperty("--figure-x", (-x * 12).toFixed(2) + "%");
+      figure.style.setProperty("--figure-y", (-y * 12).toFixed(2) + "%");
+    });
+
+    figure.addEventListener("mouseleave", function() {
+      figure.style.setProperty("--figure-x", "0%");
+      figure.style.setProperty("--figure-y", "0%");
+    });
+  });
 </script>

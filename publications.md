@@ -50,11 +50,11 @@ class: pubs
 {% for year in sorted_pubyears %}
 ## {{ year.name }}
 {:#y{{ year.name }} .year}
-{% for pub in year.items %}
+{% assign sorted_year_items = year.items | sort: "path" | reverse %}
+{% for pub in sorted_year_items %}
   {% include publication.html pub=pub %}
 {% endfor %}
 {% endfor %}
-
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/itemsjs@1.0.40/dist/itemsjs.min.js"></script> -->
 <script>

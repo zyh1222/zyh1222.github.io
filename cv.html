@@ -8,20 +8,27 @@ title: CV
 
 <h1><a href="{{ absolute_url }}/">Yuheng Zhao</a></h1>
 
-<small class="live-link">Last updated in <time datetime="{{ site.time }}">{{ site.time | date: '%B %Y'}}</time>. Get the latest version at <a href="{{ '/cv' | absolute_url }}">www.yuhengzhao.me/cv</a>.</small>
+<a class="cv-download-button" href="{{ '/doc/Yuheng_Zhao_CV_2026.pdf' | relative_url }}" download>
+  <i class="far fa-file-pdf" aria-hidden="true"></i>
+  Download PDF
+</a>
+
+<small class="live-link">Last updated in <time datetime="{{ site.time }}">{{ site.time | date: '%B %Y'}}</time>. Get the latest version at <a href="{{ '/cv' | absolute_url }}">https://zyh1222.github.io//cv</a>.</small>
 
 <div class="header-columns">
   <div>
     <p>
-      PhD candidate.<br/>
-      Address: 220 Handan Road, Shanghai, China<br/>
+      PhD Candidate, School of Data Science, Fudan University<br/>
+      Research: LLM-driven interactive agents, human-AI collaborative decision-making, intelligent visual analytics<br/>
+      Incoming Postdoctoral Researcher, ELLIS Institute Finland
     </p>
   </div>
   <div>
     <p class="right-align">
-      <a href="{{ absolute_url }}/">https://www.yuhengzhao.me</a><br/>
+      <a href="{{ absolute_url }}/">https://zyh1222.github.io/</a><br/>
       <a href="mailto:yuhengzhao@fudan.edu.cn">yuhengzhao@fudan.edu.cn</a><br/>
-      <a href="https://twitter.com/YuhengZhao_">@YuhengZhao_</a><br/>
+      +86 152-0714-7890<br/>
+      <a href="https://scholar.google.com/citations?user=aK_a-JoAAAAJ&hl=en">Google Scholar</a>
     </p>
   </div>
 </div>
@@ -30,78 +37,170 @@ title: CV
 <h2>Research Area</h2>
 
 <p>
-My main focus is on intelligent data analysis interfaces, serving as a bridge between human analysts and AI agents across diverse domains problems. I combine methods of <strong>Visualization</strong>, <strong>Artificial Intelligence</strong> and <strong>Human-Computer Interaction</strong> to build versatile and intelligent data analysis workflow and interfaces.
+My research focuses on LLM-driven intelligent visual analytics, human-AI collaboration, and interactive agents for data analysis. I combine methods from <strong>Visualization</strong>, <strong>Artificial Intelligence</strong>, and <strong>Human-Computer Interaction</strong> to build intelligent interfaces that help people understand complex data, coordinate with AI agents, and make decisions in open-ended analytical workflows.
 </p>
 
 
 <h2>Positions</h2>
 
-{% assign filtered_positions = site.data.positions | where_exp:'item','item.hidden == null' %}
-{% for pos in filtered_positions %}
 <article>
   <div class="date-container">
-    <span class="date">{{ pos.years | replace: "-", "–" }}</span>
-    <strong class="fill">{{pos.company}}</strong>
-    <span class="right">{{ pos.location }}</span>
+    <span class="date">Aug 2026–</span>
+    <strong class="fill">ELLIS Institute Finland / Aalto University</strong>
+    <span class="right">Espoo, Finland</span>
   </div>
-  <span>
-    {{pos.title}}{% if pos.short_desc %}, {{ pos.short_desc | markdownify | remove: '<p>' | remove: '</p>' }}{% endif %}
-  </span>
-  <p>
-    {% if pos.mentors %}
-      Mentor{% if pos.mentors.size > 1 %}s{% endif %}: {% for mentor in pos.mentors %}
-        {% include person person=mentor %}{% unless forloop.last %}, {% endunless %}
-      {% endfor %}<br/>
-    {% endif %}
-    {{ pos.description | markdownify | remove: '<p>' | remove: '</p>' }}
-    {% if pos.skills %}
-    <small class="muted">[{% for skill in pos.skills %}{{ skill }}{% unless forloop.last %}, {% endunless %}{% endfor %}]</small>
-    {% endif %}
+  <span>Postdoctoral Researcher, ELLIS Institute Postdoctoral Fellowship</span>
+  <p class="muted">
+    Supervisor: Prof. Antti Oulasvirta. Research on VLM/VLA and reinforcement-learning agents with human-in-the-loop feedback, studying when and how agents should interact with people to improve intent alignment, interaction efficiency, and autonomous decision-making in open collaborative tasks.
   </p>
 </article>
-{% endfor %}
+
+<article>
+  <div class="date-container">
+    <span class="date">Jul–Sep 2023</span>
+    <strong class="fill">Huawei 2012 Laboratories, Central Software Institute</strong>
+    <span class="right">Shanghai, China</span>
+  </div>
+  <span>Research Intern</span>
+  <p class="muted">
+    Developed LLM-agent-based data analysis methods and systems for complex scenarios such as spatiotemporal situation awareness and business intelligence, supporting task-intent understanding, analysis planning, tool use, and human-in-the-loop decision-making.
+  </p>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">Nov 2021–Jun 2022</span>
+    <strong class="fill">FDUVIS Lab, School of Data Science, Fudan University</strong>
+    <span class="right">Shanghai, China</span>
+  </div>
+  <span>Research Assistant</span>
+  <p class="muted">
+    Developed social media visual analytics systems, including temporal topic modeling, text comparison, and immersive 3D/VR visual analytics systems.
+  </p>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">Jul–Sep 2020</span>
+    <strong class="fill">BGI Genomics, Bioinformatics Algorithm Group</strong>
+    <span class="right">Shenzhen, China</span>
+  </div>
+  <span>Research Intern</span>
+  <p class="muted">
+    Designed and implemented algorithms for detecting different types of genomic structural variants from next-generation sequencing data.
+  </p>
+</article>
 
 
 <h2>Education</h2>
 
-{% for ed in site.data.education %}
 <article>
   <div class="date-container">
-    <span class="date">{{ ed.years | replace: "-", "–" }}</span>
-    <strong class="fill">{{ ed.degree }}, {{ ed.university }}</strong>
-    <span class="right">{{ ed.location }}</span>
+    <span class="date">2022–2026</span>
+    <strong class="fill">Ph.D. in Statistics, School of Data Science, Fudan University</strong>
+    <span class="right">Shanghai, China</span>
   </div>
   <p>
-    {% for des in ed.description %}
-      <span class="muted">{{ des | markdownify | remove: '<p>' | remove: '</p>' }}</span>{% unless forloop.last %}<br/>{% endunless %}
-    {% endfor %}
+    <span class="muted">Advisor: Prof. Siming Chen. Dissertation: LLM-driven intelligent visual analytics.</span>
   </p>
 </article>
-{% endfor %}
 
-
-<h2>Awards</h2>
-
-{% for award in site.data.awards %}
 <article>
   <div class="date-container">
-    <span class="date">{{ award.years | replace: "-", "–" }}</span>
-    <strong class="fill">{{ award.name }}</strong>
-    <span class="right">{{ award.sponsor }}</span>
+    <span class="date">2025–2026</span>
+    <strong class="fill">Visiting Ph.D. Student, School of Informatics, University of Edinburgh</strong>
+    <span class="right">Edinburgh, UK</span>
   </div>
-  <p class="muted">
-    {{ award.description }}
+  <p>
+    <span class="muted">Advisor: Prof. Benjamin Bach. Supported by the China Scholarship Council.</span>
   </p>
 </article>
-{% endfor %}
+
+<article>
+  <div class="date-container">
+    <span class="date">2020–2021</span>
+    <strong class="fill">M.S. in Data-driven Modeling, The Hong Kong University of Science and Technology</strong>
+    <span class="right">Hong Kong, China</span>
+  </div>
+  <p>
+    <span class="muted">Advisor: Prof. Michael K. Y. Wong. First Class Honors.</span>
+  </p>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">2016–2020</span>
+    <strong class="fill">B.S. in Information and Computing Science, Huazhong Agricultural University</strong>
+    <span class="right">Wuhan, China</span>
+  </div>
+  <p>
+    <span class="muted">Advisor: Prof. Feng Shi.</span>
+  </p>
+</article>
+
+
+<h2>Selected Research Projects</h2>
+
+<article>
+  <div class="date-container">
+    <span class="date">2025</span>
+    <strong class="fill">CellHermes: Language-based multimodal omics understanding</strong>
+    <span class="right">AI for Science</span>
+  </div>
+  <p class="muted">
+    Proposed a natural-language-centered framework for unifying multimodal omics data and scientific reasoning. Led the language formulation and interpretability analysis components that transform biological data into diverse instruction-response structures.
+  </p>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">2025</span>
+    <strong class="fill">ProactiveVA: Proactive visual analytics with LLM-based UI agents</strong>
+    <span class="right">Human-AI Interaction</span>
+  </div>
+  <p class="muted">
+    Designed a proactive GUI-agent framework that perceives user difficulties, reasons about assistance strategies, and acts within visual analytics interfaces to support data analysis.
+  </p>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">2024</span>
+    <strong class="fill">LightVA: LLM-agent-based task planning and visual analytics generation</strong>
+    <span class="right">Visual Analytics</span>
+  </div>
+  <p class="muted">
+    Built an LLM-agent workflow for decomposing analysis goals, generating visual analytics systems, and optimizing multiple linked views, reducing development from weeks to hours.
+  </p>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">2023</span>
+    <strong class="fill">LEVA: LLM-enhanced visual analytics</strong>
+    <span class="right">Visual Analytics</span>
+  </div>
+  <p class="muted">
+    Proposed an early LLM-enhanced visual analytics framework that supports onboarding, exploration, recommendation, and report generation. The paper is an ESI Highly Cited Paper (top 1%).
+  </p>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">2023</span>
+    <strong class="fill">ContextWing: Visual comparison for evolving social media contexts</strong>
+    <span class="right">Social Computing</span>
+  </div>
+  <p class="muted">
+    Developed a text comparison and visual analytics method that combines dynamic topic modeling and sequential pattern mining to reveal semantic evolution in large-scale social media streams.
+  </p>
+</article>
 
 
 <h2>Publications <a href="{{ '/publications/' | absolute_url }}">[Interactive Version]</a></h2>
 
-{% assign sorted_pubs = site.publications | reverse %}
-
-<!-- {% assign types = "Conference|Journal|Book Chapter|Demo|Workshop|Thesis" | split: "|" %} -->
-{% assign types = "Conference|Journal" | split: "|" %}
+{% assign sorted_pubs = site.publications | sort: "path" | reverse %}
+{% assign types = "Journal|Conference|Workshop" | split: "|" %}
 {% for type in types %}
   {% assign counter = 1 %}
   {% for pub in sorted_pubs %}
@@ -110,55 +209,38 @@ My main focus is on intelligent data analysis interfaces, serving as a bridge be
     {% endif %}
   {% endfor %}
 
-  <h3 class="pub-type">
-    {{ type }}
-  </h3>
+  <h3 class="pub-type">{{ type }}</h3>
 
   {% for pub in sorted_pubs %}
     {% if pub.type[0] == type %}
       {% assign counter = counter | minus: 1 %}
       <article class="pub">
         <div class="ref-container">{{ type | slice: 0 }}{{ counter }}</div>
-        <strong class="fill">{% if pub.pdf %}<a href="{{ pub.pdf }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{%endif%}</strong>
+        <strong class="fill">{% if pub.pdf %}<a href="{{ pub.pdf }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</strong>
         <div>
-          {% for author in pub.authors %}{% include person person=author %}{% unless forloop.last %}, {% endunless %}{% endfor %}.
-          {% if pub.venue or pub.description %}<i>{% if pub.description %}{{ pub.description | markdownify | remove: '<p>' | remove: '</p>' }}{% endif %}{{ pub.venue }}</i>{% if pub.venue %},{% endif %} {% endif %}{{ pub.year }}.
+          {% for author in pub.authors %}{% include person person=author %}{% unless forloop.last %},{% endunless %}{% endfor %}.
+          {% if pub.venue %}<i>{{ pub.venue }}</i>, {% endif %}{{ pub.year }}.
 
-          {% if pub.link or pub.pdf or pub.video or pub.blog or pub.slides or pub.doi %}
-            <div class="extra-links">
-            {% if pub.pdf %}
-              <a href="{{ pub.pdf }}">
-                <i class="far fa-file-pdf" aria-hidden="true"></i> PDF
-              </a>
-            {% endif %}
-            {% if pub.link %}
-              <a href="{{ pub.link }}">
-                <i class="fas fa-link" aria-hidden="true"></i> Project
-              </a>
-            {% endif %}
-            {% if pub.blog %}
-              <a href="{{ pub.blog }}">
-                <i class="fas fa-newspaper" aria-hidden="true"></i> Article
-              </a>
-            {% endif %}
-            {% if pub.video %}
-              <a href="{{ pub.video }}">
-                <i class="fas fa-film" aria-hidden="true"></i> Video
-              </a>
-            {% endif %}
-            {% if pub.doi %}
-              <a href="https://www.doi2bib.org/bib/{{ pub.doi }}">
-                <i class="fas fa-book" aria-hidden="true"></i> Bibtex
-              </a>
-            {% elsif pub.arxiv %}
-              <a href="https://arxiv2bibtex.org/?q={{ pub.arxiv | cgi_escape }}">
-                <i class="fas fa-book" aria-hidden="true"></i> Bibtex
-              </a>
-            {% endif %}
-            </div>
+          {% if pub.awards %}
+            {% for award in pub.awards %}<strong class="award"><i class="fas fa-award" aria-hidden="true"></i> {{ award }}</strong>{% endfor %}
           {% endif %}
 
-          {% for award in pub.awards %}<strong class="award"><i class="fas fa-{% if award == "Best Paper Award" %}trophy{% else %}award{% endif %}" aria-hidden="true"></i> {{ award }}</strong>{% endfor %}
+          {% if pub.ESI_highly_cited %}
+            <strong class="award"><i class="fas fa-chart-line" aria-hidden="true"></i> ESI Highly Cited Paper (top 1%)</strong>
+          {% endif %}
+
+          {% if pub.link or pub.pdf or pub.fast_forward or pub.demo or pub.talk or pub.slides or pub.appendix or pub.doi %}
+            <div class="extra-links">
+            {% if pub.pdf %}<a href="{{ pub.pdf }}"><i class="far fa-file-pdf" aria-hidden="true"></i> PDF</a>{% endif %}
+            {% if pub.link %}<a href="{{ pub.link }}"><i class="fas fa-link" aria-hidden="true"></i> Link</a>{% endif %}
+            {% if pub.fast_forward %}<a href="{{ pub.fast_forward }}"><i class="fas fa-forward" aria-hidden="true"></i> Fast Forward</a>{% endif %}
+            {% if pub.demo %}<a href="{{ pub.demo }}"><i class="fas fa-play" aria-hidden="true"></i> Demo</a>{% endif %}
+            {% if pub.talk %}<a href="{{ pub.talk }}"><i class="fas fa-video" aria-hidden="true"></i> Talk</a>{% endif %}
+            {% if pub.slides %}<a href="{{ pub.slides }}"><i class="fas fa-window-maximize" aria-hidden="true"></i> Slides</a>{% endif %}
+            {% if pub.appendix %}<a href="{{ pub.appendix }}"><i class="far fa-file-lines" aria-hidden="true"></i> Appendix</a>{% endif %}
+            {% if pub.doi %}<a href="https://www.doi2bib.org/bib/{{ pub.doi }}"><i class="fas fa-book" aria-hidden="true"></i> Bibtex</a>{% endif %}
+            </div>
+          {% endif %}
         </div>
       </article>
     {% endif %}
@@ -166,155 +248,135 @@ My main focus is on intelligent data analysis interfaces, serving as a bridge be
 {% endfor %}
 
 
-<!-- <h2>Patents</h2>
+<h2>Awards & Funding</h2>
 
-{% for patent in site.data.patents %}
-  <div class="date-container">
-    <span class="date">{{ patent.date | date: "%b %Y" }}</span>
-    <h3><a href="{{ patent.url }}">{{ patent.title }}</a></h3>
-  </div>
-  <div class="patent">
-    <p>
-      {% for author in patent.authors %}
-        {% include person person=author %}{% unless forloop.last %}, {% endunless %}
-      {% endfor %}
-    </p>
-  </div>
-{% endfor %} -->
+<h3>Scholarships & Honors</h3>
+<ul>
+  <li>Shanghai Outstanding Graduate, 2026</li>
+  <li>Outstanding Student, Fudan University, 2026</li>
+  <li>Fudan University First-Class Academic Scholarship for Outstanding PhD Students, 2022-2025</li>
+  <li>Fudan University "Shede" Named Scholarship, 2025</li>
+  <li>Fudan University "Guotai Junan Building Dreams for a Strong Nation" Named Scholarship, 2024</li>
+  <li>HKUST Postgraduate Scholarship, top 5%, 2020</li>
+</ul>
+
+<h3>Research & Competitions</h3>
+<ul>
+  <li>IEEE PacificVis Best Paper Honorable Mention, 2025</li>
+  <li>ACM UIST Special Recognition for Outstanding Reviews, 2025</li>
+  <li>Gold Award, China International College Students' Innovation Competition, 2024</li>
+  <li>Third Prize, Fudan-Tsinghua Joint PhD Forum, 2024</li>
+  <li>First Prize, IEEE VAST Challenge, 2021</li>
+  <li>First Prize, MathorCup College Mathematical Modeling Challenge, 2019</li>
+</ul>
+
+<h3>Travel & Project Grants</h3>
+<ul>
+  <li>IEEE VIS Travel Grant, Vienna, Austria, 2025</li>
+  <li>China Scholarship Council Visiting PhD Program at the University of Edinburgh, 2024</li>
+  <li>ACM CSCW Travel Grant, Minneapolis, USA, 2023</li>
+</ul>
 
 
-<!-- <h2>Student Mentoring</h2>
+<h2>Invited Talks</h2>
 
-{% assign filtered_mentoring = site.data.mentoring | where_exp:'item','item.hidden == null' %}
-{% for mentor in filtered_mentoring %}
-  <div class="date-container">
-    <span class="date">{{ mentor.year | replace: "-", "–" }}</span>
-    <h3>{{ mentor.title }}</h3>
-    <span class="right">{{ mentor.location }}</span>
-  </div>
-  <p>
-    <span class="muted">
-      {{ mentor.description }}
-    </span>
-    {% if mentor.who %}
-      <h4>Mentored:</h4>
-      <ul>
-      {% for person in mentor.who %}
-        <li class="muted">{% include person person=person %}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  </p>
-{% endfor %} -->
-
-<!-- 
-<h2>Talks  <a href="{{ '/talks/' | absolute_url }}">[Interactive Version]</a></h2>
-
-{% assign talktitles = site.data.talks | group_by:"title" %}
-{% for title in talktitles %}
 <article>
-  <h3 class="cv-talk-title">{{ title.name }}</h3>
-  {% assign sorted_talks = title.items | sort: 'date' | reverse %}
-  {% for talk in sorted_talks %}
-    <div class="date-container">
-      <time datetime="{{ talk.date }}">{{ talk.date | date: "%b %Y" }}</time>
-      <span class="fill">{{ talk.location }}{% if talk.city %}, <small class="muted">{{ talk.city }}</small>{% endif %}</span>
-
-    </div>
-  {% endfor %}
+  <div class="date-container">
+    <span class="date">Nov 2025</span>
+    <strong class="fill">LLM-driven intelligent visual analytics</strong>
+    <span class="right">IEEE VIS Doctoral Colloquium, Vienna</span>
+  </div>
 </article>
-{% endfor %} -->
+
+<article>
+  <div class="date-container">
+    <span class="date">Jul 2025</span>
+    <strong class="fill">Building proactive GUI visual analytics agents</strong>
+    <span class="right">ChinaVis Frontier Paper Talk, Hangzhou</span>
+  </div>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">May 2025</span>
+    <strong class="fill">LLM-driven intelligent visual analytics</strong>
+    <span class="right">Fudan 120th Anniversary PhD Forum, Shanghai</span>
+  </div>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">Dec 2024</span>
+    <strong class="fill">Agent-driven visual analytics for automated task decomposition</strong>
+    <span class="right">Fudan-Tsinghua Joint PhD Forum, Shanghai</span>
+  </div>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">Jul 2024</span>
+    <strong class="fill">LLM-driven intelligent visual analytics methods</strong>
+    <span class="right">ChinaVis Doctoral Colloquium, Hong Kong</span>
+  </div>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">May 2024</span>
+    <strong class="fill">LLM-enhanced intelligent interactive data analysis</strong>
+    <span class="right">GAMES Webinar</span>
+  </div>
+</article>
+
+<article>
+  <div class="date-container">
+    <span class="date">Aug 2023</span>
+    <strong class="fill">Text data mining and visual analytics</strong>
+    <span class="right">CCF-CSCW & Social Computing Summer School, Suzhou</span>
+  </div>
+</article>
 
 
 <h2>Teaching</h2>
 
-{% for teach in site.data.teaching %}
 <article>
   <div class="date-container">
-    <span class="date">{{ teach.year }}</span>
-    <strong class="fill">{{ teach.title }}</strong>
-    <span class="right">{{ teach.location }}</span>
+    <span class="date">Fall 2021</span>
+    <strong class="fill">Data Visualization and Application</strong>
+    <span class="right">Fudan University</span>
   </div>
-  <p>
-    {% if teach.students %}
-      {% if teach.role %}{{ teach.role }}{% endif %}{% if teach.professor %} for {% include person person=teach.professor %}{% endif %},
-      {{ teach.students }}
-      <br/>
-    {% endif %}
-    <span class="muted">
-      {{ teach.description | markdownify | remove: '<p>' | remove: '</p>' }}
-    </span>
+  <p class="muted">
+    Teaching Assistant. Developed and presented tutorials on visual analytics tools, HTML, and D3.js; graded assignments for approximately 80 students.
   </p>
 </article>
-{% endfor %}
 
 
-<h2>Service</h2>
+<h2>Academic Service</h2>
 
-<p>
-  Conference Reviewer: ACM CHI 2024, IEEE PacificVis 2024, ChinaVis 2023.
-  <!-- Program committee for <a href="http://hilda.io/2018/">HILDA 2018</a>, <a href="http://hilda.io/2019/">HILDA 2019</a>, and <a href="http://hilda.io/2020/">HILDA 2020</a>, and program chair for <a href="https://hilda.io/2022/">HILDA 2022</a> and <a href="https://hilda.io/2023/">HILDA 2023</a> at SIGMOD.
-  Organizer of <a href="https://www.interactive-analysis.org/year/2018/">DSIA 2018</a> and <a href="https://www.interactive-analysis.org/">DSIA 2019</a> at VIS.
-  Session chair at CHI 2019, VIS 2019, VIS 2020, VIS 2021, VIS 2023. Program committee at VIS 2020 and 2021. Organizing commitee for VIS 2022 and VIS 2023.
-  Maintainer of many open source projects. <a href="https://arrow.apache.org/committers/">Apache Arrow commiter</a>. -->
-  <!-- <br/>
-  Member of the <a href="https://frictionlessdata.io/">Frictionless Data</a> working group that aims to submit a specification to the <a href="https://www.ietf.org/">IETF</a>. -->
-  <br/>
-  Session Chair: China-R Conference (AI+VIS Session) 2023
-</p>
-
-<!-- <h2>Relevant Coursework</h2>
-
-{% for institution in site.data.courses %}
 <article>
-  <h3>{{ institution.title }}</h3>
-  <div>
-    <ul>
-      {% for course in institution.courses %}<li>{{ course.title }}{% if course.with %}<span class="muted"> ({% include person person=course.with %})</span>{% endif %}</li>{% endfor %}
-    </ul>
-  </div>
+  <h3>Program Committee</h3>
+  <p class="muted">
+    IEEE VIS Posters (2026), IEEE PacificVis Papers (2026), EuroVis Posters and Demos (2026), ChinaVis Papers (2026), VINCI (2024-2026).
+  </p>
 </article>
-{% endfor %} -->
 
-
-<!-- <h2>References</h2> -->
-
-<!-- <div class="refs">
-  <p>
-    <strong>Jeffrey Heer</strong><br/>
-    Professor of Computer Science & Engineering<br/>
-    <i>University of Washington</i><br/>
-    <a href="https://homes.cs.washington.edu/~jheer/">homes.cs.washington.edu/~jheer/</a>
+<article>
+  <h3>Reviewer</h3>
+  <p class="muted">
+    <strong>Journals:</strong>
+    IEEE Transactions on Visualization and Computer Graphics (TVCG, 2023-2026), IEEE Computer Graphics and Applications (CG&A, 2025), Computers & Graphics (2025-2026), Visual Informatics (2023-2026).
   </p>
-
-  <p>
-    <strong>Bill Howe</strong><br/>
-    Professor at the Information School<br/>
-    <i>University of Washington</i><br/>
-    <a href="https://faculty.washington.edu/billhowe/">faculty.washington.edu/billhowe/</a>
+  <p class="muted">
+    <strong>Conferences and Workshops:</strong>
+    IEEE VIS Full Papers / Short Papers / Posters / VISxGenAI (2024-2026), ACM UIST Papers (2025-2026), ACM CHI Papers / Late-Breaking Work / Workshops (2025), ACM CSCW (2024), IEEE PacificVis Conference Track / VisNotes (2024-2026), EuroVis Full Papers / Posters and Demos (2026), ChinaVis Papers (2024, 2026), VINCI (2024-2026).
   </p>
+</article>
 
-  <p>
-    <strong>Danyel Fisher</strong><br/>
-    Principal Design Researcher<br/>
-    <i>Honeycomb</i><br/>
-    Former Senior Researcher at Microsoft Research<br/>
-    <a href="https://danyelfisher.info/">danyelfisher.info/</a>
+<article>
+  <h3>Session Chair</h3>
+  <p class="muted">
+    China-R Conference, AI+VIS Session, 2023.
   </p>
-
-  <p>
-    <strong>Tim Kraska</strong><br/>
-    Professor of Electrical Engineering & Computer Science<br/>
-    <i>Massachusetts Institute of Technology</i><br/>
-    <a href="https://people.csail.mit.edu/kraska/">people.csail.mit.edu/kraska/</a>
-  </p>
-
-  <p>
-    <strong>Steven Franconeri</strong><br/>
-    Professor of Psychology<br/>
-    <i>Northwestern University</i><br/>
-    <a href="https://psychology.northwestern.edu/people/faculty/core/profiles/steven-franconeri.html">psychology.northwestern.edu/people/faculty/core/profiles/steven-franconeri.html</a>
-  </p>
-</div> -->
+</article>
 
 </section>

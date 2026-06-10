@@ -4,7 +4,7 @@ https://keybase.io/domoritz
 
 I hereby claim:
 
-  * I am an admin of https://www.yuhengzhao.me
+  * I am an admin of https://https://zyh1222.github.io/
   * I am domoritz (https://keybase.io/domoritz) on keybase.
   * I have a public key ASAJGx2jml7Mvdjd-wJ7HvYUxb6cRMtAlXUGzl2Ja0c3tAo
 
@@ -20,7 +20,7 @@ To do so, I am signing this object:
             "username": "domoritz"
         },
         "service": {
-            "hostname": "www.yuhengzhao.me",
+            "hostname": "https://zyh1222.github.io/",
             "protocol": "https:"
         },
         "type": "web_service_binding",

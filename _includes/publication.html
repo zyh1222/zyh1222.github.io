@@ -1,40 +1,56 @@
 {% capture anchor %}{% if pub.id %}{{ pub.id }}{% else %}{{ (pub.title | slugify) }}{% endif %}{% endcapture %}
+{% capture pub_data %}{"year":{{ pub.year | jsonify }},"title":{{ pub.title | jsonify }},"authors":{{ pub.authors | jsonify }},"awards":{{ pub.awards | jsonify }},"tags":{{ pub.tags | jsonify }},"type":{{ pub.type | jsonify }},"venue_tags":{{ pub.venue_tags | jsonify }},"highlight":{{ pub.highlight | jsonify }},"content":{{ pub.content | strip_html | strip_newlines | jsonify }}}{% endcapture %}
 
-<div class="publication-wrapper" style="display: flex; align-items: center; gap: 1.5em;margin-bottom: 2em;">
-  {% if pub.image %}
-  <div class="image" style="flex: 0 0 220px;">
-    <img src="{{ pub.image }}" style="width: 100%; border-radius: 8px;">
+<article class="publication publication-card" data-highlight="{% if pub.highlight %}true{% else %}false{% endif %}" data-pub='{{ pub_data | escape }}'>
+  <div class="publication-figure">
+    {% if pub.image %}
+      <img src="{{ pub.image | relative_url }}" alt="{{ pub.title }} figure">
+    {% else %}
+      <div class="publication-figure-placeholder" aria-hidden="true">
+        <i class="far fa-file-lines"></i>
+      </div>
+    {% endif %}
   </div>
-  {% endif %}
 
-  <div class="publication" data-pub='{{ pub | jsonify | escape }}' style="flex: 1;">
+  <div class="publication-body">
     <h3 id="{{ anchor }}">
-      {% for award in pub.awards %}
-        <i class="fas fa-{% if award == "Best Paper Award" %}trophy{% else %}award{% endif %} award-icon" title="{{ award }}"></i>
-      {% endfor %}
       {{ pub.title }}
     </h3>
 
     <div class="authors">
-      {% for author in pub.authors %}
-        {% include person person=author %}{% unless forloop.last %}, {% endunless %}
-      {% endfor %}
+      {%- for author in pub.authors -%}
+        {%- include person person=author -%}{%- unless forloop.last -%}, {% endunless -%}
+      {%- endfor -%}
     </div>
 
     {% if pub.venue %}
     <div class="venue">
+      {% if pub.venue_tags %}
+        <span class="venue-inline-badges">
+          {% for venue_tag in pub.venue_tags %}
+            <span>{{ venue_tag }}</span>
+          {% endfor %}
+        </span>
+      {% endif %}
       {% if pub.venue_url %}<a href="{{ pub.venue_url }}">{% endif %}
-        {{ pub.venue }}
-        {% if pub.venue_location %} in {{ pub.venue_location }}{% endif %}
-        {{ pub.year }}
+        {%- assign displayed_year = pub.venue_year | default: pub.year -%}
+        {{- pub.venue -}}{%- if pub.venue_location %} in {{ pub.venue_location }}{% endif -%}, {{ displayed_year }}
       {% if pub.venue_url %}</a>{% endif %}
     </div>
     {% endif %}
 
     <div class="pub-badges">
-      <span class="pub-badge ccf">CCF: {% if pub.ccf %}{{ pub.ccf }}{% else %}N/A{% endif %}</span>
-      <span class="pub-badge esi{% if pub.esi_highly_cited %} active{% endif %}">ESI: {% if pub.esi_highly_cited %}Highly Cited{% else %}No{% endif %}</span>
-      <span class="pub-badge award{% if pub.awards %} active{% endif %}">Award: {% if pub.awards %}{{ pub.awards | join: '; ' }}{% else %}No{% endif %}</span>
+      {% if pub.ESI_highly_cited or pub.esi_highly_cited %}
+        <span class="pub-badge esi active"><i class="fas fa-chart-line" aria-hidden="true"></i> ESI Highly Cited (top 1%)</span>
+      {% endif %}
+      {% if pub.awards %}
+        {% for award in pub.awards %}
+          <span class="pub-badge award active">
+            <i class="fas fa-{% if award == "Best Paper Award" %}trophy{% else %}award{% endif %}" aria-hidden="true"></i>
+            {{ award }}
+          </span>
+        {% endfor %}
+      {% endif %}
     </div>
 
     {% if pub.description %}
@@ -49,13 +65,7 @@
       </a>
     {% endif %}
 
-    {% if pub.awards %}
-      <div class="awards">
-        {% for award in pub.awards %}{{ award }}{% unless forloop.last %}, {% endunless %}{% endfor %}
-      </div>
-    {% endif %}
-
-    {% if pub.link or pub.pdf or pub.video or pub.blog or pub.slides or pub.doi or pub.arxiv %}
+    {% if pub.link or pub.pdf or pub.fast_forward or pub.demo or pub.talk or pub.appendix or pub.blog or pub.slides or pub.doi or pub.arxiv %}
     <div class="extra-links">
       {% if pub.pdf %}
         <a href="{{ pub.pdf }}"><i class="far fa-file-pdf"></i> PDF</a>
@@ -79,8 +89,16 @@
         <a href="{{ pub.blog }}"><i class="fas fa-newspaper"></i> Article</a>
       {% endif %}
 
-      {% if pub.video %}
-        <a href="{{ pub.video }}"><i class="fas fa-film"></i> Video</a>
+      {% if pub.fast_forward %}
+        <a href="{{ pub.fast_forward }}"><i class="fas fa-forward"></i> Fast Forward</a>
+      {% endif %}
+
+      {% if pub.demo %}
+        <a href="{{ pub.demo }}"><i class="fas fa-play"></i> Demo</a>
+      {% endif %}
+
+      {% if pub.talk %}
+        <a href="{{ pub.talk }}"><i class="fas fa-video"></i> Talk</a>
       {% endif %}
 
       {% if pub.recording %}
@@ -89,6 +107,10 @@
 
       {% if pub.slides %}
         <a href="{{ pub.slides }}"><i class="fas fa-window-maximize"></i> Slides</a>
+      {% endif %}
+
+      {% if pub.appendix %}
+        <a href="{{ pub.appendix }}"><i class="far fa-file-lines"></i> Appendix</a>
       {% endif %}
 
       {% if pub.doi %}
@@ -111,4 +133,4 @@
     </div>
     {% endif %}
   </div>
-</div>
+</article>
