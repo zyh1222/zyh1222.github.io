@@ -12,7 +12,7 @@ class: home
 Hello! I am Yuheng Zhao (赵宇恒).
 I received my Ph.D. in Statistics from the School of Data Science at Fudan University, supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). I was also a visiting PhD student at the University of Edinburgh, supervised by Prof. [Benjamin Bach](https://benjbach.github.io/) in [VisHub](https://vishub.net/). I also completed a research internship advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
 
-My research focuses on <span class="keyword">LLM-driven intelligent visual analytics</span>, <span class="keyword">human-AI collaboration</span>, and <span class="keyword">human-computer interaction</span>. I combine methods from visualization, artificial intelligence, and human-computer interaction to build intelligent interfaces that help people understand complex data and coordinate with AI agents.
+My research focuses on <span class="keyword">LLM-driven intelligent visual analytics</span> and <span class="keyword">human-AI collaboration</span>. I combine methods from visualization, artificial intelligence, and human-computer interaction to build intelligent interfaces that help people understand complex data and coordinate with AI agents.
 
 <div class="news-section">
   <div class="news-heading">💬 News</div>
