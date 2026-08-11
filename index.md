@@ -10,7 +10,7 @@ class: home
 
 <div class="intro" markdown="1">
 Hello! I am Yuheng Zhao (赵宇恒).
-I am currently a postdoc working in the [Computational Behavior Lab](https://cbl.aalto.fi/) with [Prof. Dr. Antti Oulasvirta](https://users.aalto.fi/~oulasvir/) under the [ELLIS program](https://ellis.eu/). I received my Ph.D. in Statistics from the School of Data Science at Fudan University, supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). I also completed a research internship advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
+I am an [ELLIS](https://ellis.eu/) Postdoctoral Fellow in the [Computational Behavior Lab](https://cbl.aalto.fi/) at Aalto University, working with [Prof. Antti Oulasvirta](https://users.aalto.fi/~oulasvir/). I received my Ph.D. in Statistics from the School of Data Science at Fudan University, supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). I also completed a research internship advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
 
 My research focuses on <span class="keyword">LLM-driven intelligent visual analytics</span> and <span class="keyword">human-AI collaboration</span>. I combine methods from visualization, artificial intelligence, and human-computer interaction to build intelligent interfaces that help people understand complex data and coordinate with AI agents.
 
