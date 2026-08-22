@@ -2,10 +2,10 @@
 title: Yuheng Zhao
 email: yuhengzhao@fudan.edu.cn
 description: > # this means to ignore newlines until "baseurl:"
-  PhD candidate from Fudan University.
+  Personal website of Yuheng Zhao, ELLIS Postdoctoral Fellow at Aalto University working on visual analytics, large language models, and human-AI collaboration.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://https://zyh1222.github.io/" # the base hostname & protocol for your site
-production_url: "https://https://zyh1222.github.io/"
+url: "https://zyh1222.github.io" # the base hostname & protocol for your site
+production_url: "https://zyh1222.github.io"
 github_username: zyh1222
 permalink: /blog/:year/:month/:title.html
 

@@ -12,7 +12,7 @@ class: home
 Hello! I am Yuheng Zhao (赵宇恒).
 I am an [ELLIS](https://ellis.eu/) Postdoctoral Fellow in the [Computational Behavior Lab](https://cbl.aalto.fi/) at Aalto University, working with [Prof. Antti Oulasvirta](https://users.aalto.fi/~oulasvir/). I received my Ph.D. in Statistics from the School of Data Science at Fudan University, supervised by Prof. [Siming Chen](http://simingchen.me/) in [FDUVIS Lab](https://fduvis.net/). I also completed a research internship advised by Dr. [Yu Zhang](https://zhangyu94.github.io/).
 
-My research focuses on <span class="keyword">LLM-driven intelligent visual analytics</span> and <span class="keyword">human-AI collaboration</span>. I combine methods from visualization, artificial intelligence, and human-computer interaction to build intelligent interfaces that help people understand complex data and coordinate with AI agents.
+My research focuses on <span class="keyword">LLM-driven intelligent visual analytics</span>,  <span class="keyword">human-AI interaction</span> and <span class="keyword">AI4Science</span>. I combine methods from visualization, artificial intelligence, and human-computer interaction to build intelligent interfaces that help people understand complex data and coordinate with AI agents.
 
 <div class="news-section">
   <div class="news-heading">💬 News</div>
@@ -48,21 +48,54 @@ My research focuses on <span class="keyword">LLM-driven intelligent visual analy
 
 </div>
 
-<div id="publications" class="section-title-row">
-  <h3><a href="{{ "/publications/" | relative_url }}">Publications</a></h3> (selected)
+<div id="publications" class="section-title-row home-section-heading">
+  <h3>📖 Publications</h3>
+  <!--
+  <div class="publication-toggle" role="group" aria-label="Publication display mode">
+    <button type="button" class="active" data-publication-mode="selected" aria-pressed="true">Selected</button>
+    <button type="button" data-publication-mode="full" aria-pressed="false">Full</button>
+  </div>
+  -->
 </div>
   <p style="font-size:12px">* denoted equal contribution</p>
 
 <div class="featured-publications">
   {% assign sorted_publications = site.publications | sort: "path" | reverse %}
   {% for pub in sorted_publications %}
-    {% if pub.highlight %}
+    <div class="home-publication-item" data-home-publication data-highlight="{% if pub.highlight %}true{% else %}false{% endif %}">
       {% include publication.html pub=pub %}
-    {% endif %}
+    </div>
   {% endfor %}
 </div>
 
-<a href="{{ "/publications/" | relative_url }}" class="button show-publications-button">
-  <i class="fas fa-chevron-circle-right"></i>
-  Show All Publications
-</a>
+<div id="award" class="section-title-row home-section-heading">
+  <h3>🏆 Award</h3>
+</div>
+
+<div class="home-info-grid awards-funding">
+  {% for section in site.data.awards %}
+  <section>
+    <h4>{{ section.section }}</h4>
+    <ul>
+      {% for item in section.items %}
+      <li><span>{{ item.years }}</span> {{ item.name }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+
+<div id="service" class="section-title-row home-section-heading">
+  <h3>✨ Service</h3>
+</div>
+
+<div class="home-info-grid academic-service">
+  {% for section in site.data.service %}
+  <section>
+    <h4>{{ section.role }}</h4>
+    {% for item in section.items %}
+    <p>- {% if item.label %}<strong>{{ item.label }}:</strong> {% endif %}{{ item.text }}</p>
+    {% endfor %}
+  </section>
+  {% endfor %}
+</div>

@@ -1,6 +1,15 @@
-# - position: Organizer
-#   at: DSIA at VIS 2018
-#   url: http://www.interactive-analysis.org/
-# - position: Program Committee
-#   at: HILDA at SIGMOD 2018
-#   url: http://hilda.io/2018/
+- role: Program Committee
+  items:
+    - text: IEEE VIS Posters (2026), VISxGenAI Workshop (2026), IEEE PacificVis Papers (2026), EuroVis Posters and Demos (2026), ChinaVis Papers (2026), ICHEC Papers (2026),VINCI (2024-2026).
+
+- role: Reviewer
+  items:
+    - label: Journals
+      text: IEEE TVCG, IEEE CG&A, Computers & Graphics, Computer Graphics and Forum, Visual Informatics, Visual Computer.
+    - label: Conferences and Workshops
+      text: IEEE VIS / VISxGenAI Workshop, ACM UIST, ACM CHI / Late-Breaking Work, ACM CSCW, IEEE PacificVis / VisNotes, EuroVis, ChinaVis, VINCI.
+
+- role: Session Chair
+  items:
+    - text: China-R Conference, AI+VIS Session, 2023.
+    - text: ChinaVis, AI and Visualization, 2026.

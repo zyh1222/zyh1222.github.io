@@ -45,10 +45,11 @@
       {% endif %}
       {% if pub.awards %}
         {% for award in pub.awards %}
-          <span class="pub-badge award active">
-            <i class="fas fa-{% if award == "Best Paper Award" %}trophy{% else %}award{% endif %}" aria-hidden="true"></i>
-            {{ award }}
-          </span>
+          {% assign award_name = award.name | default: award %}
+          {% if award.link %}<a class="pub-badge award active" href="{{ award.link }}">{% else %}<span class="pub-badge award active">{% endif %}
+            <i class="fas fa-{% if award_name == "Best Paper Award" %}trophy{% else %}award{% endif %}" aria-hidden="true"></i>
+            {{ award_name }}
+          {% if award.link %}</a>{% else %}</span>{% endif %}
         {% endfor %}
       {% endif %}
     </div>
@@ -65,7 +66,7 @@
       </a>
     {% endif %}
 
-    {% if pub.link or pub.pdf or pub.fast_forward or pub.demo or pub.talk or pub.appendix or pub.blog or pub.slides or pub.doi or pub.arxiv %}
+    {% if pub.link or pub.pdf or pub.fast_forward or pub.demo or pub.talk or pub.appendix or pub.blog or pub.slides or pub.doi or pub.arxiv or pub.github %}
     <div class="extra-links">
       {% if pub.pdf %}
         <a href="{{ pub.pdf }}"><i class="far fa-file-pdf"></i> PDF</a>
@@ -87,6 +88,10 @@
 
       {% if pub.blog %}
         <a href="{{ pub.blog }}"><i class="fas fa-newspaper"></i> Article</a>
+      {% endif %}
+
+      {% if pub.github %}
+        <a href="{{ pub.github }}"><i class="fab fa-github"></i> GitHub</a>
       {% endif %}
 
       {% if pub.fast_forward %}

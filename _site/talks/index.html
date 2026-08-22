@@ -40,7 +40,9 @@
   <nav class="container">
     <!-- <a class="site-title" href="/">Yuheng Zhao</a> -->
     <a class="site-title" href="/"><img height="50px" src="/images/1.png"><img height="36px" style="margin-top:5px" src="/images/7.gif"></a>
-    <a href="/publications/">Publications</a>
+    <a href="/#publications">Publications</a>
+    <a href="/#award">Award</a>
+    <a href="/#service">Service</a>
     <!-- <a href="/blog/" >Blog</a> -->
     <a href="/cv/">CV</a>
 
@@ -356,7 +358,7 @@ animate();
   <div class="container">
     <div class="footer-col">
       Last build on:
-      <abbr title="2026-08-03"> August 2026</abbr>
+      <abbr title="2026-08-22"> August 2026</abbr>
     </div>
     <div class="footer-col">
       Template from: <a href="https://github.com/domoritz/domoritz.github.io/edit/master/unused/talks.md">@domoritz</a>
@@ -390,6 +392,24 @@ animate();
     figure.addEventListener("mouseleave", function() {
       figure.style.setProperty("--figure-x", "0%");
       figure.style.setProperty("--figure-y", "0%");
+    });
+  });
+
+  document.querySelectorAll("[data-publication-mode]").forEach(function(button) {
+    button.addEventListener("click", function() {
+      var mode = button.getAttribute("data-publication-mode");
+      var showFull = mode === "full";
+
+      document.querySelectorAll("[data-publication-mode]").forEach(function(toggleButton) {
+        var isActive = toggleButton === button;
+        toggleButton.classList.toggle("active", isActive);
+        toggleButton.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      document.querySelectorAll("[data-home-publication]").forEach(function(item) {
+        var isSelected = item.getAttribute("data-highlight") === "true";
+        item.classList.toggle("is-hidden", !showFull && !isSelected);
+      });
     });
   });
 </script>

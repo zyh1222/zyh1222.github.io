@@ -23,6 +23,10 @@
       return d !== "Yuheng Zhao";
     });
 
+    item.awards = (item.awards || []).map(function(award) {
+      return typeof award === "string" ? award : award.name;
+    }).filter(Boolean);
+
     data.push(item);
   });
 

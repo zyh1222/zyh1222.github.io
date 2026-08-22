@@ -1,23 +1,29 @@
 - message: "🏆 Our paper LEVA won the <a href=\"https://www.computer.org/publications/2025-best-paper-award-winners\">Best Paper Runner-Up</a> at IEEE TVCG 2025!"
-  date: 2026-07-23
-  
-- message: "🎉 Our paper ProactiveVA and SceneLoom have been accepted to IEEE VIS '25. Also, KinemaFX has been accepted to ACM UIST '25!"
-  date: 2025-07-15
+  date: 2026-07
 
-- message: "🎉 Two papers are accepted to PacificVis 2025, with one receiving the 🏆 Best Paper Honorable Mention!"
-  date: 2025-04-24
+- message: "🎉 Our paper \"InfoAlign\" has been accepted to ACM CHI 2026!"
+  date: 2026-02
+
+- message: "🎉 Our paper \"Intelligent Drill-Down\" has been accepted to IEEE PacificVis 2026!"
+  date: 2026-01
+
+- message: "🎉 Our paper \"ProactiveVA\" and \"SceneLoom\" have been accepted to IEEE VIS '25. Also, \"KinemaFX\" has been accepted to ACM UIST '25!"
+  date: 2025-07
+
+- message: "🎉 Two papers were accepted to PacificVis 2025! \"SmartMLVs\" received a 🏆 Best Paper Honorable Mention!"
+  date: 2025-04
 
 - message: "🎉 Our paper \"LightVA: Lightweight Visual Analytics with LLM Agent-Based Task Planning and Execution\" has been accepted to IEEE TVCG 2024 — looking forward to sharing more soon!"
-  date: 2024-10-28
+  date: 2024-10
 
 - message: "🎉 Our paper \"LEVA: Using Large Language Models to Enhance Visual Analytics\" has been accepted to IEEE TVCG 2024."
-  date: 2024-01-25
+  date: 2024-01
 
 - message: "👩🏻‍💻 Wrapped up an research internship at Huawei (2012 Lab) — grateful for the opportunity and mentorship."
-  date: 2023-09-25
+  date: 2023-09
 
-- message: "🎉 Our paper \"OldVisOnline: Curating a Dataset of Historical Visualizations\" has been accepted to IEEE VIS 2023 — excited to contribute to historical visualization research!"
-  date: 2023-07-16
+- message: "🎉 Our paper \"OldVisOnline\" has been accepted to IEEE VIS 2023 — excited to contribute to historical visualization research!"
+  date: 2023-07
 
-- message: "🎉 Our paper \"ContextWing: Pair-wise Visual Comparison for Evolving Sequential Patterns of Contexts in Social Media Data Streams\" has been accepted to CSCW 2023."
-  date: 2022-10-01
+- message: "🎉 Our paper \"ContextWing\" has been accepted to CSCW 2023."
+  date: 2022-10

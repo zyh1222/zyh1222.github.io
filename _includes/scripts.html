@@ -24,4 +24,22 @@
       figure.style.setProperty("--figure-y", "0%");
     });
   });
+
+  document.querySelectorAll("[data-publication-mode]").forEach(function(button) {
+    button.addEventListener("click", function() {
+      var mode = button.getAttribute("data-publication-mode");
+      var showFull = mode === "full";
+
+      document.querySelectorAll("[data-publication-mode]").forEach(function(toggleButton) {
+        var isActive = toggleButton === button;
+        toggleButton.classList.toggle("active", isActive);
+        toggleButton.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      document.querySelectorAll("[data-home-publication]").forEach(function(item) {
+        var isSelected = item.getAttribute("data-highlight") === "true";
+        item.classList.toggle("is-hidden", !showFull && !isSelected);
+      });
+    });
+  });
 </script>

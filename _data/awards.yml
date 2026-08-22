@@ -1,21 +1,33 @@
-- name: The Fudan University Guotai Jun'an Scholarship
-  years: 2024
-- name: The Doctoral Scholarship of FDU - First Prize
-  years: 2022, 2023, 2024
-- name: The 9th China International College Students' 'Internet+' Innovation and Entrepreneurship Competition - Gold Award
-  years: 2023
-- name: IEEE VAST Challenge MC2 - Outstanding Comprehensive Solution Award
-  years: 2021
-  description: "A Visualization System for Spatio-temporal Situation Awareness"
-- name: IEEE VAST Challenge MC3 - Award for Strong Human-in-the-Loop Analysis Methodology
-  years: 2021
-  description: "Mixed-Initiative Visual Exploration of Social Media Text and Events"
-- name: IEEE PacificVis Best Paper Honorable Mention (3/100)
-  years: 2025
-  description: "SmartMLVs: LLM Enabled Multiple Linked Views Generation for Interactive Visualization"
-- name: Fudan University Doctoral Forum of Data Science - Bronze Award
-  years: 2021
-- name: Outstanding Freshman Scholarship of HKUST (Top 5%)
-  years: 2020
-- name: The 4th China International College Students' 'Internet+' Innovation and Entrepreneurship Competition - The Best Design Prize
-  years: 2019
+- section: Scholarships & Honors
+  items:
+    - name: Outstanding Graduate in Shanghai
+      years: 2026
+    - name: Outstanding Student in Fudan University
+      years: 2026
+    - name: First-Class Academic Scholarship for Outstanding PhD Students in Fudan University
+      years: 2022-2026
+    - name: Outstanding Student of Fudan University "Shede" Named Scholarship
+      years: 2025
+    - name: China Scholarship Council Joint PhD Program
+      years: 2024
+    - name: Outstanding Student of Fudan University "Guotai Junan" Named Scholarship
+      years: 2024
+    - name: Outstanding Postgraduate Scholarship in HKUST
+      years: 2020
+
+- section: Research & Competitions
+  items:
+    - name: IEEE TVCG 2025 Best Paper Runner-Up (top 0.7%)
+      years: 2026
+    - name: IEEE PacificVis Best Paper Honorable Mention (3/100)
+      years: 2025
+    - name: The 10th China International College Students' Innovation Competition, Gold Award
+      years: 2024
+    - name: Fudan-Tsinghua Joint PhD Forum, Third Prize
+      years: 2024
+    - name: IEEE VAST Challenge, Award for Strong Human-in-the-Loop Analysis Methodology
+      years: 2021
+    - name: IEEE VAST Challenge, Outstanding Comprehensive Solution Award
+      years: 2021
+    - name: The 9th China MathorCup College Mathematical Modeling Challenge, First Prize
+      years: 2019

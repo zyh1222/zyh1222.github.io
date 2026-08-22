@@ -3,4 +3,4 @@
 User-agent: *
 Disallow: /octopress/
 
-Sitemap: {{ site.url }}/sitemap.xml
+Sitemap: {{ site.production_url }}/sitemap.xml
