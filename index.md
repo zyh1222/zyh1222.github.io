@@ -75,7 +75,7 @@ My research focuses on <span class="keyword">LLM-driven intelligent visual analy
 <div class="home-info-grid awards-funding">
   {% for section in site.data.awards %}
   <section>
-    <h4>{{ section.section }}</h4>
+    <h6>{{ section.section }}</h6>
     <ul>
       {% for item in section.items %}
       <li><span>{{ item.years }}</span> {{ item.name }}</li>
@@ -92,7 +92,7 @@ My research focuses on <span class="keyword">LLM-driven intelligent visual analy
 <div class="home-info-grid academic-service">
   {% for section in site.data.service %}
   <section>
-    <h4>{{ section.role }}</h4>
+    <h6>{{ section.role }}</h6>
     {% for item in section.items %}
     <p>- {% if item.label %}<strong>{{ item.label }}:</strong> {% endif %}{{ item.text }}</p>
     {% endfor %}
