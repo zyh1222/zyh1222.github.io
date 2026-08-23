@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /octopress/
 
-Sitemap: https://https://zyh1222.github.io//sitemap.xml
+Sitemap: https://zyh1222.github.io/sitemap.xml
