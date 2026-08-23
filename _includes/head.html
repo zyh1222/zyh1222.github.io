@@ -9,6 +9,49 @@
 
   {% seo %}
 
+  {% if page.url == "/" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Yuheng Zhao",
+    "alternateName": "赵宇恒",
+    "url": "{{ site.production_url }}/",
+    "image": "{{ site.production_url }}/images/yuheng.webp",
+    "email": "mailto:{{ site.email }}",
+    "jobTitle": "ELLIS Postdoctoral Fellow",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Aalto University",
+      "url": "https://www.aalto.fi/"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Computational Behavior Lab",
+      "url": "https://cbl.aalto.fi/"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Fudan University",
+      "url": "https://www.fudan.edu.cn/"
+    },
+    "knowsAbout": [
+      "visual analytics",
+      "large language models",
+      "human-AI interaction",
+      "AI4Science",
+      "human-computer interaction"
+    ],
+    "sameAs": [
+      "{{ site.scholar }}",
+      "https://github.com/{{ site.github_username }}",
+      "{{ site.twitter.url }}",
+      "https://www.linkedin.com/in/yuheng-zhao-b246b91b5/"
+    ]
+  }
+  </script>
+  {% endif %}
+
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
 
   <link href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" rel="stylesheet">
