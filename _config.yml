@@ -1,6 +1,6 @@
 # Site settings
 title: Yuheng Zhao
-email: yuhengzhao@fudan.edu.cn
+email: yuheng.zhao@aalto.fi
 description: > # this means to ignore newlines until "baseurl:"
   Personal website of Yuheng Zhao, ELLIS Postdoctoral Fellow at Aalto University working on visual analytics, large language models, and human-AI collaboration.
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -11,9 +11,9 @@ permalink: /blog/:year/:month/:title.html
 
 scholar: "https://scholar.google.com/citations?user=aK_a-JoAAAAJ&hl=en"
 
-twitter:
-  username: YuhengZhao_
-  url: https://twitter.com/YuhengZhao_
+# twitter:
+#   username: YuhengZhao_
+#   url: https://twitter.com/YuhengZhao_
 
 sass:
   style: compressed
