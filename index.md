@@ -40,7 +40,7 @@ My research focuses on <span class="keyword">LLM-driven intelligent visual analy
 {:.no-list}
 * <a href="mailto:{{ site.email }}"> <i class="fas fa-envelope"></i> Email: {{ site.email }}</a>
 * <a href="https://scholar.google.com/citations?user=aK_a-JoAAAAJ&hl=en"> <i class="fas fa-fw fa-graduation-cap"></i> Google Scholar: Yuheng Zhao</a> 
-* <a href="https://twitter.com/YuhengZhao_"><i class="fab fa-twitter"></i> Twitter: YuhengZhao_</a>
+<!-- * <a href="https://twitter.com/YuhengZhao_"><i class="fab fa-twitter"></i> Twitter: YuhengZhao_</a> -->
 * <a href="https://www.linkedin.com/in/yuheng-zhao-b246b91b5/"><i class="fab fa-linkedin"></i> LinkedIn: Yuheng Zhao</a>
 
 </div>
