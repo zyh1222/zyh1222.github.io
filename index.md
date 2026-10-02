@@ -51,10 +51,10 @@ My research focuses on <span class="keyword">LLM-driven intelligent visual analy
 <div id="publications" class="section-title-row home-section-heading">
   <h3>📖 Publications</h3>
   
-  <div class="publication-toggle" role="group" aria-label="Publication display mode">
+  <!-- <div class="publication-toggle" role="group" aria-label="Publication display mode">
     <button type="button" class="active" data-publication-mode="selected" aria-pressed="true">Selected</button>
     <button type="button" data-publication-mode="full" aria-pressed="false">Full</button>
-  </div>
+  </div> -->
  
 </div>
   <p style="font-size:12px">* denoted equal contribution</p>
