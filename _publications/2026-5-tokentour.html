@@ -1,0 +1,38 @@
+---
+layout: publication
+year: 2026
+title: "TokenTour: Visualizing the Transformation from LLM Agent Messages to Tokens and KV Cache States"
+authors:
+  - Liwen Fan
+  - Yu Zhang
+  - Yuheng Zhao
+  - Siming Chen
+highlight: false
+type:
+  - Workshop
+venue: "IEEE VIS 9th Workshop on VISxAI: Visualization for AI Explainability"
+venue_location:
+venue_tags:
+  - VIS
+  - VISxAI
+ccf:
+ESI_highly_cited:
+awards:
+tags:
+  - LLM
+  - AI agents
+  - interactive visualization
+  - tokenization
+  - KV cache
+link: https://tokentour.github.io/chat2token/blog
+pdf: /papers/vis26k-sub3338-i26.pdf
+fast_forward:
+talk:
+demo: https://tokentour.github.io/chat2token/playground
+github: https://github.com/flwfdd/TokenTour
+appendix:
+slides:
+image: /images/papers/token_tour.png
+---
+
+Modern LLM agents involve a series of hidden transformations between user-facing conversations and model execution. Agent messages, system prompts, tool specifications, and tool calls are formatted into model-specific prompts, converted into token sequences, and processed through mechanisms such as context windows and KV caches. Yet these intermediate representations are rarely exposed to users, thus mysterious to users. TokenTour is a project that aims to demystify this hidden pipeline by making it explorable through interactive blogs and visualizations. In its current stage, TokenTour provides an interactive blog and a visualization tool that allows users to edit agent conversations and trace their transformations across multiple representation layers, including chat templates, token sequences, context-window organization, and KV-cache reuse. The system supports comparison across model families, inspection of tokenization behavior, and exploration of how prompt changes affect computational reuse. Through TokenTour, we aim to bridge the gap between high-level interactions with LLM agents and the low-level mechanisms that enable them, offering an interactive lens for studying and learning modern LLM infrastructure.
